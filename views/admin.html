@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>欢迎访问TMSR SEED</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="bootstrap/css/modern-business.css" rel="stylesheet">
+    <link href="bootstrap/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+	<script src="bootstrap/js/ecStat.min.js"></script> 
+    <script src="bootstrap/js/echarts.min.js"></script>
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="bootstrap/js/jquery-ui.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <!--<link href="bootstrap/css/metismenu.min.css" rel="stylesheet" >
+    <link href="bootstrap/css/demo.css" rel="stylesheet" >
+    <link href="bootstrap/css/prism.min.css" rel="stylesheet" >-->
+    <style>
+        .panel-group{overflow: auto;}
+        .leftMenu{margin:0px;margin-top:0px;}
+        .leftMenu .panel-heading{font-size:14px;padding-left:20px;height:36px;line-height:36px;color:white;position:relative;cursor:pointer;}/*转成手形图标*/
+        .leftMenu .panel-heading span{position:absolute;right:10px;top:12px;}
+        .leftMenu .menu-item-left{padding: 0px; background: transparent; border:0px solid transparent;border-radius: 0px;}
+        .leftMenu .menu-item-left:hover{background:#C4E3F3;border:0px solid #1E90FF;}
+        body{
+            font-family: "微软雅黑"
+        }
+    </style>
+</head>
+
+<body ng-app="myApp" ng-controller="myCtrl" class="login" style="overflow-x: hidden">
+    <!--画图冒泡-->
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="home"><span class="glyphicon glyphicon-home"> TMSR SEED</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/main"><span class="glyphicon glyphicon-glyphicon glyphicon-film">关于</a>
+                    </li>
+
+                    <li>
+                        <a href="contact"><span class="glyphicon glyphicon-earphone">联系</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-user"><%=session.user.username%><span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                            <li role="separator" class="divider"></li>
+                            <li ng-show = "{{auth == 8888}}">
+                                <a data-toggle="modal" data-target="#myModal">管理</a>
+                                <!-- <button class="btn btn-success col-sm-3 col-sm-offset-3" data-toggle="modal" data-target="#myModal">注册</button> -->
+                            </li>
+                            <li  ng-show = "{{auth == 8888}}" role="separator" class="divider"></li>
+                            <li>
+                                <a href="exPassword">修改密码</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="/loginout">注销</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe">网站地图<span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                            <li ng-show = "{{alloy == 1}}">
+                                <a href="data_alloy">合金数据库</a>
+                            </li>
+                            <li ng-show = "{{graphite == 1}}" role="separator" class="divider"></li>
+                            <li ng-show = "{{graphite == 1}}">
+                                <a href="data_graphite">石墨数据库</a>
+                            </li>
+                            <li ng-show = "{{salt == 1}}" role="separator" class="divider"></li>
+                            <li ng-show = "{{salt == 1}}">
+                                <a href="data_salt">熔盐数据库</a>
+                            </li>
+                            <li ng-show = "{{irradiation == 1}}" role="separator" class="divider"></li>
+                            <li ng-show = "{{irradiation == 1}}">
+                                <a href="data_irradiation">材料辐照数据库</a>
+                            </li>
+                             <li ng-show = "{{corrode == 1}}" role="separator" class="divider"></li>
+                            <li ng-show = "{{corrode == 1}}">
+                                <a href="data_corrode">材料腐蚀数据库</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <div class="container" >
+        <div class="col-lg-12" >
+            <h1 class=""  >后台管理
+                <!-- <small>后台管理</small> -->
+            </h1>
+            <ol class="breadcrumb" >
+                <li><a href="home">Home</a>
+                </li>
+                <li><a href="/admin">Refresh</a>
+                </li> 
+            </ol>
+        </div>
+    </div>
+    <!-- Page Content -->
+    <div>
+        
+        
+    </div>
+
+    
+    
+
+<script>
+	$(function () { $("[data-toggle='tooltip']").tooltip(); });
+    $(function() {
+        $("#dialog").on("show.bs.modal", function(){
+            $(this).draggable({
+                handle: ".modal-header",   // 只能点击头部拖动
+                cursor: 'move',   
+                refreshPositions: false, 
+            });
+            $(this).css("overflow", "hidden"); // 防止出现滚动条，出现的话，你会把滚动条一起拖着走的
+        });
+    })
+</script>
+<script>
+
+
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope, $http) {
+		$scope.x_value = "x";
+		$scope.y_value = "y";
+		$scope.z_value = 1;
+		$scope.logicMethod ="多项式回归";
+		$scope.conf = []; //存储绑定input标签里面的值
+		$scope.conf[0] = ""; //存储绑定input标签里面的值
+		$scope.col = '';//默认排序条件升序
+		$scope.desc = true;//默认排序条件升序
+		$scope.control = [];
+		$scope.control[0] = false;
+		$scope.queryComplete = [];  //控制input筛选标签是否完成查询，完成后就隐藏下面多余的input框
+	    $scope.alloy = <%=session.user.alloy%>;
+        $scope.salt = <%=session.user.salt%>;
+        $scope.graphite = <%=session.user.graphite%>;
+        $scope.irradiation = <%=session.user.irradiation%>;
+        $scope.corrode = <%=session.user.corrode%>;
+        $scope.auth = <%=session.user.auth%>;
+		//console.log($scope.auth);
+		var i = 0;
+		$scope.isSelectedAll = true;
+		$scope.params = ['0'];
+		
+		//$scope.select = [];//存储绑定select标签里面的值
+		$scope.logic = [];//存储绑定logic标签里面的值
+		$scope.fields = [];//把字段统一放到这里，供后续处理
+		$scope.selected = []; 
+		$scope.selectedTags = [];
+		var myUrl = "http://10.10.12.251:8081/alloy?callback=JSON_CALLBACK";
+		$http.jsonp(myUrl).success(function(response) {
+				$scope.alloy_left = response;
+		});								
+										
+
+		var flag = false;
+		$http.jsonp("http://10.10.12.251:8081/list50?callback=JSON_CALLBACK")
+		.success(function (response) {
+		$scope.data = response;$scope.datas = angular.copy($scope.data); //此处先查询50条数据并展示	
+		for (var p1 in response[0]) {
+              $scope.fields.push(p1);
+			  $scope.selected.push(p1);
+        }
+		$http.jsonp("http://10.10.12.251:8081/list100?callback=JSON_CALLBACK")
+			.success(function (response) {
+				$scope.data=response; //待查询完50条之后，后台启动全部数据查询，这样客户筛选的时候就是从全部数据中进行筛选，而不是刚开始的50条数据
+				flag= true; //这个状态码表示客户筛选之前要等所有的数据查询完毕，避免遗漏数据。
+		 });
+		 
+	  });
+	  
+	  	$http.jsonp("http://10.10.12.251:8081/get_material_name?callback=JSON_CALLBACK").success(function (response) {
+				//$scope.lastName = response[0].param_name;
+				$scope.query_res = response;
+				//console.log(response);
+		});
+
+		$scope.add = function () {
+			$scope.params.push(i++);//动态增加标签
+			$scope.conf[i] = ""; //存储绑定input标签里面的值
+		};
+		$scope.remove = function (index) {
+			if(index != 0){//保留第一行不被删除
+			$scope.params.splice(index,1);
+			$scope.select.splice(index,1);//同时需要更新select里面的数据，否则总是删除最后一行
+			$scope.conf.splice(index,1);
+			$scope.logic.splice(index,1);
+			}
+			//alert(index)
+		};
+		
+		$scope.display = function () {  //此处替换为button查询按钮的代码
+		if(flag){
+		$scope.inputs=[];
+			for(var i = 0;i<$scope.params.length;i++){
+				var temp = [];
+				temp.push($scope.select[i]);
+				temp.push($scope.logic[i]);
+				temp.push($scope.conf[i]);
+				$scope.inputs.push(temp);
+
+			}
+			//console.log($scope.inputs);
+		$scope.datas = myfilter($scope.inputs,$scope.data) //此处就把所有inputs标签里面的值组合成数组，利用myfilter函数就可以筛选了
+		      // console.log($scope.datas);
+			}else{
+		
+alert('请稍等，数据量太大，后台还在下载数据')
+		}
+		};
+
+    $scope.reset = function() {
+        alert("hhh");
+    };
+	
+	$scope.shaixuan = function(e) {
+        return true;
+    };
+	//console.log($scope.fields);
+
+  
+  var updateSelected = function(action,id,name){ 
+    if(action == 'add' && $scope.selected.indexOf(id) == -1){ 
+      $scope.selected.push(id); 
+      $scope.selectedTags.push(name); 
+    } 
+    if(action == 'remove' && $scope.selected.indexOf(id)!=-1){ 
+      var idx = $scope.selected.indexOf(id); 
+      $scope.selected.splice(idx,1); 
+      $scope.selectedTags.splice(idx,1); 
+    } 
+  } 
+  
+  $scope.updateSelection = function($event, id){ 
+    var checkbox = $event.target; 
+    var action = (checkbox.checked?'add':'remove'); 
+    updateSelected(action,id,checkbox.name); 
+  } 
+		
+  $scope.isSelected = function(id){ 
+  //alert(id);
+    return $scope.selected.indexOf(id)>=0; 
+  }
+  
+  $scope.selectAll = function(){  //display区域全选
+    var F1 = angular.copy($scope.fields);//F1就是把所有字段拷贝一下
+	var F2 = [];
+	$scope.selected = ($scope.isSelectedAll?F2:F1);//如果isSelectedAll的话就空，否则就全选
+	$scope.isSelectedAll = !$scope.isSelectedAll;  //取反操作 
+    
+  }
+
+
+function logic_change(input,obj){	//此函数用来判断输入的条件是否满足要求
+//console.log(a[1] == '=');
+if(input[1] == '='){	
+	if(obj[input[0]] == input[2]){return 1}	
+	return 0
+	};	
+if(input[1] == '>'){	
+	if(obj[input[0]] > input[2]){return 1}	
+	return 0
+	};	
+	
+if(input[1] == '<'){	
+	if(obj[input[0]] < input[2]){return 1}	
+	return 0
+	};	
+}
+function myfilter(conditions,data){  //condition就是前面的多个条件，data就是400条数据
+	var arr = [];
+	for(var i=0;i<data.length;i++){
+		
+		var stat = 1;
+		conditions.forEach(function(e){
+			stat = stat*logic_change(e,data[i]);	  //如果条件都满足的话乘积就是1，一个不满足就是0
+		}); 
+		//console.log(stat);
+		if(stat == 1){
+			arr.push(data[i])
+		}
+	} 	
+	return arr;
+}
+
+$scope.$watch('conf[0]',function(){
+			if($scope.conf[0] == ""){
+			$scope.control[0] = false;
+			return;
+			}
+			if(!isNaN(parseFloat($scope.conf[0]))){
+			$scope.control[0] = false;
+			return;
+			}
+			if($scope.conf[0] ==$scope.queryComplete){
+			$scope.control[0] = false;
+			return;
+			}
+			else {
+				$scope.control[0] = true;
+			}	
+});
+$scope.$watch('conf[1]',function(){
+			if($scope.conf[1] == ""){
+			$scope.control[1] = false;
+			return;
+			}
+			if(!isNaN(parseFloat($scope.conf[1]))){
+			$scope.control[1] = false;
+			return;
+			}
+			if($scope.conf[1] ==$scope.queryComplete){
+			$scope.control[1] = false;
+			return;
+			}
+			else {
+				$scope.control[1] = true;
+			}	
+});
+$scope.$watch('conf[2]',function(){
+			if($scope.conf[2] == ""){
+			$scope.control[2] = false;
+			return;
+			}
+			if(!isNaN(parseFloat($scope.conf[2]))){
+			$scope.control[2] = false;
+			return;
+			}
+			if($scope.conf[2] ==$scope.queryComplete){
+			$scope.control[2] = false;
+			return;
+			}
+			else {
+				$scope.control[2] = true;
+			}	
+});
+$scope.$watch('conf[3]',function(){
+			if($scope.conf[3] == ""){
+			$scope.control[3] = false;
+			return;
+			}
+			if(!isNaN(parseFloat($scope.conf[3]))){
+			$scope.control[3] = false;
+			return;
+			}
+			if($scope.conf[3] ==$scope.queryComplete){
+			$scope.control[3] = false;
+			return;
+			}
+			else {
+				$scope.control[3] = true;
+			}	
+});
+$scope.$watch('conf[4]',function(){
+			if($scope.conf[4] == ""){
+			$scope.control[4] = false;
+			return;
+			}
+			if(!isNaN(parseFloat($scope.conf[4]))){
+			$scope.control[4] = false;
+			return;
+			}
+			if($scope.conf[4] ==$scope.queryComplete){
+			$scope.control[4] = false;
+			return;
+			}
+			else {
+				$scope.control[4] = true;
+			}	
+});
+$scope.$watch('conf[5]',function(){
+			if($scope.conf[5] == ""){
+			$scope.control[5] = false;
+			return;
+			}
+			if(!isNaN(parseFloat($scope.conf[5]))){
+			$scope.control[5] = false;
+			return;
+			}
+			if($scope.conf[5] ==$scope.queryComplete){
+			$scope.control[5] = false;
+			return;
+			}
+			else {
+				$scope.control[5] = true;
+			}	
+});
+$scope.query = function(my_index,parent_index,aaa){
+    $scope.conf[parent_index] =aaa;
+	$scope.control[my_index] = false;
+	$scope.queryComplete = [parent_index] = aaa ;
+}
+
+
+
+
+$scope.sort = function(key){
+$scope.col = key;
+$scope.desc =!$scope.desc;
+}
+
+
+
+$scope.draw = function (){
+//alert($scope.x_value);
+//alert($scope.y_value);
+
+ var myChart = echarts.init(document.getElementById('main'));
+ 
+		var data = [];
+		console.log($scope.datas);
+		for(var i =0;i<$scope.datas.length;i++)
+		{
+			var son = [];
+			son[0]=$scope.datas[i][$scope.x_value];
+			son[1]=$scope.datas[i][$scope.y_value];
+		       //console.log(son[0]+" son is : "+son[1]);
+			data.push(son);
+                        
+			//console.log(data[i][0]+" data: "+data[i][1]);
+		}
+		//for(var j =0;j<10;j++)
+		//{
+			//console.log(data[i]);
+		//}
+		var logic_Method ="";
+		if($scope.logicMethod == "多项式回归") logic_Method = "polynomial";
+		if($scope.logicMethod == "对数回归") logic_Method = "logarithmic";
+		if($scope.logicMethod == "指数回归") logic_Method = "exponential";
+            var myRegression = ecStat.regression(logic_Method, data,parseInt($scope.z_value));
+            	console.log($scope.z_value);
+            myRegression.points.sort(function(a, b) {
+                return a[0] - b[0];
+            });
+            var option = {
+                title: {
+                    text: '数据拟合-多项式、指数和对数',
+                  //  subtext: 'By ecStat.regression',
+                  //  sublink: 'https://github.com/ecomfe/echarts-stat',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross'
+                    }
+                },
+                xAxis: {
+                    type: 'value',
+                    splitLine: {
+                        lineStyle: {
+                            type: 'dashed'
+                        }
+                    },
+                    splitNumber: 20
+                },
+                yAxis: {
+                    type: 'value',
+                    splitLine: {
+                        lineStyle: {
+                            type: 'dashed'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'scatter',
+                    type: 'scatter',
+                    label: {
+                        emphasis: {
+                            show: true,
+                            position: 'left',
+                            textStyle: {
+                                color: 'blue',
+                                fontSize: 16
+                            }
+                        }
+                    },
+                    data: data
+                }, {
+                    name: 'line',
+                    type: 'line',
+                    showSymbol: false,
+                    smooth: true,
+                    data: myRegression.points,
+                    markPoint: {
+                        itemStyle: {
+                            normal: {
+                                color: 'transparent'
+                            }
+                        },
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'left',
+                                formatter: myRegression.expression,
+                                textStyle: {
+                                    color: '#333',
+                                    fontSize: 14
+                                }
+                            }
+                        },
+                        data: [{
+                            coord: myRegression.points[myRegression.points.length - 1]
+                        }]
+                    }
+                }]
+            };
+
+        myChart.setOption(option);
+    }
+	
+
+
+}); 
+</script>
+</body>
+</html>
+

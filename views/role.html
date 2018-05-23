@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+	
+		<title>欢迎访问TMSR SEED</title>
+	
+		<!-- Bootstrap Core CSS -->
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
+		<!-- Custom CSS -->
+		<link href="bootstrap/css/modern-business.css" rel="stylesheet">
+		<link href="bootstrap/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+		<script src="bootstrap/js/ecStat.min.js"></script> 
+		<script src="bootstrap/js/echarts.min.js"></script>
+		<script src="bootstrap/js/jquery.min.js"></script>
+		<script src="bootstrap/js/jquery-ui.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+	
+		<!--<link href="bootstrap/css/metismenu.min.css" rel="stylesheet" >
+		<link href="bootstrap/css/demo.css" rel="stylesheet" >
+		<link href="bootstrap/css/prism.min.css" rel="stylesheet" >-->
+		<style>
+			.panel-group{overflow: auto;}
+			.leftMenu{margin:0px;margin-top:0px;}
+			.leftMenu .panel-heading{font-size:14px;padding-left:20px;height:36px;line-height:36px;color:white;position:relative;cursor:pointer;}/*转成手形图标*/
+			.leftMenu .panel-heading span{position:absolute;right:10px;top:12px;}
+			.leftMenu .menu-item-left{padding: 0px; background: transparent; border:0px solid transparent;border-radius: 0px;}
+			.leftMenu .menu-item-left:hover{background:#C4E3F3;border:0px solid #1E90FF;}
+			body{
+				font-family: "微软雅黑"
+			}
+		</style>
+	</head>
+<body>
+
+<div ng-app="myApp" ng-controller="namesCtrl">
+	    <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<a class="navbar-brand" href="home"><span class="glyphicon glyphicon-home"> TMSR SEED</a>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="/main.html"><span class="glyphicon glyphicon-glyphicon glyphicon-film">关于</a>
+							</li>
+							<li>
+								<a href="services.html"><span class="glyphicon glyphicon-headphones">服务</a>
+							</li>
+							<li>
+								<a href="contact.html"><span class="glyphicon glyphicon-earphone">联系</a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-user"><%=session.user.username%><span class="caret"></span></a>
+								<ul class="dropdown-menu dropdown-menu-left">
+									<li role="separator" class="divider"></li>
+									<li ng-show = "{{auth == 8888}}">
+										<a data-toggle="modal" data-target="#myModal">管理</a>
+										<!-- <button class="btn btn-success col-sm-3 col-sm-offset-3" data-toggle="modal" data-target="#myModal">注册</button> -->
+									</li>
+									<li  ng-show = "{{auth == 8888}}" role="separator" class="divider"></li>
+									<li>
+										<a href="exPassword">修改密码</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a href="/loginout">注销</a>
+									</li>
+		
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe">网站地图<span class="caret"></span></a>
+								<ul class="dropdown-menu dropdown-menu-left">
+									<li ng-show = "{{alloy == 1}}">
+										<a href="data_alloy">合金数据库</a>
+									</li>
+									<li ng-show = "{{graphite == 1}}" role="separator" class="divider"></li>
+									<li ng-show = "{{graphite == 1}}">
+										<a href="data_graphite">石墨数据库</a>
+									</li>
+									<li ng-show = "{{salt == 1}}" role="separator" class="divider"></li>
+									<li ng-show = "{{salt == 1}}">
+										<a href="data_salt">熔盐数据库</a>
+									</li>
+									<li ng-show = "{{irradiation == 1}}" role="separator" class="divider"></li>
+									<li ng-show = "{{irradiation == 1}}">
+										<a href="data_irradiation">材料辐照数据库</a>
+									</li>
+									 <li ng-show = "{{corrode == 1}}" role="separator" class="divider"></li>
+									<li ng-show = "{{corrode == 1}}">
+										<a href="data_corrode">材料腐蚀数据库</a>
+									</li>
+								</ul>
+							</li>
+		
+						</ul>
+					</div>
+					<!-- /.navbar-collapse -->
+				</div>
+				<!-- /.container -->
+			</nav>
+			<div class="container" >
+					<div class="col-lg-12" >
+						<h1 class=""  >后台管理
+							<!-- <small>后台管理</small> -->
+						</h1>
+						<ol class="breadcrumb" >
+							<li><a href="home">Home</a>
+							</li>
+							<li><a href="/admin">Refresh</a>
+							</li> 
+							
+						</ol>
+					</div>
+					<div id="header">
+							<h1></h1>
+							</div>
+							<div class="container">
+								<div class="row clearfix">
+									<div class="col-md-12 column">
+										<nav class="navbar navbar-default" role="navigation" >
+							
+												<ul class="nav navbar-nav" style="margin-top:8px;margin-left:15px">
+														<select class="form-control"  ng-change="change(id)" ng-model="id">
+															<option value="0" ng-selected=true>未授权用户</option>
+															<option value="1">已授权用户</option>
+														</select>
+												</ul>
+												<form class="navbar-form navbar-left " role="search">
+													<div class="form-group">
+														<input type="text" class="form-control" ng-model="name" placeholder="请输入要查询的用户名" />
+													</div> <button id="submit0" ng-click="query()" class="btn btn-default">查询</button>
+												</form>
+							
+							
+										</nav>
+									</div>
+								</div>
+							<table class="table">
+							   <thead>
+								  <tr>
+									 <th>用户名</th>
+									 <th>单位</th>
+									 <th>部门</th>
+									 <th>合金数据库</th>
+									 <th>石墨数据库</th>
+									 <th>熔盐数据库</th>
+									 <th>辐照数据库</th>
+									 <th>熔盐侵润数据库</th>
+									 <th>授权</th>
+								  </tr>
+							   </thead>
+							   <tbody >
+								  <tr ng-repeat="x in names">
+									<td>{{ x.username }}</td>
+									<td>{{ x.company }}</td>
+									<td>{{ x.department }}</td>
+									<td>  <input type="radio"  ng-checked="x.alloy" ng-click="x.alloy = !x.alloy" ></input></td>
+									<td>  <input type="radio"  ng-checked="x.graphite" ng-click="x.graphite = !x.graphite" ></input></td>
+									<td>  <input type="radio"  ng-checked="x.salt" ng-click="x.salt = !x.salt" ></input></td>
+									<td>  <input type="radio"  ng-checked="x.irradiation" ng-click="x.irradiation = !x.irradiation" ></input></td>
+									<td>  <input type="radio"  ng-checked="x.corrode" ng-click="x.corrode = !x.corrode" ></input></td>
+									<td>  <input type="radio"  ng-checked="x.auth" ng-click="x.auth = !x.auth" ></input></td>
+									<td> <button type="text" class="btn btn-default" ng-click="updateRole(x)">修改</button></td>
+								  </tr>
+							   </tbody>
+							</table>
+							</br></br>
+							</br></br>
+							<div class="copyright">
+								<div align="center">
+									<p  ng-repeat="x in stats">用户数：&nbsp {{x.user}} &nbsp &nbsp 累计登陆：&nbsp {{x.login}}  </p>
+										<strong >TMSR &copy; 2017  &nbsp  &nbsp &nbsp钍基熔盐堆先进核能系统</strong>
+								</div>	
+						    </div>
+							
+							</div>
+			</div>
+
+
+
+
+
+
+</div>
+<script>
+angular.module('myApp', []).controller('namesCtrl', function($scope, $http) {
+		$scope.name = "";
+		$http.jsonp("http://10.10.12.251:8081/mtsrusers/0?callback=JSON_CALLBACK")
+			.success(function (response) {$scope.names = response;});
+  		$scope.change = function(id){
+    	$http.jsonp("http://10.10.12.251:8081/mtsrusers/"+id+"?callback=JSON_CALLBACK")
+			.success(function (response) {$scope.names = response});
+			  }
+
+
+    	$scope.updateRole = function(x){
+    		$http.post('/updateRole',x).success(function(){
+			location.href = '/role';
+			});
+			  }
+			  
+  		$http.jsonp("http://10.10.12.251:8081/get_login_record?callback=JSON_CALLBACK").success(function (response) {
+				//$scope.lastName = response[0].param_name;
+				$scope.stats = response;
+				console.log(response);
+		});
+
+    $scope.query = function(){
+			$http.jsonp("http://10.10.12.251:8081/getUserByname/"+$scope.name+"?callback=JSON_CALLBACK")
+			.success(function (response) {$scope.names = response});
+  }
+  
+});
+</script>
+       
+</body>
+</html>
+
