@@ -4,7 +4,8 @@ var config = {
 	user: 'material_owner', //env var: PGUSER
 	database: 'tmsr_material_1_1_1', //env var: PGDATABASE
 	password: 'material', //env var: PGPASSWORD
-	host: '11.11.11.1', // Server hosting the postgres database
+	// host: '11.11.11.1', // Server hosting the postgres database
+	host:'10.10.12.251',
 	port: 3245, //env var: PGPORT
 	max: 10, // max number of clients in the pool
 	idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed

@@ -69,7 +69,7 @@ router.get('/', function(req, res, next) {
 		res.redirect("/login");				//未登录则重定向到 /login 路径
 	} ;	
 	if(req.session.user){
-	res.render("home",{title:'主页'}); 	
+	res.render("/home",{title:'主页'}); 	
 	}//未登录则重定向到 /login 路径
 	
 });
@@ -158,12 +158,24 @@ router.get('/exPassword', function(req, res, next) {
 router.get('/data_alloy', function(req, res, next) {
 	////console.log(req.session.user.alloy);
 	if(req.session.user.alloy == 1){ 					//到达/home路径首先判断是否已经登录
-		res.render("data_alloy",{title:'合金数据库'}); 			//未登录则重定向到 /login 路径
+		res.render("data_alloy", { title: '合金数据库', param_id:'1'}); 			//未登录则重定向到 /login 路径
 	} ;	
 	if(req.session.user.alloy == 0){ 					//到达/home路径首先判断是否已经登录
-		res.render("home"); 			//未登录则重定向到 /login 路径
+		res.render("/home"); 			//未登录则重定向到 /login 路径
 	} ;	
   
+});
+
+
+router.get('/data_alloy/:param_id', function (req, res, next) {
+	////console.log(req.session.user.alloy);
+	if (req.session.user.alloy == 1) { 					//到达/home路径首先判断是否已经登录
+		res.render("data_alloy", { title: '合金数据库', param_id: req.params.param_id}); 			//未登录则重定向到 /login 路径
+	};
+	if (req.session.user.alloy == 0) { 					//到达/home路径首先判断是否已经登录
+		res.render("/home"); 			//未登录则重定向到 /login 路径
+	};
+
 });
 
 router.get('/alloy_report', function(req, res, next) {
@@ -172,7 +184,7 @@ router.get('/alloy_report', function(req, res, next) {
 		res.render("alloy_report",{title:'合金数据库技术报告'}); 			//未登录则重定向到 /login 路径
 	} ;	
 	if(req.session.user.alloy == 0){ 					//到达/home路径首先判断是否已经登录
-		res.render("home"); 			//未登录则重定向到 /login 路径
+		res.render("/home"); 			//未登录则重定向到 /login 路径
 	} ;	
   
 });
@@ -221,7 +233,7 @@ router.get('/public/documents/alloy/alloy_report/:fileName.:extension', function
 	 		 })
 			}
 		if(req.session.user.irradiation == 0){ 					//到达/home路径首先判断是否已经登录
-				res.render("home"); 			//未登录则重定向到 /login 路径
+				res.render("/home"); 			//未登录则重定向到 /login 路径
 		} ;		
 	});  
 
@@ -234,7 +246,7 @@ router.get('/alloy_standard', function(req, res, next) {
 		res.render("alloy_standard",{title:'合金数据库技术规范'}); 			//未登录则重定向到 /login 路径
 	} ;	
 	if(req.session.user.alloy == 0){ 					//到达/home路径首先判断是否已经登录
-		res.render("home"); 			//未登录则重定向到 /login 路径
+		res.render("/home"); 			//未登录则重定向到 /login 路径
 	} ;	
   
 });
@@ -268,7 +280,7 @@ router.get('/public/documents/alloy/alloy_standard/:fileName.:extension', functi
 	 		 })
 			}
 		if(req.session.user.irradiation == 0){ 					//到达/home路径首先判断是否已经登录
-				res.render("home"); 			//未登录则重定向到 /login 路径
+				res.render("/home"); 			//未登录则重定向到 /login 路径
 		} ;		
 	});  
 
@@ -279,7 +291,7 @@ router.get('/public/documents/alloy/alloy_standard/:fileName.:extension', functi
 			res.render("graphite_report",{title:'石墨数据库技术报告'}); 			//未登录则重定向到 /login 路径
 		} ;	
 		if(req.session.user.alloy == 0){ 					//到达/home路径首先判断是否已经登录
-			res.render("home"); 			//未登录则重定向到 /login 路径
+			res.render("/home"); 			//未登录则重定向到 /login 路径
 		} ;	
 	  
 	});
@@ -304,7 +316,7 @@ router.get('/public/documents/alloy/alloy_standard/:fileName.:extension', functi
 				  })
 				}
 			if(req.session.user.irradiation == 0){ 					//到达/home路径首先判断是否已经登录
-					res.render("home"); 			//未登录则重定向到 /login 路径
+					res.render("/home"); 			//未登录则重定向到 /login 路径
 			} ;		
 		});  
 
@@ -314,7 +326,7 @@ router.get('/data_graphite', function(req, res, next) {
 		res.render("data_graphite",{title:'石墨数据库'});  			//未登录则重定向到 /login 路径
 	} ;	
 	if(req.session.user.graphite == 0){ 					//到达/home路径首先判断是否已经登录
-		res.render("home"); 			//未登录则重定向到 /login 路径
+		res.render("/home"); 			//未登录则重定向到 /login 路径
 	} ;	
   
 });
@@ -332,7 +344,7 @@ router.get('/data_salt', function(req, res, next) {
 		res.render("data_salt",{title:'熔盐数据库'});  			//未登录则重定向到 /login 路径
 	} ;	
 	if(req.session.user.salt == 0){ 					//到达/home路径首先判断是否已经登录
-		res.render("home"); 			//未登录则重定向到 /login 路径
+		res.render("/home"); 			//未登录则重定向到 /login 路径
 	} ;	
    
 });
@@ -342,7 +354,7 @@ router.get('/data_irradiation', function(req, res, next) {
 		res.render("data_irradiation",{title:'熔盐数据库'});  			//未登录则重定向到 /login 路径
 	} ;	
 	if(req.session.user.irradiation == 0){ 					//到达/home路径首先判断是否已经登录
-		res.render("home"); 			//未登录则重定向到 /login 路径
+		res.render("/home"); 			//未登录则重定向到 /login 路径
 	} ;		
    
 });
@@ -352,13 +364,13 @@ router.get('/data_corrode', function(req, res, next) {
 		res.render("data_corrode",{title:'熔盐数据库'});   			//未登录则重定向到 /login 路径
 	} ;	
 	if(req.session.user.corrode == 0){ 					//到达/home路径首先判断是否已经登录
-		res.render("home"); 			//未登录则重定向到 /login 路径
+		res.render("/home"); 			//未登录则重定向到 /login 路径
 	} ;	
   
 });
 
  router.get('/alloy', function(req, res,next) { //负面清单页面入口
-   	var sql = 'select * from alloy_param';
+	 var sql = 'select * from alloy_param where id in (select distinct param_id from alloy_param_data) order by id';
 	////console.log(sql);
 	my_conn.query(sql,function(result){		
 		res.jsonp(result.rows);
@@ -368,15 +380,24 @@ router.get('/data_corrode', function(req, res, next) {
 });
 
 
- router.get('/list50', function(req, res,next) { //负面清单页面入口
+ router.get('/list50/:param_id', function(req, res,next) { //负面清单页面入口
    	//var sql = 'select * from db_user where username = \'jyq\'' ;
 	//var sql = 'SELECT column_name from information_schema.columns where table_name = \'alloy_param_data\'' ;
-	var sql = 'select material_name, param_name,param_intro,param_value,test_temp,test_stress,std_num,param_maintainer,alloy_report_info.report_name from  alloy_param_data,alloy_param, alloy_standard_info,alloy_report_info where alloy_param_data.param_id=alloy_param.id and  alloy_param_data.standard_id =alloy_standard_info.id and alloy_param_data.report_id =alloy_report_info.id and param_id=29 order by test_temp';
-	my_conn.query(sql,function(result){		
-		res.jsonp(result.rows);
-		////console.log(result.rows);
-		// console.log('gooda2');
-	}); 
+	var sql1='select param_scope from alloy_param where id=\''+req.params.param_id+'\';';
+	// console.log(sql1);
+	 my_conn.query(sql1, function (result) {
+		//  res.jsonp(result.rows);
+		 ////console.log(result.rows);
+		//  console.log(result.rows); 
+		 var sql = 'select ' +result.rows[0].param_scope+' from  alloy_param_data,alloy_param, alloy_standard_info,alloy_report_info where alloy_param_data.param_id=alloy_param.id and  alloy_param_data.standard_id =alloy_standard_info.id and alloy_param_data.report_id =alloy_report_info.id and param_id=\'' + req.params.param_id + '\'';
+		 console.log(sql);
+		 my_conn.query(sql, function (result) {
+			 res.jsonp(result.rows);
+			 ////console.log(result.rows);
+			 // console.log('gooda2');
+		 });
+	 }); 
+	  
 });
 
  router.get('/list100', function(req, res,next) { //负面清单页面入口
@@ -401,7 +422,7 @@ router.get('/data_corrode', function(req, res, next) {
  router.get('/gp_list50', function(req, res,next) { 
    	//var sql = 'select * from db_user where username = \'jyq\'' ;
 	//var sql = 'SELECT column_name from information_schema.columns where table_name = \'alloy_param_data\'' ;
-	var sql = 'select sample_index,material_grade,material_block_num,material_block_size,material_batch,test_temp,test_temp_span,param_intro,param_value,param_unit,std_num,test_org,material_manufacturer,name from graphite_param_data,graphite_param,graphite_standard_info,graphite_maintainer where graphite_param_data.standard_id =graphite_standard_info.id and graphite_param_data.param_id=graphite_param.id and graphite_maintainer.graphite_maintainer_id=graphite_param_data.maintainer_id and param_id = 28';
+	var sql = 'select sample_index,material_grade,material_block_num,material_block_size,material_batch,test_temp,test_temp_span,param_intro,param_value,param_unit,std_num,test_org,material_manufacturer,name from graphite_param_data,graphite_param,graphite_standard_info,graphite_maintainer where graphite_param_data.standard_id =graphite_standard_info.id and graphite_param_data.param_id=graphite_param.id and graphite_maintainer.graphite_maintainer_id=graphite_param_data.maintainer_id and param_id = 1';
 	my_conn.query(sql,function(result){		
 		res.jsonp(result.rows);
 		console.log('goodg2');

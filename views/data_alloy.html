@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,19 +11,26 @@
     <title>欢迎访问TMSR SEED</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet"> 
     <!-- Custom CSS -->
-    <link href="bootstrap/css/modern-business.css" rel="stylesheet">
-    <link href="bootstrap/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script> 
-	<script src="bootstrap/js/ecStat.min.js"></script> 
-    <script src="bootstrap/js/echarts.min.js"></script>
-    <script src="bootstrap/js/jquery.min.js"></script>
-    <script src="bootstrap/js/jquery-ui.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-
-    <!--<link href="bootstrap/css/metismenu.min.css" rel="stylesheet" >
+    <link href="/bootstrap/css/modern-business.css" rel="stylesheet">
+    <link href="/bootstrap/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- <script src="https://cdn.bootcss.com/angular.js/1.7.0/angular.min.js"></script> -->
+    <script src="/bootstrap/js/ecStat.min.js"></script> 
+    <script src="/bootstrap/js/echarts.min.js"></script>
+    <script src="/bootstrap/js/jquery.min.js"></script>
+    <script src="/bootstrap/js/jquery-ui.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- <script src="bootstrap/js/jquery.min.js"></script> -->
+    <!-- <script src="bootstrap/js/jquery-ui.min.js"></script> -->
+    <script src="/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="/bower_components/angular-dataTables/dist/angular-datatables.min.js"></script>
+    <link rel="stylesheet" href="/bower_components/angular-dataTables/dist/css/angular-datatables.css"> 
+       <!--<link href="bootstrap/css/metismenu.min.css" rel="stylesheet" >
     <link href="bootstrap/css/demo.css" rel="stylesheet" >
     <link href="bootstrap/css/prism.min.css" rel="stylesheet" >-->
     <style>
@@ -71,7 +79,7 @@
     </script>
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl" class="login" style="overflow-x: hidden">
+<body  ng-app="myApp" ng-controller="myCtrl" class="login" style="overflow-x: hidden">
     <!--画图冒泡-->
 
     <!-- Navigation -->
@@ -79,7 +87,7 @@
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="home"><span class="glyphicon glyphicon-home"> TMSR SEED</a>
+                <a class="navbar-brand" href="/home"><span class="glyphicon glyphicon-home"> TMSR SEED</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
@@ -91,15 +99,15 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-user">文档<span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-menu-left">
                             <li>
-                                <a href="alloy_report"><span class="glyphicon glyphicon-file">报告</a>
+                                <a href="/alloy_report"><span class="glyphicon glyphicon-file">报告</a>
                             </li>
                             <li>
-                                <a href="alloy_standard"><span class="glyphicon glyphicon-book">标准</a>
+                                <a href="/alloy_standard"><span class="glyphicon glyphicon-book">标准</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="contact"><span class="glyphicon glyphicon-earphone">联系</a>
+                        <a href="/contact"><span class="glyphicon glyphicon-earphone">联系</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-user"><%=session.user.username%><span class="caret"></span></a>
@@ -111,7 +119,7 @@
                             </li>
                             <li  ng-show = "{{auth == 8888}}" role="separator" class="divider"></li>
                             <li>
-                                <a href="exPassword">修改密码</a>
+                                <a href="/exPassword">修改密码</a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>
@@ -124,23 +132,23 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe">网站地图<span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-menu-left">
                             <li ng-show = "{{alloy == 1}}">
-                                <a href="data_alloy">合金数据库</a>
+                                <a href="/data_alloy">合金数据库</a>
                             </li>
                             <li ng-show = "{{graphite == 1}}" role="separator" class="divider"></li>
                             <li ng-show = "{{graphite == 1}}">
-                                <a href="data_graphite">石墨数据库</a>
+                                <a href="/data_graphite">石墨数据库</a>
                             </li>
                             <li ng-show = "{{salt == 1}}" role="separator" class="divider"></li>
                             <li ng-show = "{{salt == 1}}">
-                                <a href="data_salt">熔盐数据库</a>
+                                <a href="/data_salt">熔盐数据库</a>
                             </li>
                             <li ng-show = "{{irradiation == 1}}" role="separator" class="divider"></li>
                             <li ng-show = "{{irradiation == 1}}">
-                                <a href="data_irradiation">材料辐照数据库</a>
+                                <a href="/data_irradiation">材料辐照数据库</a>
                             </li>
                              <li ng-show = "{{corrode == 1}}" role="separator" class="divider"></li>
                             <li ng-show = "{{corrode == 1}}">
-                                <a href="data_corrode">材料腐蚀数据库</a>
+                                <a href="/data_corrode">材料腐蚀数据库</a>
                             </li>
                         </ul>
                     </li>
@@ -154,12 +162,12 @@
     <div class="row" >
         <div class="col-lg-12" >
             <h1 class=""  >TMSR
-                <small>合金数据库</small>
+                <small>合金数据库 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a>{{param_intro}}</a></small>
             </h1>
             <ol class="breadcrumb" >
-                <li><a href="home">Home</a>
+                <li><a href="/home">Home</a>
                 </li>
-                <li><a href="data_alloy">Refresh</a>
+                <li><a href="/data_alloy/1">Refresh</a>
                 </li> 
             </ol>
         </div>
@@ -183,7 +191,7 @@
                             参数列表
                         </li>-->
                         <li ng-repeat="x in alloy_left" class="list-group-item">
-                            <span  data-toggle="tooltip" data-placement="top" title="单位：{{x.param_unit}}；中文名称：{{x.param_intro }}">{{ x.param_name }}</span>
+                            <a    href="/data_alloy/{{x.id}}" data-placement="top" title="单位：{{x.param_unit}}；中文名称：{{x.param_intro }}">{{ x.param_name }}</a>
                         </li>                       
                     </div>
                     <!--<div style="background-color: white;">
@@ -198,7 +206,7 @@
             </div>
             <div class="col-md-9" style="background-color: white;LEFT:3%;width:68%;">
                     <div class="row" style="background-color: WHITE;">
-                        <div  class="col-md-11" ng-repeat="param in params">
+                        <div  class="col-md-10" ng-repeat="param in params">
                             <div class="row">
                                 <div class="col-md-3" >
                                     <select style="width:160px;height:32px" name="cars"  ng-model="$parent.select[$index]">
@@ -212,7 +220,7 @@
                                                 <option value="<">小于</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-5">
 									<input  id ="input1" name="test" value="" class="form-control" type="text"  ng-model="$parent.conf[$index]"/>
 									<div ng-show="$parent.control[$index]">
 										<div  ng-repeat="y in $parent.query_res | filter:$parent.conf[$index]">
@@ -220,9 +228,13 @@
 										</div>
 									</div>
 								</div>
-                                <div class="col-md-1"><span ng-click="add()" class="glyphicon glyphicon-plus"></span><span style="margin-left:15px" class="glyphicon glyphicon-minus"  ng-click="remove($index)"></span></div>
                             </div>
                         </div>
+                            <div class="col-md-1">
+                                                            <span ng-click="add()" class="glyphicon glyphicon-plus"></span>
+                                                            <span style="margin-left:15px" class="glyphicon glyphicon-minus" ng-click="remove($index)"></span>
+                            </div>
+
                         <div  class="col-md-1">
                             <button class="btn-primary" ng-click="display()"> 筛选</button>
                         </div>
@@ -233,7 +245,7 @@
                         <div class="row">
                                 <div class="col-md-9" >
                                     <span ng-repeat="x in fields" >
-                                        <input type="checkbox" name="{{x}}" ng-checked="isSelected(x)" ng-click="updateSelection($event,x)"><span>&nbsp{{x}}</span>
+                                        <input type="checkbox" name="{{x}}" ng-bind="param_sc[0]" ng-checked="isSelected(x)" ng-click="updateSelection($event,x)" ><span>&nbsp{{param_sc[$index]}}&nbsp</span>
                                     </span>
                                 </div>
                                 <div  class="col-md-1">
@@ -251,19 +263,22 @@
                     <!--  <pre>{{selected}}</pre>  -->
 
                     <hr>
-                    <DIV class="table-responsive">
-                    <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                        <th ng-click="sort(key)" style="cursor:pointer" ng-repeat="(key,value) in datas[0] " ng-show="isSelected(key)">{{key}}</th>
-                        </tr>
-                        <tr ng-repeat="u in datas |orderBy:col:desc">
-                            <td ng-repeat="(key,value) in u" ng-show="isSelected(key)">{{value}}</td>
-                        </tr>                        
-
-                    </thead>
+                    <div class="row">
+                        
+                        <table datatable="ng"  dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="table table-striped table-bordered dataTable">
+                        <thead>
+                             <tr>
+                                 <th ng-click="sort(key)" style="cursor:pointer" ng-repeat="(key,value) in datas[0] " ng-show="isSelected(key)">{{param_sc[$index]}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr ng-repeat="u in datas ">
+                                     <td ng-repeat="(key,value) in u" ng-show="isSelected(key)">{{value}}</td>
+                                </tr>
+                        </tbody>
                     </table>
-                    </DIV>
+                    </div>
+                    
                     
             </div>
             </div>
@@ -272,12 +287,12 @@
 
     <div class="modal fade" id="dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content" style="width: 1000px">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">关闭
           </button>
           <h4 class="modal-title" id="myModalLabel">
-            绘制图表
+            绘制图表 
           </h4>
         </div>
         <div class="modal-body">
@@ -320,7 +335,7 @@
             </div>
         </form>
         <HR>
-        <div id="main" style="width: 600px;height:400px;"></div>
+        <div id="main" style="width: 90%px;height:600px"></div>
           </div>
           <div class="modal-footer">
             <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭
@@ -331,26 +346,58 @@
     </div>
     
 
-    <script>
-        $(function () { $("[data-toggle='tooltip']").tooltip(); });
-        $(function() {
-            $("#dialog").on("show.bs.modal", function(){
-                $(this).draggable({
-                    handle: ".modal-header",   // 只能点击头部拖动
-                    cursor: 'move',   
-                    refreshPositions: false, 
-                });
-                $(this).css("overflow", "hidden"); // 防止出现滚动条，出现的话，你会把滚动条一起拖着走的
-            });
-        })
-    </script>
 
 
     <script>
 
 
-            var app = angular.module('myApp', []);
-            app.controller('myCtrl', function($scope, $http) {
+            var app = angular.module('myApp', ['datatables',  'ngResource']);
+            app.controller('myCtrl', myfunction);
+            
+            
+            function myfunction($scope, $http,$sce, $resource, DTOptionsBuilder,DTColumnDefBuilder) {
+                    var vm = this;
+                    vm.datas = [];
+                    $scope.dtOptions = DTOptionsBuilder.newOptions()
+                        
+                        .withOption('processing', true)
+                        .withOption('serverSide', false)
+                        .withOption('paging', true)//页码条
+                        .withOption('bFilter', true)//搜索框
+                        .withOption('lengthChange', false)
+                        .withOption('info', true)
+                        .withOption('autoWidth', true)
+                        .withOption('sWidth', '60px')
+                        .withOption('language', {
+                            "lengthMenu": "每页 _MENU_ 条记录",
+                            "zeroRecords": "没有找到记录",
+                            "info": "_PAGE_/_PAGES_页  总共 _MAX_ 条记录  ", 
+
+                            "infoEmpty": "无记录",
+                            "infoFiltered": "(从 _MAX_ 条记录过滤)",
+                            "search": "快速查询",
+                            
+                            "paginate": {
+                                "previous": "上一页",
+                                "next": "下一页",
+                            }})
+
+                        
+                        ;//左下方信息
+                    //     .withOption('rowCallback', rowCallback)
+                    //    ;
+                        //  $resource('data.json').query().$promise.then(function (persons) {
+                        //    vm.datas = [];
+                        //  });
+                       
+                        // console.log($scope.datas);
+                         
+                      $scope.dtColumnDefs = [
+                    DTColumnDefBuilder.newColumnDef(0),
+                    DTColumnDefBuilder.newColumnDef(1),
+                 
+                ];
+                        // .withDataProp('data');
                     $scope.x_value = "x";
                     $scope.y_value = "y";
                     $scope.z_value = 1;
@@ -378,43 +425,54 @@
                     $scope.fields = [];//把字段统一放到这里，供后续处理
                     $scope.selected = []; 
                     $scope.selectedTags = [];
-                    var myUrl = "http://10.10.12.251:8081/alloy?callback=JSON_CALLBACK";
-                    $http.jsonp(myUrl).success(function(response) {
-                            $scope.alloy_left = response;
-                    });								
+                    var myUrl = "http://10.10.33.10:8081/alloy";
+                $http.jsonp($sce.trustAsResourceUrl(myUrl)).then(function(response) {
+                            $scope.alloy_left = response.data;
+                            response.data.forEach(function(e){
+                                var par_id= <%= param_id %>;
+                                if(e.id == par_id)
+                           { $scope.param_intro= e.param_intro;
+                            $scope.param_sc = e.param_scope_sc;
+                            $scope.param_title = e.param_intro;
+                            $scope.param_name = e.param_name;
+                            $scope.param_unit = e.param_unit;
+                            }
+                           })
+                            // $scope.param_intro= e.param_intro;
+                            // $scope.param_sc = e.param_scope_sc;
+                            // console.log(response.data[<%= param_id %> -1].param_scope_sc);
+                    });		
+                    
                                                     
-
+                    
                     var flag = false;
-                    $http.jsonp("http://10.10.12.251:8081/list50?callback=JSON_CALLBACK")
-                    .success(function (response) {
-                    $scope.data = response;
-                    $scope.datas = angular.copy($scope.data); //此处先查询50条数据并展示	
-                    for (var p1 in response[0]) {
+                    
+                $http.jsonp($sce.trustAsResourceUrl("http://10.10.33.10:8081/list50/<%= param_id %>"))
+                    .then(function(response) {
+                    
+                    $scope.data = response.data;
+                    //  console.log(response);
+                    $scope.datas = angular.copy($scope.data); //此处先查询50条数据并展示
+                    for (var p1 in response.data[0]) {
                         $scope.fields.push(p1);
                         $scope.selected.push(p1);
                     }
                    // console.log('good1');
-                    $http.jsonp("http://10.10.12.251:8081/list100?callback=JSON_CALLBACK")
-                    .success(function (response) {
-                        $scope.data=response; //待查询完50条之后，后台启动全部数据查询，这样客户筛选的时候就是从全部数据中进行筛选，而不是刚开始的50条数据
-                        flag= true; //这个状态码表示客户筛选之前要等所有的数据查询完毕，避免遗漏数据。
-                       // console.log('good2');
-                    });
 
                     
                 });
-                
-                    $http.jsonp("http://10.10.12.251:8081/get_material_name?callback=JSON_CALLBACK").success(function (response) {
+        
+                $http.jsonp($sce.trustAsResourceUrl("http://10.10.33.10:8081/get_material_name")).then(function(response) {
                             //$scope.lastName = response[0].param_name;
-                            $scope.query_res = response;
+                            $scope.query_res = response.data;
                             //console.log(response);
                     });
 
-                    $scope.add = function () {
+                $scope.add = function () {
                         $scope.params.push(i++);//动态增加标签
                         $scope.conf[i] = ""; //存储绑定input标签里面的值
                     };
-                    $scope.remove = function (index) {
+                $scope.remove = function (index) {
                         if(index != 0){//保留第一行不被删除
                         $scope.params.splice(index,1);
                         $scope.select.splice(index,1);//同时需要更新select里面的数据，否则总是删除最后一行
@@ -424,24 +482,25 @@
                         //alert(index)
                     };
                     
-                    $scope.display = function () {  //此处替换为button查询按钮的代码
-                    if(flag){
-                    $scope.inputs=[];
-                        for(var i = 0;i<$scope.params.length;i++){
-                            var temp = [];
-                            temp.push($scope.select[i]);
-                            temp.push($scope.logic[i]);
-                            temp.push($scope.conf[i]);
-                            $scope.inputs.push(temp);
+                $scope.display = function () {  //此处替换为button查询按钮的代码
+                    if(1){
+                         $scope.inputs=[];
+                             for(var i = 0;i<$scope.params.length;i++){
+                                 var temp = [];
+                                 temp.push($scope.select[i]);
+                                 temp.push($scope.logic[i]);
+                                 temp.push($scope.conf[i]);
+                                 $scope.inputs.push(temp);
 
                         }
                         //console.log($scope.inputs);
-                    $scope.datas = myfilter($scope.inputs,$scope.data) //此处就把所有inputs标签里面的值组合成数组，利用myfilter函数就可以筛选了
+                        $scope.datas = myfilter($scope.inputs,$scope.data) //此处就把所有inputs标签里面的值组合成数组，利用myfilter函数就可以筛选了
                         // console.log($scope.datas);
-                        }else{
+                         vm.datas = angular.copy($scope.datas)
+                    }else{
                     
-            alert('请稍等，数据量太大，后台还在下载数据')
-                    }
+                             alert('请稍等，数据量太大，后台还在下载数据')
+                          }
                     };
 
                 $scope.reset = function() {
@@ -643,7 +702,7 @@
             var myChart = echarts.init(document.getElementById('main'));
             
                     var data = [];
-                    console.log($scope.datas);
+                    // console.log($scope.datas);
                     for(var i =0;i<$scope.datas.length;i++)
                     {
                         var son = [];
@@ -667,9 +726,16 @@
                         myRegression.points.sort(function(a, b) {
                             return a[0] - b[0];
                         });
+                        var param_title=angular.copy($scope.param_title)
+                        var param_unit = angular.copy($scope.param_unit)
+                        var param_name = angular.copy($scope.param_name)
+
+                        var chart_x= angular.copy($scope.x_value);
+                        var chart_y=angular.copy($scope.y_value);
+                        // console.log(param_name);
                         var option = {
                             title: {
-                                text: '数据拟合-多项式、指数和对数',
+                                text: param_title+'   单位:'+param_unit,
                             //  subtext: 'By ecStat.regression',
                             //  sublink: 'https://github.com/ecomfe/echarts-stat',
                                 left: 'center'
@@ -681,6 +747,7 @@
                                 }
                             },
                             xAxis: {
+                                name:chart_x,
                                 type: 'value',
                                 splitLine: {
                                     lineStyle: {
@@ -690,6 +757,7 @@
                                 splitNumber: 20
                             },
                             yAxis: {
+                                name: param_name,
                                 type: 'value',
                                 splitLine: {
                                     lineStyle: {
@@ -743,10 +811,10 @@
 
                     myChart.setOption(option);
                 }
-                
+            
 
-
-            }); 
+                 
+            }; 
     </script>
 </body>
 </html>
