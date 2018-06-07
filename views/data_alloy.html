@@ -425,7 +425,7 @@
                     $scope.fields = [];//把字段统一放到这里，供后续处理
                     $scope.selected = []; 
                     $scope.selectedTags = [];
-                    var myUrl = "http://10.10.33.10:8081/alloy";
+                    var myUrl = "http://10.10.12.251:8081/alloy";
                 $http.jsonp($sce.trustAsResourceUrl(myUrl)).then(function(response) {
                             $scope.alloy_left = response.data;
                             response.data.forEach(function(e){
@@ -447,7 +447,7 @@
                     
                     var flag = false;
                     
-                $http.jsonp($sce.trustAsResourceUrl("http://10.10.33.10:8081/list50/<%= param_id %>"))
+                $http.jsonp($sce.trustAsResourceUrl("http://10.10.12.251:8081/list50/<%= param_id %>"))
                     .then(function(response) {
                     
                     $scope.data = response.data;
@@ -462,7 +462,7 @@
                     
                 });
         
-                $http.jsonp($sce.trustAsResourceUrl("http://10.10.33.10:8081/get_material_name")).then(function(response) {
+                $http.jsonp($sce.trustAsResourceUrl("http://10.10.12.251:8081/get_material_name")).then(function(response) {
                             //$scope.lastName = response[0].param_name;
                             $scope.query_res = response.data;
                             //console.log(response);
