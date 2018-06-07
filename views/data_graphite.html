@@ -425,7 +425,8 @@
                     $scope.selectedTags = [];
                     var myUrl = "http://10.10.12.251:8081/graphite";
                 $http.jsonp($sce.trustAsResourceUrl(myUrl)).then(function(response) {
-                            $scope.graphite = response.data;
+                            $scope.graphite_left = response.data;
+                            
                             response.data.forEach(function(e){
                                 var par_id= <%= param_id %>;
                                 if(e.id == par_id)
