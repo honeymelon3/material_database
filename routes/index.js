@@ -323,7 +323,7 @@ router.get('/public/documents/alloy/alloy_standard/:fileName.:extension', functi
 
 router.get('/data_graphite', function(req, res, next) {
 	if(req.session.user.graphite == 1){ 					//到达/home路径首先判断是否已经登录
-		res.render("data_graphite",{title:'石墨数据库'});  			//未登录则重定向到 /login 路径
+		res.render("data_graphite", { title: '石墨数据库', param_id: '1'});  			//未登录则重定向到 /login 路径
 	} ;	
 	if(req.session.user.graphite == 0){ 					//到达/home路径首先判断是否已经登录
 		res.render("/home"); 			//未登录则重定向到 /login 路径
