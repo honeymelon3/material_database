@@ -421,8 +421,8 @@ router.get('/data_corrode', function(req, res, next) {
 });
 
  router.get('/graphite', function(req, res,next) { //负面清单页面入口
-   	var sql = 'select param_name,param_unit,param_intro from  graphite_param';
-	
+	 var sql = 'select * from  graphite_param where id in (select distinct param_id from graphite_param_data) order by id';
+	// select * from alloy_param where id in (select distinct param_id from alloy_param_data) order by id
 	my_conn.query(sql,function(result){		
 		res.jsonp(result.rows);
 		console.log('goodg1');
