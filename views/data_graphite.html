@@ -446,7 +446,7 @@
                     
                     var flag = false;
                     
-                $http.jsonp($sce.trustAsResourceUrl("http://10.10.12.251:8081/list50/<%= param_id %>"))
+                $http.jsonp($sce.trustAsResourceUrl("http://10.10.12.251:8081/gp_list50/<%= param_id %>"))
                     .then(function(response) {
                     
                     $scope.data = response.data;
@@ -461,7 +461,7 @@
                     
                 });
         
-                $http.jsonp($sce.trustAsResourceUrl("http://10.10.12.251:8081/get_material_name")).then(function(response) {
+                $http.jsonp($sce.trustAsResourceUrl("http://10.10.12.251:8081/get_graphite_name")).then(function(response) {
                             //$scope.lastName = response[0].param_name;
                             $scope.query_res = response.data;
                             //console.log(response);
