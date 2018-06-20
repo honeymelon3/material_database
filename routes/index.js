@@ -456,32 +456,33 @@ router.get('/gp_list50/:param_id', function (req, res, next) { //负面清单页
 
 
  router.get('/salt', function(req, res,next) { //负面清单页面入口
-   	var sql = 'select param_name,param_unit,param_intro,param_symbol,unit_intro from salt_param';
+	var sql = 'select * from  salt_param where param_id in (select distinct param_id from salt_param_data) order by param_id';
 	//console.log(sql);
 	my_conn.query(sql,function(result){		
 		res.jsonp(result.rows);
 	}); 
 });
 
- router.get('/salt_list50', function(req, res,next) { 
+router.get('/salt_list50/:param_id', function(req, res,next) { 
    	//var sql = 'select * from db_user where username = \'jyq\'' ;
 	//var sql = 'SELECT column_name from information_schema.columns where table_name = \'alloy_param_data\'' ;
-	var sql = 'select molten_salt_name,salt_composion,salt_batch,salt_state,param_name,salt_test_temp,salt_test_temp_range,param_value,param_uncertainty,param_method,param_value_fitting,param_source,salt_param.param_maintainer from salt_param_data,salt_param,salt_name where salt_param.param_id=salt_param_data.param_id and salt_param_data.salt_id=cast(salt_name.salt_id as character varying) and salt_param.param_id = 8';
-	my_conn.query(sql,function(result){		
-		res.jsonp(result.rows);
-		//console.log(result.rows);
-	}); 
+	var sql1 = 'select param_scope from salt_param where param_id=\'' + req.params.param_id + '\';';
+	// console.log(sql1);
+	my_conn.query(sql1, function (result) {
+		//  res.jsonp(result.rows);
+		////console.log(result.rows);
+		//  console.log(result.rows); 
+		var sql = 'select ' + result.rows[0].param_scope + ' from salt_param_data,salt_param where  salt_param_data.param_id=salt_param.param_id and param_id=\'' + req.params.param_id + '\'';
+		console.log(sql);
+		my_conn.query(sql, function (result) {
+			res.jsonp(result.rows);
+			////console.log(result.rows);
+			// console.log('gooda2');
+		});
+	});
 });
 
 
- router.get('/salt_list100', function(req, res,next) { 
-    //var sql = 'select * from db_user' ;
-	var sql = 'select molten_salt_name,salt_composion,salt_batch,salt_state,param_name,salt_test_temp,salt_test_temp_range,param_value,param_uncertainty,param_method,param_value_fitting,param_source,salt_param.param_maintainer from salt_param_data,salt_param,salt_name where salt_param.param_id=salt_param_data.param_id and salt_param_data.salt_id=cast(salt_name.salt_id as character varying)';
-	//console.log(sql);
-	my_conn.query(sql,function(result){		
-		res.jsonp(result.rows);
-	}); 
-});
 
 
  router.get('/irradiation', function(req, res,next) { //负面清单页面入口
