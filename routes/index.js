@@ -467,7 +467,7 @@ router.get('/salt_list50/:param_id', function(req, res,next) {
    	//var sql = 'select * from db_user where username = \'jyq\'' ;
 	//var sql = 'SELECT column_name from information_schema.columns where table_name = \'alloy_param_data\'' ;
 	var sql1 = 'select param_scope from salt_param where param_id=\'' + req.params.param_id + '\';';
-	// console.log(sql1);
+	console.log(sql1);
 	my_conn.query(sql1, function (result) {
 		//  res.jsonp(result.rows);
 		////console.log(result.rows);
