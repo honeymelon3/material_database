@@ -523,7 +523,7 @@ router.get('/salt_list50/:param_id', function(req, res,next) {
 		 //  res.jsonp(result.rows);
 		 ////console.log(result.rows);
 		 //  console.log(result.rows); 
-		 var sql = 'select ' + result.rows[0].param_scope + ' from  alloy_irradiant_data,alloy_irradiant_param,alloy_irradiant_report where alloy_irradiant_data.param_id=alloy_irradiant_param.id  and alloy_irradiant_data.report_id =alloy_irradiant_report.id and param_id=\'' + req.params.param_id + '\'';
+		 var sql = 'select ' + result.rows[0].param_scope + ' from  alloy_irradiant_data,alloy_irradiant_param,alloy_irradiant_report where alloy_irradiant_data.param_id=alloy_irradiant_param.id  and param_id=\'' + req.params.param_id + '\'';
 		 console.log(sql);
 		 my_conn.query(sql, function (result) {
 			 res.jsonp(result.rows);
