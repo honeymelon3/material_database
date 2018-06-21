@@ -33,7 +33,7 @@ var rd = require("./util/rdfiles.js");
 		res.jsonp(result.rows);
 	}); 
 });
- router.get('/get_irradiant_name', function(req, res,next) { //辐照数据库
+router.get('/get_irradiant_name', function(req, res,next) { //辐照数据库
    	var sql = 'select distinct alloy_name from alloy_irradiant_data UNION select param_name from alloy_irradiant_param UNION select distinct environment from alloy_irradiant_data';
 	////console.log(req.query.query_field);
 	
@@ -371,13 +371,24 @@ router.get('/data_salt/:param_id', function (req, res, next) {
 
 router.get('/data_irradiation', function(req, res, next) {
 	if(req.session.user.irradiation == 1){ 					//到达/home路径首先判断是否已经登录
-		res.render("data_irradiation",{title:'熔盐数据库'});  			//未登录则重定向到 /login 路径
+		res.render("data_irradiation", { title: '材料辐照数据库', param_id: 1});  			//未登录则重定向到 /login 路径
 	} ;	
 	if(req.session.user.irradiation == 0){ 					//到达/home路径首先判断是否已经登录
 		res.render("/home"); 			//未登录则重定向到 /login 路径
 	} ;		
    
 });
+router.get('/data_irradiation/:param_id', function (req, res, next) {
+	////console.log(req.session.user.alloy);
+	if (req.session.user.salt == 1) { 					//到达/home路径首先判断是否已经登录
+		res.render("data_irradiation", { title: '熔盐数据库', param_id: req.params.param_id }); 			//未登录则重定向到 /login 路径
+	};
+	if (req.session.user.salt == 0) { 					//到达/home路径首先判断是否已经登录
+		res.render("/home"); 			//未登录则重定向到 /login 路径
+	};
+
+});
+
 
 router.get('/data_corrode', function(req, res, next) {
 	if(req.session.user.corrode == 1){ 					//到达/home路径首先判断是否已经登录
@@ -496,32 +507,35 @@ router.get('/salt_list50/:param_id', function(req, res,next) {
 
 
  router.get('/irradiation', function(req, res,next) { //负面清单页面入口
-   	var sql = 'select param_name,param_unit,param_intro from  alloy_irradiant_param';
+	 var sql = 'select * from alloy_irradiant_param where id in (select distinct param_id from alloy_irradiant_param_data) order by id';
 	//console.log(sql);
 	my_conn.query(sql,function(result){		
 		res.jsonp(result.rows);
 	}); 
 });
 
- router.get('/irrad_list50', function(req, res,next) { 
+ router.get('/irrad_list50/:param_id', function(req, res,next) { 
    	//var sql = 'select * from db_user where username = \'jyq\'' ;
 	//var sql = 'SELECT column_name from information_schema.columns where table_name = \'alloy_param_data\'' ;
-	var sql = 'select alloy_name,param_name,param_value,test_stress,test_temp, annealing_temp,irradiation_reactor,environment,ave_temperature,time_at_temperature,neutron_dose_1,neutron_dose_2,neutron_dose_3,neutron_dose_4, neutron_dose_5,"DPA","He",test_time,test_standard,report_name,alloy_batch,annealing_time,alloy_irradiant_param.param_maintainer from alloy_irradiant_data,alloy_irradiant_param where alloy_irradiant_param.id=alloy_irradiant_data.param_id and param_id = 9';
-	my_conn.query(sql,function(result){		
-		res.jsonp(result.rows);
-		//console.log(result.rows);
-	}); 
+	 var sql1 = 'select param_scope from alloy_irradiant_param where id=\'' + req.params.param_id + '\';';
+	 // console.log(sql1);
+	 my_conn.query(sql1, function (result) {
+		 //  res.jsonp(result.rows);
+		 ////console.log(result.rows);
+		 //  console.log(result.rows); 
+		 var sql = 'select ' + result.rows[0].param_scope + ' from  alloy_irradiant_param_data,alloy_irradiant_param,alloy_irradiant_report where alloy_irradiant_param_data.param_id=alloy_irradiant_param.id  and alloy_irradiant_param_data.report_id =alloy_irradiant_report.id and param_id=\'' + req.params.param_id + '\'';
+		 console.log(sql);
+		 my_conn.query(sql, function (result) {
+			 res.jsonp(result.rows);
+			 ////console.log(result.rows);
+			 // console.log('gooda2');
+		 });
+	 });
+
 });
 
 
- router.get('/irrad_list100', function(req, res,next) { 
-    //var sql = 'select * from db_user' ;
-	var sql = 'select alloy_name,param_name,param_value,test_stress,test_temp, annealing_temp,irradiation_reactor,environment,ave_temperature,time_at_temperature,neutron_dose_1,neutron_dose_2,neutron_dose_3,neutron_dose_4, neutron_dose_5,"DPA","He",test_time,test_standard,report_name,alloy_batch,annealing_time,alloy_irradiant_param.param_maintainer from alloy_irradiant_data,alloy_irradiant_param where alloy_irradiant_param.id=alloy_irradiant_data.param_id';
-	//console.log(sql);
-	my_conn.query(sql,function(result){		
-		res.jsonp(result.rows);
-	}); 
-});
+
 
  router.get('/corrode', function(req, res,next) { //负面清单页面入口
    	var sql = 'select distinct alloy_name from alloy_salt_corrod';
