@@ -482,7 +482,7 @@ router.get('/salt_list50/:param_id', function(req, res,next) {
 		//  res.jsonp(result.rows);
 		////console.log(result.rows);
 		//  console.log(result.rows); 
-		var sql = 'select ' + result.rows[0].param_scope + ' from  salt_data_view param_id=\'' + req.params.param_id + '\'';
+		var sql = 'select ' + result.rows[0].param_scope + ' from salt_param_data,salt_param,salt_name where salt_param_data.salt_id=salt_name.salt_id and salt_param_data.param_id=salt_param.param_id and param_id=\'' + req.params.param_id + '\'';
 		console.log(sql);
 		my_conn.query(sql, function (result) {
 			res.jsonp(result.rows);
