@@ -392,12 +392,22 @@ router.get('/data_irradiation/:param_id', function (req, res, next) {
 
 router.get('/data_corrode', function(req, res, next) {
 	if(req.session.user.corrode == 1){ 					//到达/home路径首先判断是否已经登录
-		res.render("data_corrode",{title:'熔盐数据库'});   			//未登录则重定向到 /login 路径
+		res.render("data_corrode", { title: '熔盐数据库', alloy_name:'Hastelloy N'});   			//未登录则重定向到 /login 路径
 	} ;	
 	if(req.session.user.corrode == 0){ 					//到达/home路径首先判断是否已经登录
 		res.render("/home"); 			//未登录则重定向到 /login 路径
 	} ;	
   
+});
+
+router.get('/data_corrode/:alloy_name', function (req, res, next) {
+	if (req.session.user.corrode == 1) { 					//到达/home路径首先判断是否已经登录
+		res.render("data_corrode", { title: '熔盐数据库', alloy_name: req.params.alloy_name.replace(/ /g, '&#32;')});   			//未登录则重定向到 /login 路径
+	};
+	if (req.session.user.corrode == 0) { 					//到达/home路径首先判断是否已经登录
+		res.render("/home"); 			//未登录则重定向到 /login 路径
+	};
+
 });
 
  router.get('/alloy', function(req, res,next) { //负面清单页面入口
@@ -556,13 +566,7 @@ router.get('/salt_list50/:param_id', function(req, res,next) {
 });
 
 
- router.get('/corrode_list100', function(req, res,next) { 
-    //var sql = 'select * from db_user' ;
-	var sql = 'select * from alloy_salt_corrod left join salt_element on alloy_salt_corrod.salt_batch=salt_element.salt_batch';
-	my_conn.query(sql,function(result){		
-		res.jsonp(result.rows);
-	}); 
-});
+
 
 
 
