@@ -344,7 +344,60 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="upload" tabindex="-1" role="upload" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:10%">
     
+    
+        <!-- BEGIN REGISTRATION FORM -->
+    
+        <form class="form-vertical register-form" style="display:inline" action="/upload_alloy" enctype="multipart/form-data" method="post">
+    
+            <h3 class="">上传数据</h3>
+    
+            <p>目前只接受CSV文件格式上传，编码格式为GB2312。请保存文件时注意文件格式，防止中文乱码录入数据库s</p>
+    
+            <div class="control-group">
+    
+                <label class="control-label visible-ie8 visible-ie9">Password</label>
+    
+                <div class="controls">
+    
+                    <div class="input-icon left">
+    
+                        <i class="icon-file-text"></i>
+    
+                        <input class="m-wrap placeholder-no-fix" type="file" id="register_password" placeholder="选择文件" name="myfile" />
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+    
+    
+    
+            <div class="form-actions">
+<!--     
+                <a class="navbar-brand" href="#">
+    
+                    <i class="m-icon-swapleft"></i>返回
+    
+                </a> -->
+    
+                <button type="submit" id="" class="btn green pull-right">
+    
+                    上传数据
+                    <i class="m-icon-swapright m-icon-white"></i>
+    
+                </button>
+    
+            </div>
+    
+        </form>
+    
+        <!-- END REGISTRATION FORM -->
+    
+    </div>
 
 
 
