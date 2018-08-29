@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 var index = require('./routes/index');
+var upload = require('./routes/upload');
 // var admin = require('./routes/admin');
 
 var app = express();
@@ -41,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public/bower_components')));
 app.use(express.static(path.join(__dirname, 'public/documents')));
 
 app.use('/', index);
-
+app.use('/upload', upload);
 // app.use('/admin', admin); // 即为为路径 /users 设置路由
 
 
