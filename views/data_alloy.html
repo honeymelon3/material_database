@@ -344,10 +344,10 @@
         </div>
       </div>
     </div>
-    <div class="modal fade" id="upload" tabindex="-1" role="upload" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:10%">
+    <div class="login-form" id="upload" tabindex="-1" role="upload" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:10%">
     
-        <div class="modal-dialog">
-            <div class="modal-content" style="background-color:#133364; width: 600px;height: 500px;">
+        <div >
+            <div class="content" style="background-color:#b1cffc; width: 600px;height: 500px;">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">关闭
                     </button>
@@ -357,7 +357,11 @@
                 </div>
                 <div class="modal-body">
         <!-- BEGIN REGISTRATION FORM -->
-    
+                <div>
+                        <h3>样表下载</h3>
+                        <a href="/public/samples/合金数据库表格.zip">合金数据库表格</a>
+                 </div>
+
                  <form class="form-vertical " style="display:inline" action="/upload_alloy" enctype="multipart/form-data" method="post">
     
     
@@ -392,10 +396,7 @@
                                 </button>
                     
                     </div>
-                    <div>
-                        <h3>样表下载</h3>
-                        <a href="/public/samples/合金数据库表格.zip">合金数据库表格</a>
-                    </div>
+
     
                 </form>
                 </div>
