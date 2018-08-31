@@ -7,13 +7,13 @@ var fs = require('fs')
 var storage3 = multer.diskStorage({
     destination: function (req, file, cb) {
 
-        cb(null, "/public/csvs");    // 保存的路径，备注：需要自己创建
+        cb(null,process.cwd() + "/public/csvs");    // 保存的路径，备注：需要自己创建
     }
 
 });
 
 
-router.post('/alloy', multer({ storage: storage3 }).single('file'), function (req, res, next) {
+router.post('/alloy', multer({ storage: storage3 }), function (req, res, next) {
     console.log(req.body);
     // console.log(req.file);
     // console.log(process.cwd());
