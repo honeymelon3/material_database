@@ -218,7 +218,7 @@ router.get('/public/documents/alloy/alloy_report/:fileName.:extension', function
 		var file ='./public/documents/alloy/alloy_report/' + req.params.fileName + '.' + req.params.extension;
 		file_name='download'+ '.' + req.params.extension;
 	   console.log(file);
-	   if(req.session.user.salt == 1){ 	
+	   if(req.session.user.alloy == 1){ 	
 			res.download(file, function(err){
 				if(err) {
 					// Check if headers have been sent
@@ -232,12 +232,35 @@ router.get('/public/documents/alloy/alloy_report/:fileName.:extension', function
 				
 	 		 })
 			}
-		if(req.session.user.irradiation == 0){ 					//到达/home路径首先判断是否已经登录
+		if(req.session.user.alloy == 0){ 					//到达/home路径首先判断是否已经登录
 				res.render("/home"); 			//未登录则重定向到 /login 路径
 		} ;		
 	});  
 
+router.get('/public/samples/:fileName.:extension', function (req, res) {
 
+	var file = './public/samples/' + req.params.fileName + '.' + req.params.extension;
+	file_name = req.params.fileName + '.' + req.params.extension;
+	console.log(file);
+	if (req.session.user.salt == 1) {
+		res.download(file, function (err) {
+			if (err) {
+				// Check if headers have been sent
+				res.sendStatus(404);
+			}
+			else {
+				return res.status(304).end();
+				// return res.redirect('/alloy_report'); // 404, maybe 500 depending on err
+			}
+
+			// Don't need res.end() here since already sent
+
+		})
+	}
+	if (req.session.user.irradiation == 0) { 					//到达/home路径首先判断是否已经登录
+		res.render("/home"); 			//未登录则重定向到 /login 路径
+	};
+}); 
 
 
 router.get('/alloy_standard', function(req, res, next) {
@@ -265,7 +288,7 @@ router.get('/public/documents/alloy/alloy_standard/:fileName.:extension', functi
 		var file ='./public/documents/alloy/alloy_standard/' + req.params.fileName + '.' + req.params.extension;
 		file_name='download'+ '.' + req.params.extension;
 	   console.log(file);
-	   if(req.session.user.salt == 1){ 	
+	   if(req.session.user.alloy == 1){ 	
 			res.download(file, function(err){
 				if(err) {
 					// Check if headers have been sent
@@ -279,7 +302,7 @@ router.get('/public/documents/alloy/alloy_standard/:fileName.:extension', functi
 				
 	 		 })
 			}
-		if(req.session.user.irradiation == 0){ 					//到达/home路径首先判断是否已经登录
+		if(req.session.user.alloy == 0){ 					//到达/home路径首先判断是否已经登录
 				res.render("/home"); 			//未登录则重定向到 /login 路径
 		} ;		
 	});  
@@ -301,7 +324,7 @@ router.get('/public/documents/alloy/alloy_standard/:fileName.:extension', functi
 			var file ='./public/documents/graphite/' + req.params.fileName + '.' + req.params.extension;
 			file_name='download'+ '.' + req.params.extension;
 		   console.log(file);
-		   if(req.session.user.salt == 1){ 	
+		   if(req.session.user.graphite == 1){ 	
 				res.download(file, function(err){
 					if(err) {
 						// Check if headers have been sent
@@ -315,7 +338,7 @@ router.get('/public/documents/alloy/alloy_standard/:fileName.:extension', functi
 					
 				  })
 				}
-			if(req.session.user.irradiation == 0){ 					//到达/home路径首先判断是否已经登录
+		if (req.session.user.graphite == 0){ 					//到达/home路径首先判断是否已经登录
 					res.render("/home"); 			//未登录则重定向到 /login 路径
 			} ;		
 		});  
