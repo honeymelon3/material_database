@@ -242,7 +242,7 @@ router.get('/public/samples/:fileName.:extension', function (req, res) {
 	var file = './public/samples/' + req.params.fileName + '.' + req.params.extension;
 	file_name = req.params.fileName + '.' + req.params.extension;
 	console.log(file);
-	if (req.session.user.salt == 1) {
+
 		res.download(file, function (err) {
 			if (err) {
 				// Check if headers have been sent
@@ -256,10 +256,7 @@ router.get('/public/samples/:fileName.:extension', function (req, res) {
 			// Don't need res.end() here since already sent
 
 		})
-	}
-	if (req.session.user.irradiation == 0) { 					//到达/home路径首先判断是否已经登录
-		res.render("/home"); 			//未登录则重定向到 /login 路径
-	};
+	
 }); 
 
 
