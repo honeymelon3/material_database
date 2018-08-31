@@ -8,20 +8,13 @@ var storage3 = multer.diskStorage({
     destination: function (req, file, cb) {
 
         cb(null, "/public/csvs");    // 保存的路径，备注：需要自己创建
-    },
-    filename: function (req, file, cb) {
-        // 将保存文件名设置为 时间戳+字段名 ，比如 1478521468943-技术需求
-        //  filename2=file.originalname;
-        //  filedate=Date.now();
-        //  filename1=filedate+'-'+filename2;
-        cb(null,  file.originalname+ '-' +Date.now() );
     }
 
 });
 
 
 router.post('/alloy', multer({ storage: storage3 }).single('file'), function (req, res, next) {
-    // console.log(req.body);
+    console.log(req.body);
     // console.log(req.file);
     // console.log(process.cwd());
     // var upfdate = Date.now();
