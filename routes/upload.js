@@ -20,8 +20,8 @@ var storage3 = multer.diskStorage({
 });
 
 
-router.post('/alloy', function (req, res, next) {
-    console.log("测试");
+router.post('/alloy', multer({ storage: storage3 }).single('file'), function (req, res, next) {
+    console.log(req.body);
     // console.log(req.file);
     // console.log(process.cwd());
     // var upfdate = Date.now();
@@ -52,7 +52,7 @@ router.post('/alloy', function (req, res, next) {
 
 
 
-    Wurl = 'data_alloy';
+    Wurl = '/data_alloy';
     res.redirect(Wurl);
 
 })
