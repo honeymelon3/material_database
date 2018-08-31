@@ -10,7 +10,7 @@ var storage3 = multer.diskStorage({
         cb(null,process.cwd() + "/public/csvs");    // 保存的路径，备注：需要自己创建
     },
     filename: function (req, file, cb) {
-        cb(null, req.file.filename + '-' + Date.now());
+        cb(null, file.originalname + '-' + Date.now());
     }
 
 });
