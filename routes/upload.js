@@ -56,3 +56,5 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
     res.redirect(Wurl);
 
 })
+
+module.exports = router;
