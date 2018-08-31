@@ -628,7 +628,7 @@ router.get("/loginout",function(req,res){    // 到达 /logout 路径则登出�
 	res.redirect("/");
 });
 
-   router.post('/register',function(req, res) {
+router.post('/register',function(req, res) {
 	var sql = sq.insertSql(req.body);
 	console.log(sql);
 	

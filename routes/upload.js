@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var my_conn = require("./pgconn");
 var multer = require('multer');
-
+var fs = require('fs')
 
 var storage3 = multer.diskStorage({
     destination: function (req, file, cb) {
