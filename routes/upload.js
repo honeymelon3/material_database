@@ -20,8 +20,8 @@ var storage3 = multer.diskStorage({
 });
 
 
-router.post('/alloy', multer({ storage: storage3 }).single('file'), function (req, res, next) {
-    console.log(req.body);
+router.post('/alloy', function (req, res, next) {
+    console.log("测试");
     // console.log(req.file);
     // console.log(process.cwd());
     // var upfdate = Date.now();
@@ -38,16 +38,16 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
     //     console.log(sql);
     //     pg2.query(sql, function (result) { });
     // }
-    var tmppath = req.files.file.path;
-    fs.createReadStream(__dirname + '/' + tmppath)
-        .pipe(parse({ delimiter: "\n" }))
-        .on('data', function (csvrow) {
-            console.log(csvrow);
-            csvData.push(csvrow);
-        })
-        .on('end', function () {
-            console.log(csvData);
-        });
+    // var tmppath = req.files.file.path;
+    // fs.createReadStream(__dirname + '/' + tmppath)
+    //     .pipe(parse({ delimiter: "\n" }))
+    //     .on('data', function (csvrow) {
+    //         console.log(csvrow);
+    //         csvData.push(csvrow);
+    //     })
+    //     .on('end', function () {
+    //         console.log(csvData);
+    //     });
  
 
 
