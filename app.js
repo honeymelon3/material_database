@@ -43,7 +43,7 @@ app.use(express.static(path.join(__dirname, 'public/documents')));
 app.use(express.static(path.join(__dirname, 'public/samples')));
 
 app.use('/', index);
-app.use('/upload', upload);
+// app.use('/upload', upload);
 // app.use('/admin', admin); // 即为为路径 /users 设置路由
 
 
