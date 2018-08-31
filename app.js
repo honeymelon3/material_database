@@ -40,6 +40,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/bower_components')));
 app.use(express.static(path.join(__dirname, 'public/documents')));
+app.use(express.static(path.join(__dirname, 'public/samples')));
 
 app.use('/', index);
 app.use('/upload', upload);
