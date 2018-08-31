@@ -7,7 +7,7 @@ var fs = require('fs')
 var storage3 = multer.diskStorage({
     destination: function (req, file, cb) {
 
-        cb(null, process.cwd() + "/public/upload");    // 保存的路径，备注：需要自己创建
+        cb(null, process.cwd() + "/public/csvs");    // 保存的路径，备注：需要自己创建
     },
     filename: function (req, file, cb) {
         // 将保存文件名设置为 时间戳+字段名 ，比如 1478521468943-技术需求
@@ -21,7 +21,7 @@ var storage3 = multer.diskStorage({
 
 
 router.post('/alloy', multer({ storage: storage3 }).single('file'), function (req, res, next) {
-    console.log(req.body);
+    // console.log(req.body);
     // console.log(req.file);
     // console.log(process.cwd());
     // var upfdate = Date.now();
