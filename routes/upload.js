@@ -3,6 +3,7 @@ var router = express.Router();
 var my_conn = require("./pgconn");
 var multer = require('multer');
 var fs = require('fs')
+var {exec} = require('child_process')
 
 var storage3 = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -29,6 +30,9 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
     // console.log(upftime);
      if (req.file != null) {
          console.log(req.file.path);
+         var commands_string = ' scp' + req.file.path + 'root@cu01:'+ req.file.path;
+         console.log(commands);
+         exec(commands_string);
         var sql ='copy alloy_param_data from \''+req.file.path +'\' with delimiter as \',\' csv header quote as \'"\' ;';
         console.log(sql);
          my_conn.query(sql, function (result) { 
