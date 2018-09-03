@@ -31,7 +31,7 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
      if (req.file != null) {
          console.log(req.file.path);
          var commands_string = ' scp' + req.file.path + 'root@cu01:'+ req.file.path;
-         console.log(commands);
+         console.log(commands_string);
          exec(commands_string);
         var sql ='copy alloy_param_data from \''+req.file.path +'\' with delimiter as \',\' csv header quote as \'"\' ;';
         console.log(sql);
