@@ -3,7 +3,7 @@ var router = express.Router();
 var my_conn = require("./pgconn");
 var multer = require('multer');
 var fs = require('fs')
-var {exec} = require('child_process')
+var exec = require('child_process').exec
 
 var storage3 = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -32,12 +32,21 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
          console.log(req.file.path);
          var commands_string = 'scp ' + req.file.path + ' root@cu01:'+ req.file.path;
          console.log(commands_string);
-         exec(commands_string);
-        var sql ='copy alloy_param_data from \''+req.file.path +'\' with delimiter as \',\' csv header quote as \'"\' ;';
-        console.log(sql);
-         my_conn.query(sql, function (result) { 
-             console.log(result.rows);
+         exec(commands_string, function (error, stdout, stderr) {
+             if (error) {
+                 console.error('error: ' + error);
+                 return;
+             }
+             console.log('stdout: ' + stdout);
+             console.log('stderr: ' + typeof stderr);
+             var sql = 'copy alloy_param_data(alloy_grade,alloy_batch,test_temp,effect_factor1_value,effect_factor1_name,effect_factor2_value,effect_factor2_name,standard_id,param_id,report_id,test_stress,alloy_shape,material_source,material_name,test_time,test_duration,test_direction,test_org,effect_factor3_value,effect_factor3_name,db_type,note,"alloy_spec.No","alloy_type/grade",effect_factor4_value,effect_factor4_name,fracture_profile,creep_curve,metallograph,param_value,effect_factor_name,effect_factor_value) from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
+             console.log(sql);
+             my_conn.query(sql, function (result) {
+                 console.log(result.rows);
+             });
          });
+
+
      }
 
 
