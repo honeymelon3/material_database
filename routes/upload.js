@@ -39,7 +39,7 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
              }
              console.log('stdout: ' + stdout);
              console.log('stderr: ' + typeof stderr);
-             var sql= 'set client_encoding = \'GBK\'';
+             var sql= 'set client_encoding = \'GBK\''; 
              console.log(sql);
              my_conn.query(sql, function (result) {
                  console.log(result.rows);
