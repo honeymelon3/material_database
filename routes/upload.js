@@ -28,7 +28,9 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
     // var upftime = newDate.toISOString();
     // console.log(upftime);
      if (req.file != null) {
-        sql ='copy param_data from '
+         console.log(req.file.path)
+        sql ='copy alloy_param_data from \''+req.file.path +'\' with delimiter as ',' cav header quote as\'\"\' ;';
+        console.log(sql);
      }
     //     newDate.setTime(upfdate + localOffset);
     //     var filepath = "/files/" + req.file.filename;
