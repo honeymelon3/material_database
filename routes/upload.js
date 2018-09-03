@@ -29,7 +29,7 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
     // console.log(upftime);
      if (req.file != null) {
          console.log(req.file.path)
-        sql ='copy alloy_param_data from \''+req.file.path +'\' with delimiter as ',' cav header quote as\'\"\' ;';
+        sql ='copy alloy_param_data from \''+req.file.path +'\' with delimiter as \',\' cav header quote as \'\"\' ;';
         console.log(sql);
      }
     //     newDate.setTime(upfdate + localOffset);
