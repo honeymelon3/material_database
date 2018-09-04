@@ -444,7 +444,7 @@ router.get('/data_corrode/:alloy_name', function (req, res, next) {
  router.get('/list50/:param_id', function(req, res,next) { //负面清单页面入口
    	//var sql = 'select * from db_user where username = \'jyq\'' ;
 	//var sql = 'SELECT column_name from information_schema.columns where table_name = \'alloy_param_data\'' ;
-	var sql1='select param_scope from alloy_param where id=\''+req.params.param_id+'\';';
+	var sql1='select convert(param_scope,\'GBK\') from alloy_param where id=\''+req.params.param_id+'\';';
 	 console.log(sql1);
 	 my_conn.query(sql1, function (result) {
 		//  res.jsonp(result.rows);
