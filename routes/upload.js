@@ -58,7 +58,7 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
 
 
     
-    Wurl = '/data_alloy';
+    Wurl = '/home';
     res.redirect(Wurl);
     
 })
