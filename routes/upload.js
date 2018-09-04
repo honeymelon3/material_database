@@ -57,7 +57,7 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
 
 
 
-    var sql = 'set client_encoding = \'utf8\'';
+    var sql = 'set client_encoding = \'GBK\'';
     console.log(sql);
     my_conn.query(sql, function (result) {
     Wurl = '/data_alloy';
