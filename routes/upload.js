@@ -57,12 +57,10 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
 
 
 
-    var sql = 'set client_encoding = \'utf-8\'';
-    console.log(sql);
-    my_conn.query(sql, function (result) {
+  
     Wurl = '/data_alloy';
     res.redirect(Wurl);
-    });
+  
 })
 
 module.exports = router;
