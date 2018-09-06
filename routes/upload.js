@@ -105,4 +105,48 @@ router.post('/graphite', multer({ storage: storage3 }).single('file'), function 
 
 })
 
+router.post('/salt', multer({ storage: storage3 }).single('file'), function (req, res, next) {
+    console.log(req.file);
+    // console.log(req.file);
+    // console.log(process.cwd());
+    // var upfdate = Date.now();
+    // var newDate = new Date();
+    // var filename = '';
+    // var localOffset = newDate.getTimezoneOffset() * 60000;
+
+    // var upftime = newDate.toISOString();
+    // console.log(upftime);
+    if (req.file != null) {
+        console.log(req.file.path);
+        var commands_string = 'scp ' + req.file.path + ' root@cu01:' + req.file.path;
+        console.log(commands_string);
+        exec(commands_string, function (error, stdout, stderr) {
+            if (error) {
+                console.error('error: ' + error);
+                return;
+            }
+            console.log('stdout: ' + stdout);
+            console.log('stderr: ' + typeof stderr);
+            var sql = 'set client_encoding = \'GBK\'';
+            console.log(sql);
+            my_conn.query(sql, function (result) {
+                console.log(result.rows);
+                var sql = 'copy salt_param_data(comp_purity,ele_impurity,salt_batch,salt_state,salt_pretreatment,salt_test_temp,salt_test_temp_range,param_id,param_value,param_uncertainty,param_value_fitting,param_method,param_source,param_check,note,param_report,salt_id) from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
+                console.log(sql);
+                my_conn.query(sql, function (result) {
+                    console.log(result.rows);
+                });
+            });
+
+        });
+
+
+    }
+
+
+    Wurl = '/home';
+    res.redirect(Wurl);
+
+})
+
 module.exports = router;
