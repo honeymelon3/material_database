@@ -55,12 +55,54 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
 
      }
 
-
-
     
     Wurl = '/home';
     res.redirect(Wurl);
     
+})
+
+router.post('/graphite', multer({ storage: storage3 }).single('file'), function (req, res, next) {
+    console.log(req.file);
+    // console.log(req.file);
+    // console.log(process.cwd());
+    // var upfdate = Date.now();
+    // var newDate = new Date();
+    // var filename = '';
+    // var localOffset = newDate.getTimezoneOffset() * 60000;
+
+    // var upftime = newDate.toISOString();
+    // console.log(upftime);
+    if (req.file != null) {
+        console.log(req.file.path);
+        var commands_string = 'scp ' + req.file.path + ' root@cu01:' + req.file.path;
+        console.log(commands_string);
+        exec(commands_string, function (error, stdout, stderr) {
+            if (error) {
+                console.error('error: ' + error);
+                return;
+            }
+            console.log('stdout: ' + stdout);
+            console.log('stderr: ' + typeof stderr);
+            var sql = 'set client_encoding = \'GBK\'';
+            console.log(sql);
+            my_conn.query(sql, function (result) {
+                console.log(result.rows);
+                var sql = 'copy alloy_param_data("material_grade","material_batch","standard_id","param_value","param_id","report_id","material_block_size","data_source","test_time","test_infiltration_duration","test_org","note","material_manufacturer","material_block_num","material_produce_date","sample_direction","sample_num_avg","sample_num","molten_salt_composition_id","molten_salt_batch","inflitration_experiment_no","test_preset_pres","test_inflitration_pres","test_inflitration_temp","molten_salt_content","test_notch_depth","test_support_span","molten_salt_distribution","db_type","sample_org","sample_index","sample_position_id","maintainer_id","test_temp","test_temp_span","sample_size") from \'' + req.file.path + '\' with delimiter as \',\' csv header quote as \'"\';';
+                console.log(sql);
+                my_conn.query(sql, function (result) {
+                    console.log(result.rows);
+                });
+            });
+
+        });
+
+
+    }
+
+
+    Wurl = '/home';
+    res.redirect(Wurl);
+
 })
 
 module.exports = router;

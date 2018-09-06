@@ -93,7 +93,7 @@
             <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="/upload/graphite"><span class="glyphicon glyphicon-glyphicon glyphicon-upload">上传数据</a>
+                        <a data-toggle="modal" data-target="#upload"><span class="glyphicon glyphicon-glyphicon glyphicon-upload">上传数据</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-user">文档<span class="caret"></span></a>
@@ -342,8 +342,69 @@
         </div>
       </div>
     </div>
+  
+    <div class="modal fade" id="upload" tabindex="-1" role="upload" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:10%">
     
-
+        <div class="modal-dialog">
+            <div class="modal-content" style="background-color:#b1cffc; width: 600px;height: 500px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">关闭
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        上传数据
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- BEGIN REGISTRATION FORM -->
+                    <div>
+                        <h3>样表下载</h3>
+                        <a href="/public/samples/graphite_param_data.csv">石墨数据库数据样表</a>
+                    </div>
+                    <br>
+    
+                    <form class="form-vertical " style="display:inline" action="/upload/graphite" enctype="multipart/form-data" method="post">
+    
+    
+                        <p>目前只接受CSV文件格式上传，编码格式为GB2312。请保存文件时注意文件格式，防止中文乱码录入数据库.</p>
+                        <br>
+    
+                        <div class="form-group">
+    
+    
+                            <div class="controls">
+    
+                                <div>
+    
+                                    <input class="m-wrap placeholder-no-fix" type="file" id="data_csv" placeholder="选择文件" name="file" />
+    
+                                </div>
+    
+                            </div>
+    
+                        </div>
+    
+    
+    
+    
+                        <div class="form-group">
+    
+    
+                            <button type="submit" id="" class="btn btn-green pull-right">
+    
+                                上传数据
+    
+                            </button>
+    
+                        </div>
+    
+    
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END REGISTRATION FORM -->
+    
+    </div>
 
 
     <script>
