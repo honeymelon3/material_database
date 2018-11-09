@@ -565,8 +565,6 @@ router.get('/salt_list50/:param_id', function(req, res,next) {
 });
 
 
-
-
  router.get('/corrode', function(req, res,next) { //负面清单页面入口
    	var sql = 'select distinct alloy_name from alloy_salt_corrod';
 	//console.log(sql);
@@ -575,14 +573,16 @@ router.get('/salt_list50/:param_id', function(req, res,next) {
 	}); 
 });
 
- router.get('/corrode_list50', function(req, res,next) { 
+ router.get('/corrode_list50/:alloy_name', function(req, res,next) { 
    	//var sql = 'select * from db_user where username = \'jyq\'' ;
 	//var sql = 'SELECT column_name from information_schema.columns where table_name = \'alloy_param_data\'' ;
-	var sql = 'select * from alloy_salt_corrod left join salt_element on alloy_salt_corrod.salt_batch=salt_element.salt_batch limit 15';
+	var sql = 'select * from alloy_salt_corrod left join salt_element on alloy_salt_corrod.salt_batch=salt_element.salt_batch limit 50';
 	my_conn.query(sql,function(result){		
 		res.jsonp(result.rows);
 		//console.log(result.rows);
 	}); 
+
+	
 });
 
 
