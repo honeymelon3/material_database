@@ -148,7 +148,7 @@ router.post('/salt', multer({ storage: storage3 }).single('file'), function (req
     res.redirect(Wurl);
 
 })
-router.post('/salt', multer({ storage: storage3 }).single('file'), function (req, res, next) {
+router.post('/irradiation', multer({ storage: storage3 }).single('file'), function (req, res, next) {
     console.log(req.file);
     // console.log(req.file);
     // console.log(process.cwd());
