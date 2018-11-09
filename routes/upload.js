@@ -191,5 +191,47 @@ router.post('/irradiation', multer({ storage: storage3 }).single('file'), functi
     res.redirect(Wurl);
 
 })
+router.post('/corrode', multer({ storage: storage3 }).single('file'), function (req, res, next) {
+    console.log(req.file);
+    // console.log(req.file);
+    // console.log(process.cwd());
+    // var upfdate = Date.now();
+    // var newDate = new Date();
+    // var filename = '';
+    // var localOffset = newDate.getTimezoneOffset() * 60000;
 
+    // var upftime = newDate.toISOString();
+    // console.log(upftime);
+    if (req.file != null) {
+        console.log(req.file.path);
+        var commands_string = 'scp ' + req.file.path + ' root@cu01:' + req.file.path;
+        console.log(commands_string);
+        exec(commands_string, function (error, stdout, stderr) {
+            if (error) {
+                console.error('error: ' + error);
+                return;
+            }
+            console.log('stdout: ' + stdout);
+            console.log('stderr: ' + typeof stderr);
+            var sql = 'set client_encoding = \'GBK\'';
+            console.log(sql);
+            my_conn.query(sql, function (result) {
+                console.log(result.rows);
+                var sql = 'copy alloy_salt_corrode("alloy_name","alloy_state","alloy_batch","salt_batch","salt_batch_add","methods","test_temp","duration","environment","crucible","setup","fixing","weight_loss","uncertainty","morphology","standard_name","param_maintainer","param_check","note","salt_name_id","report_name","depth_in_base","depth_in_weld","dt","flow_rate","references","corrdepth_morphology(um)","corrodepth_Cr(um)","corrdepth_weight(um)") from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
+                console.log(sql);
+                my_conn.query(sql, function (result) {
+                    console.log(result.rows);
+                });
+            });
+
+        });
+
+
+    }
+
+
+    Wurl = '/home';
+    res.redirect(Wurl);
+
+})
 module.exports = router;
