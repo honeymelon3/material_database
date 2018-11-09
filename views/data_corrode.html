@@ -506,7 +506,7 @@
                         $scope.fields.push(p1);
                         $scope.selected.push(p1);
                     }
-                    $scope.param_sc=['合金名称','合金批次','方法依据','测试温度','保温时间','环境气氛','坩埚材料','测试装置','微观腐蚀深度','Cr扩散层深度','失重换算的腐蚀深度','数据来源','数据负责人'];
+                    $scope.param_sc=['合金名称','合金批次','方法依据','测试温度(C)','保温时间(h)','环境气氛','坩埚材料','测试装置','微观腐蚀深度(um)','Cr扩散层深度(um)','失重换算的腐蚀深度(um)','数据来源','数据负责人'];
                     $scope.alloy_name='<%= alloy_name %>';
                    // console.log('good1');
 
@@ -773,16 +773,15 @@
                         myRegression.points.sort(function(a, b) {
                             return a[0] - b[0];
                         });
-                        var param_title=angular.copy($scope.param_title)
-                        var param_unit = angular.copy($scope.param_unit)
-                        var param_name = angular.copy($scope.param_name)
+               
+                        var alloy_name = angular.copy($scope.alloy_name)
 
                         var chart_x= angular.copy($scope.x_value);
                         var chart_y=angular.copy($scope.y_value);
                         // console.log(param_name);
                         var option = {
                             title: {
-                                text: param_title+'   单位:'+param_unit,
+                                text: alloy_name,
                             //  subtext: 'By ecStat.regression',
                             //  sublink: 'https://github.com/ecomfe/echarts-stat',
                                 left: 'center'
