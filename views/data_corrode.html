@@ -511,11 +511,7 @@
                     
                 });
         
-                $http.jsonp($sce.trustAsResourceUrl("http://10.10.12.251:8081/get_material_name")).then(function(response) {
-                            //$scope.lastName = response[0].param_name;
-                            $scope.query_res = response.data;
-                            //console.log(response);
-                    });
+
 
                 $scope.add = function () {
                         $scope.params.push(i++);//动态增加标签
