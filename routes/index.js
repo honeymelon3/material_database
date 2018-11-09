@@ -576,7 +576,7 @@ router.get('/salt_list50/:param_id', function(req, res,next) {
  router.get('/corrode_list50/:alloy_name', function(req, res,next) { 
    	//var sql = 'select * from db_user where username = \'jyq\'' ;
 	//var sql = 'SELECT column_name from information_schema.columns where table_name = \'alloy_param_data\'' ;
-	var sql = 'select * from alloy_salt_corrod left join salt_element on alloy_salt_corrod.salt_batch=salt_element.salt_batch limit 50';
+	 var sql = 'select * from alloy_salt_corrod left join salt_element on alloy_salt_corrod.salt_batch=salt_element.salt_batch'+'where id =\'' + req.params.alloy_name + '\';';
 	my_conn.query(sql,function(result){		
 		res.jsonp(result.rows);
 		//console.log(result.rows);
