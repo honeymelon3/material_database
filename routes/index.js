@@ -414,7 +414,7 @@ router.get('/data_corrode', function(req, res, next) {
 	
 	if(req.session.user.corrode == 1){ 
 		console.log('debug corrode');					//到达/home路径首先判断是否已经登录
-		res.render("data_corrode", { title: '熔盐数据库', alloy_name: 'GH3535' }, function (err, html) {console.log(err)});   			//未登录则重定向到 /login 路径
+		res.render("data_corrode", { title: '熔盐数据库', alloy_name: 'GH3535' });   			//未登录则重定向到 /login 路径
 	} ;	
 	if(req.session.user.corrode == 0){ 					//到达/home路径首先判断是否已经登录
 		res.render("/home"); 			//未登录则重定向到 /login 路径
