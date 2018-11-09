@@ -411,6 +411,7 @@ router.get('/data_irradiation/:param_id', function (req, res, next) {
 
 
 router.get('/data_corrode', function(req, res, next) {
+	console.log('debug corrode')
 	if(req.session.user.corrode == 1){ 					//到达/home路径首先判断是否已经登录
 		res.render("data_corrode", { title: '熔盐数据库', alloy_name:'Hastelloy N'});   			//未登录则重定向到 /login 路径
 	} ;	
