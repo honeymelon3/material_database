@@ -217,7 +217,7 @@ router.post('/corrode', multer({ storage: storage3 }).single('file'), function (
             console.log(sql);
             my_conn.query(sql, function (result) {
                 console.log(result.rows);
-                var sql = 'copy alloy_salt_corrode("alloy_name","alloy_state","alloy_batch","salt_batch","salt_batch_add","methods","test_temp","duration","environment","crucible","setup","fixing","weight_loss","uncertainty","morphology","standard_name","param_maintainer","param_check","note","salt_name_id","report_name","depth_in_base","depth_in_weld","dt","flow_rate","references","corrdepth_morphology(um)","corrodepth_Cr(um)","corrdepth_weight(um)") from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
+                var sql = 'copy alloy_salt_corrod("alloy_name","alloy_state","alloy_batch","salt_batch","salt_batch_add","methods","test_temp","duration","environment","crucible","setup","fixing","weight_loss","uncertainty","morphology","standard_name","param_maintainer","param_check","note","salt_name_id","report_name","depth_in_base","depth_in_weld","dt","flow_rate","references","corrdepth_morphology(um)","corrodepth_Cr(um)","corrdepth_weight(um)") from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
                 console.log(sql);
                 my_conn.query(sql, function (result) {
                     console.log(result.rows);
