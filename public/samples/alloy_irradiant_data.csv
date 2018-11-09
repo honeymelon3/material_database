@@ -1,0 +1,2 @@
+alloy_name,alloy_shape,sample_direction,annealing_temp,irradiation_reactor,enviroment,temperature_lower_limit ,temperature_upper_limit,ave_temperature,time_at_temperature,neutron_dose_1,neutron_dose_2,neutron_dose_3,neutron_dose_4,neutron_dose_5,neutron_dose_6,DPA,He,test_time,test_temp,test_env,strain_rate,test_stress,param_id,param_value,source,test_standard,report_name,alloy_batch,alloy_data_id,annealing_time,neutron_dose,upload_time
+Hastelloy N,,,900,MSRE,N2+O2,,,650,20789,2.6e+19,5e+19,4.2e+19,,1.1e+19,6e+18,0.0127,0.953,,650,,,324.14,9,2.1,ORNL,,ORNL-TM-2359,5065,2,2,,

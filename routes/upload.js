@@ -87,7 +87,7 @@ router.post('/graphite', multer({ storage: storage3 }).single('file'), function 
             console.log(sql);
             my_conn.query(sql, function (result) {
                 console.log(result.rows);
-                var sql = 'copy graphite_param_data("material_grade","material_batch","standard_id","param_value","param_id","report_id","material_block_size","data_source","test_time","test_infiltration_duration","test_org","note","material_manufacturer","material_block_num","material_produce_date","sample_direction","sample_num_avg","sample_num","molten_salt_composition_id","molten_salt_batch","inflitration_experiment_no","test_preset_pres","test_inflitration_pres","test_inflitration_temp","molten_salt_content","test_notch_depth","test_support_span","molten_salt_distribution","db_type","sample_org","sample_index","sample_position_id","maintainer_id","test_temp","test_temp_span","sample_size") from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
+                var sql = 'copy alloy_irradiant_data("alloy_name","alloy_shape","sample_direction","annealing_temp","irradiation_reactor","enviroment","temperature_lower_limit ","temperature_upper_limit","ave_temperature","time_at_temperature","neutron_dose_1","neutron_dose_2","neutron_dose_3","neutron_dose_4","neutron_dose_5","neutron_dose_6","DPA","He","test_time","test_temp","test_env","strain_rate","test_stress","param_id","param_value","source","test_standard","report_name","alloy_batch","alloy_data_id","annealing_time","neutron_dose") from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
                 console.log(sql);
                 my_conn.query(sql, function (result) {
                     console.log(result.rows);
@@ -132,6 +132,49 @@ router.post('/salt', multer({ storage: storage3 }).single('file'), function (req
             my_conn.query(sql, function (result) {
                 console.log(result.rows);
                 var sql = 'copy salt_param_data(comp_purity,ele_impurity,salt_batch,salt_state,salt_pretreatment,salt_test_temp,salt_test_temp_range,param_id,param_value,param_uncertainty,param_value_fitting,param_method,param_source,param_check,note,param_report,salt_id) from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
+                console.log(sql);
+                my_conn.query(sql, function (result) {
+                    console.log(result.rows);
+                });
+            });
+
+        });
+
+
+    }
+
+
+    Wurl = '/home';
+    res.redirect(Wurl);
+
+})
+router.post('/salt', multer({ storage: storage3 }).single('file'), function (req, res, next) {
+    console.log(req.file);
+    // console.log(req.file);
+    // console.log(process.cwd());
+    // var upfdate = Date.now();
+    // var newDate = new Date();
+    // var filename = '';
+    // var localOffset = newDate.getTimezoneOffset() * 60000;
+
+    // var upftime = newDate.toISOString();
+    // console.log(upftime);
+    if (req.file != null) {
+        console.log(req.file.path);
+        var commands_string = 'scp ' + req.file.path + ' root@cu01:' + req.file.path;
+        console.log(commands_string);
+        exec(commands_string, function (error, stdout, stderr) {
+            if (error) {
+                console.error('error: ' + error);
+                return;
+            }
+            console.log('stdout: ' + stdout);
+            console.log('stderr: ' + typeof stderr);
+            var sql = 'set client_encoding = \'GBK\'';
+            console.log(sql);
+            my_conn.query(sql, function (result) {
+                console.log(result.rows);
+                var sql = 'copy salt_irradiant_data(comp_purity,ele_impurity,salt_batch,salt_state,salt_pretreatment,salt_test_temp,salt_test_temp_range,param_id,param_value,param_uncertainty,param_value_fitting,param_method,param_source,param_check,note,param_report,salt_id) from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
                 console.log(sql);
                 my_conn.query(sql, function (result) {
                     console.log(result.rows);
