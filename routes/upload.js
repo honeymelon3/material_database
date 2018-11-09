@@ -174,7 +174,7 @@ router.post('/irradiation', multer({ storage: storage3 }).single('file'), functi
             console.log(sql);
             my_conn.query(sql, function (result) {
                 console.log(result.rows);
-                var sql = 'copy salt_irradiant_data(comp_purity,ele_impurity,salt_batch,salt_state,salt_pretreatment,salt_test_temp,salt_test_temp_range,param_id,param_value,param_uncertainty,param_value_fitting,param_method,param_source,param_check,note,param_report,salt_id) from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
+                var sql = 'copy alloy_irradiant_data(comp_purity,ele_impurity,salt_batch,salt_state,salt_pretreatment,salt_test_temp,salt_test_temp_range,param_id,param_value,param_uncertainty,param_value_fitting,param_method,param_source,param_check,note,param_report,salt_id) from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
                 console.log(sql);
                 my_conn.query(sql, function (result) {
                     console.log(result.rows);
