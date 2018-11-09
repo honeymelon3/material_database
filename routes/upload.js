@@ -174,7 +174,7 @@ router.post('/irradiation', multer({ storage: storage3 }).single('file'), functi
             console.log(sql);
             my_conn.query(sql, function (result) {
                 console.log(result.rows);
-                var sql = 'copy alloy_irradiant_data("sample_id","alloy_name","alloy_shape","sample_direction","annealing_temp","irradiation_reactor","enviroment","temperature_lower_limit ","temperature_upper_limit","ave_temperature","time_at_temperature","neutron_dose_1","neutron_dose_2","neutron_dose_3","neutron_dose_4","neutron_dose_5","neutron_dose_6","DPA","He","test_time","test_temp","test_env","strain_rate","test_stress","param_id","param_value","source","test_standard","report_name","alloy_batch","alloy_data_id","annealing_time","neutron_dose") from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
+                var sql = 'copy alloy_irradiant_data("sample_id","alloy_name","alloy_shape","sample_direction","annealing_temp","irradiation_reactor","enviroment","temperature_lower_limit ","temperature_upper_limit","ave_temperature","time_at_temperature","neutron_dose_1","neutron_dose_2","neutron_dose_3","neutron_dose_4","neutron_dose_5","neutron_dose_6","DPA","He","test_time","test_temp","test_env","strain_rate","test_stress","param_id","param_value","source","test_standard","report_name","alloy_batch","annealing_time","neutron_dose") from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
                 console.log(sql);
                 my_conn.query(sql, function (result) {
                     console.log(result.rows);
