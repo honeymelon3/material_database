@@ -245,7 +245,7 @@
                         <div class="row">
                                 <div class="col-md-9" >
                                     <span ng-repeat="x in fields" >
-                                        <input type="checkbox" name="{{x}}" ng-bind="param_sc[0]" ng-checked="isSelected(x)" ng-click="updateSelection($event,x)" ><span>&nbsp{{param_sc[$index]}}&nbsp</span>
+                                        <input type="checkbox" name="{{x}}" ng-bind="{{x}}" ng-checked="isSelected(x)" ng-click="updateSelection($event,x)" ><span>&nbsp{{x}}&nbsp</span>
                                     </span>
                                 </div>
                                 <div  class="col-md-1">
@@ -268,7 +268,7 @@
                         <table datatable="ng"  dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="table table-striped table-bordered dataTable">
                         <thead>
                              <tr>
-                                 <th ng-click="sort(key)" style="cursor:pointer" ng-repeat="(key,value) in datas[0] " ng-show="isSelected(key)">{{param_sc[$index]}}</th>
+                                 <th ng-click="sort(key)" style="cursor:pointer" ng-repeat="(key,value) in datas[0] " ng-show="isSelected(key)">{{x}}</th>
                             </tr>
                         </thead>
                         <tbody>
