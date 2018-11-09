@@ -496,7 +496,7 @@
                     
                     var flag = false;
                     
-                $http.jsonp($sce.trustAsResourceUrl("http://10.10.12.251:8081/list50/<%= alloy_name %>"))
+                $http.jsonp($sce.trustAsResourceUrl("http://10.10.12.251:8081/corrode_list50/<%= alloy_name %>"))
                     .then(function(response) {
                     
                     $scope.data = response.data;
