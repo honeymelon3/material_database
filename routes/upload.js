@@ -105,6 +105,9 @@ router.post('/graphite', multer({ storage: storage3 }).single('file'), function 
                     console.log(sql);
                     my_conn.query(sql, function (result) {
                     });
+
+                    Wurl = '/data_graphite/1';
+                    res.redirect(Wurl);
                 });
             });
 
@@ -116,8 +119,6 @@ router.post('/graphite', multer({ storage: storage3 }).single('file'), function 
     }
 
 
-    Wurl = '/data_graphite/1';
-    res.redirect(Wurl);
 
 })
 
@@ -155,6 +156,8 @@ router.post('/salt', multer({ storage: storage3 }).single('file'), function (req
                     console.log(sql);
                     my_conn.query(sql, function (result) {
                     });
+                    Wurl = '/data_salt/1';
+                    res.redirect(Wurl);
                 });
             });
          
@@ -165,8 +168,7 @@ router.post('/salt', multer({ storage: storage3 }).single('file'), function (req
     }
 
 
-    Wurl = '/data_salt/1';
-    res.redirect(Wurl);
+
 
 })
 router.post('/irradiation', multer({ storage: storage3 }).single('file'), function (req, res, next) {
@@ -199,13 +201,18 @@ router.post('/irradiation', multer({ storage: storage3 }).single('file'), functi
                 console.log(sql);
                 my_conn.query(sql, function (result) {
                     console.log(result.rows);
+
+                    var sql = 'set client_encoding = \'UTF8\'';
+                    console.log(sql);
+                    my_conn.query(sql, function (result) {
+                    });
+
+                    Wurl = 'data_irradiation/1';
+                    res.redirect(Wurl);
                 });
+
             });
 
-            var sql = 'set client_encoding = \'UTF8\'';
-            console.log(sql);
-            my_conn.query(sql, function (result) {
-            });
 
         });
 
@@ -213,8 +220,6 @@ router.post('/irradiation', multer({ storage: storage3 }).single('file'), functi
     }
 
 
-    Wurl = 'data_irradiation/1';
-    res.redirect(Wurl);
 
 })
 router.post('/corrode', multer({ storage: storage3 }).single('file'), function (req, res, next) {
@@ -247,13 +252,17 @@ router.post('/corrode', multer({ storage: storage3 }).single('file'), function (
                 console.log(sql);
                 my_conn.query(sql, function (result) {
                     console.log(result.rows);
+                    var sql = 'set client_encoding = \'UTF8\'';
+                    console.log(sql);
+                    my_conn.query(sql, function (result) {
+                    });
+                    Wurl = '/data_corrode/1';
+                    res.redirect(Wurl);
                 });
             });
 
-            var sql = 'set client_encoding = \'UTF8\'';
-            console.log(sql);
-            my_conn.query(sql, function (result) {
-            });
+
+
 
         });
 
@@ -261,8 +270,6 @@ router.post('/corrode', multer({ storage: storage3 }).single('file'), function (
     }
 
 
-    Wurl = '/data_corrode/1';
-    res.redirect(Wurl);
-
+    
 })
 module.exports = router;
