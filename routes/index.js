@@ -158,7 +158,7 @@ router.get('/exPassword', function(req, res, next) {
 router.get('/data_alloy', function(req, res, next) {
 	////console.log(req.session.user.alloy);
 	if(req.session.user.alloy == 1){ 					//到达/home路径首先判断是否已经登录
-		res.render("data_alloy", { title: '合金数据库', param_id:''}); 			//未登录则重定向到 /login 路径
+		res.render("data_alloy", { title: '合金数据库', param_id:'1'}); 			//未登录则重定向到 /login 路径
 	} ;	
 	if(req.session.user.alloy == 0){ 					//到达/home路径首先判断是否已经登录
 		res.render("/home"); 			//未登录则重定向到 /login 路径
@@ -188,6 +188,7 @@ router.get('/alloy_report', function(req, res, next) {
 	} ;	
   
 });
+
 
 
 
@@ -445,13 +446,7 @@ router.get('/data_corrode/:alloy_name', function (req, res, next) {
  router.get('/list50/:param_id', function(req, res,next) { //负面清单页面入口
    	//var sql = 'select * from db_user where username = \'jyq\'' ;
 	//var sql = 'SELECT column_name from information_schema.columns where table_name = \'alloy_param_data\'' ;
-	 if (req.params.param_id !=''){
-		var sql1 = 'select param_scope from alloy_param where id=\'' + req.params.param_id + '\';';
-	}else{
-		var sql1 = 'select param_scope from alloy_param ;';
-
-	}
-	
+	var sql1='select param_scope from alloy_param where id=\''+req.params.param_id+'\';';
 	 console.log(sql1);
 	 my_conn.query(sql1, function (result) {
 		//  res.jsonp(result.rows);

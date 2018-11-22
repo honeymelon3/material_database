@@ -56,7 +56,7 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
      }
 
     
-    Wurl = '/data_alloy';
+    Wurl = '/data_alloy/1';
     res.redirect(Wurl);
     
 })
@@ -100,7 +100,7 @@ router.post('/graphite', multer({ storage: storage3 }).single('file'), function 
     }
 
 
-    Wurl = '/home';
+    Wurl = '/data_graphite/1';
     res.redirect(Wurl);
 
 })
@@ -144,7 +144,7 @@ router.post('/salt', multer({ storage: storage3 }).single('file'), function (req
     }
 
 
-    Wurl = '/home';
+    Wurl = '/data_salt/1';
     res.redirect(Wurl);
 
 })
@@ -187,7 +187,7 @@ router.post('/irradiation', multer({ storage: storage3 }).single('file'), functi
     }
 
 
-    Wurl = '/home';
+    Wurl = 'data_irradiation/1';
     res.redirect(Wurl);
 
 })
@@ -230,7 +230,7 @@ router.post('/corrode', multer({ storage: storage3 }).single('file'), function (
     }
 
 
-    Wurl = '/home';
+    Wurl = '/data_corrode/1';
     res.redirect(Wurl);
 
 })
