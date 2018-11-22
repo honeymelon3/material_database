@@ -191,7 +191,6 @@ router.get('/alloy_report', function(req, res, next) {
 
 
 
-
 router.get('/get_alloy_report', function(req, res,next) { //负面清单页面入口
 	var path = './public/documents/alloy/alloy_report';
         // console.log("读报告列表");		
