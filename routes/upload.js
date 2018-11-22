@@ -59,7 +59,10 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
                  });
              });
 
-
+             var sql = 'set client_encoding = \'UTF8\'';
+             console.log(sql);
+             my_conn.query(sql, function (result) {
+             });
 
          });
 
@@ -111,7 +114,10 @@ router.post('/graphite', multer({ storage: storage3 }).single('file'), function 
                 });
             });
 
-
+            var sql = 'set client_encoding = \'UTF8\'';
+            console.log(sql);
+            my_conn.query(sql, function (result) {
+            });
 
         });
 
@@ -160,7 +166,10 @@ router.post('/salt', multer({ storage: storage3 }).single('file'), function (req
                     res.redirect(Wurl);
                 });
             });
-         
+            var sql = 'set client_encoding = \'UTF8\'';
+            console.log(sql);
+            my_conn.query(sql, function (result) {
+            });
 
         });
 
@@ -212,7 +221,10 @@ router.post('/irradiation', multer({ storage: storage3 }).single('file'), functi
                 });
 
             });
-
+            var sql = 'set client_encoding = \'UTF8\'';
+            console.log(sql);
+            my_conn.query(sql, function (result) {
+            });
 
         });
 
@@ -260,7 +272,10 @@ router.post('/corrode', multer({ storage: storage3 }).single('file'), function (
                     res.redirect(Wurl);
                 });
             });
-
+            var sql = 'set client_encoding = \'UTF8\'';
+            console.log(sql);
+            my_conn.query(sql, function (result) {
+            });
 
 
 
