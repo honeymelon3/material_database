@@ -49,8 +49,9 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
                      if(err){
                          console.log(result.rows);
 
-                         res.render("data_alloy", { title: '合金数据库', param_id: '1',err_info:err })
-
+                         Wurl = '/data_alloy/1';
+                         res.redirect(Wurl);
+                         return console.error('error running query', err);
                      }
 
 
