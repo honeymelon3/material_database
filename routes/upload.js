@@ -48,7 +48,7 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
                  my_conn.query(sql, function (err,result) {
                      if(err){
                          console.log(result.rows);
-                         client.end();
+                        my_conn.end();
                          Wurl = '/data_alloy/1';
                          res.redirect(Wurl);
 
