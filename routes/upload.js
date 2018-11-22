@@ -54,7 +54,7 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
                      }
 
 
-                     res.render("data_alloy", { title: '合金数据库', param_id: '1', err_info:'' })
+                     res.render("data_alloy", { title: '合金数据库', param_id: '1'})
                      var sql = 'set client_encoding = \'UTF8\'';
                      console.log(sql);
                      my_conn.query(sql, function (result) {
