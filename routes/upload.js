@@ -207,7 +207,7 @@ router.post('/irradiation', multer({ storage: storage3 }).single('file'), functi
                     my_conn.query(sql, function (result) {
                     });
 
-                    Wurl = 'data_irradiation/1';
+                    Wurl = '/data_irradiation/1';
                     res.redirect(Wurl);
                 });
 
