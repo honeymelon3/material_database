@@ -34,7 +34,7 @@ var rd = require("./util/rdfiles.js");
 	}); 
 });
 router.get('/get_irradiant_name', function(req, res,next) { //辐照数据库
-   	var sql = 'select distinct alloy_name from alloy_irradiant_data UNION select param_name from alloy_irradiant_param UNION select distinct environment from alloy_irradiant_data';
+   	var sql = 'select distinct alloy_name from alloy_irradiant_data UNION select param_name from alloy_irradiant_param UNION select distinct enviroment from alloy_irradiant_data';
 	////console.log(req.query.query_field);
 	
 	my_conn.query(sql,function(result){
