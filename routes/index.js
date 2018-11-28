@@ -452,7 +452,7 @@ router.get('/data_corrode/:alloy_name', function (req, res, next) {
 		//  res.jsonp(result.rows);
 		 ////console.log(result.rows);
 		//  console.log(result.rows); 
-		 var sql = 'select ' +result.rows[0].param_scope+' from  alloy_param_data,alloy_param, alloy_standard_info,alloy_report_info where alloy_param_data.param_id=alloy_param.id and  alloy_param_data.standard_id =alloy_standard_info.id and alloy_param_data.report_id =alloy_report_info.id and param_id=\'' + req.params.param_id + '\'';
+		 var sql = 'select ' +result.rows[0].param_scope+' from alloy_param_data,alloy_param, alloy_standard_info,alloy_report_info,alloy_batch where alloy_param_data.param_id=alloy_param.id and  alloy_param_data.standard_id =alloy_standard_info.id and alloy_param_data.report_id =alloy_report_info.id and alloy_param_data.alloy_batch_id =alloy_batch.id and param_id=\'' + req.params.param_id + '\'';
 		 console.log(sql);
 		 my_conn.query(sql, function (result) {
 			 res.jsonp(result.rows);
