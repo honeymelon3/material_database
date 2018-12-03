@@ -43,7 +43,7 @@ router.post('/alloy', multer({ storage: storage3 }).single('file'), function (re
              console.log(sql);
              my_conn.query(sql, function (result) {
                  console.log(result.rows);
-                 var sql = 'copy alloy_param_data(alloy_grade,alloy_batch_id,test_temp,effect_factor1_value,effect_factor1_name,effect_factor2_value,effect_factor2_name,standard_id,param_id,report_id,test_stress,alloy_shape,material_source,material_name,test_time,test_duration,test_direction,test_org,effect_factor3_value,effect_factor3_name,db_type,note,"alloy_spec.No","alloy_type/grade",effect_factor4_value,effect_factor4_name,fracture_profile,creep_curve,metallograph,param_value,effect_factor_name,effect_factor_value,data_category) from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
+                 var sql = 'copy alloy_param_data(alloy_grade,alloy_batch_id,test_temp,effect_factor1_value,effect_factor1_name,effect_factor2_value,effect_factor2_name,standard_id,param_id,report_id,test_stress,alloy_shape_id,material_source,material_name,test_time,test_duration,test_direction_id,test_org,effect_factor3_value,effect_factor3_name,db_type,note,"alloy_spec.No","alloy_type/grade",effect_factor4_value,effect_factor4_name,fracture_profile,creep_curve,metallograph,param_value,effect_factor_name,effect_factor_value,data_category) from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
                  console.log(sql);
                  my_conn.query(sql, function (result) {
                    
