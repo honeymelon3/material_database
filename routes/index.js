@@ -279,6 +279,27 @@ router.get('/public/samples/alloy/:fileName.:extension', function (req, res) {
 	})
 
 }); 
+router.get('/public/samples/graphite/:fileName.:extension', function (req, res) {
+
+	var file = './public/samples/graphite/' + req.params.fileName + '.' + req.params.extension;
+	file_name = req.params.fileName + '.' + req.params.extension;
+	console.log(file);
+
+	res.download(file, function (err) {
+		if (err) {
+			// Check if headers have been sent
+			res.sendStatus(404);
+		}
+		else {
+			return res.status(304).end();
+			// return res.redirect('/alloy_report'); // 404, maybe 500 depending on err
+		}
+
+		// Don't need res.end() here since already sent
+
+	})
+
+}); 
 
 
 router.get('/alloy_standard', function(req, res, next) {
