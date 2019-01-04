@@ -413,7 +413,7 @@ router.get('/get_graphite_report', function(req, res,next) { //负面清单页�
 
 router.get('/data_salt', function(req, res, next) {
 	if(req.session.user.salt == 1){ 					//到达/home路径首先判断是否已经登录
-		res.render("data_salt", { title: '熔盐数据库', param_id: '1'});  			//未登录则重定向到 /login 路径
+		res.render("data_salt", { title: '熔盐数据库', param_id: '2'});  			//未登录则重定向到 /login 路径
 	} ;	
 	if(req.session.user.salt == 0){ 					//到达/home路径首先判断是否已经登录
 		res.render("/home"); 			//未登录则重定向到 /login 路径
