@@ -258,6 +258,48 @@ router.get('/public/samples/:fileName.:extension', function (req, res) {
 		})
 	
 }); 
+router.get('/public/samples/alloy/:fileName.:extension', function (req, res) {
+
+	var file = './public/samples/alloy/' + req.params.fileName + '.' + req.params.extension;
+	file_name = req.params.fileName + '.' + req.params.extension;
+	console.log(file);
+
+	res.download(file, function (err) {
+		if (err) {
+			// Check if headers have been sent
+			res.sendStatus(404);
+		}
+		else {
+			return res.status(304).end();
+			// return res.redirect('/alloy_report'); // 404, maybe 500 depending on err
+		}
+
+		// Don't need res.end() here since already sent
+
+	})
+
+}); 
+router.get('/public/samples/graphite/:fileName.:extension', function (req, res) {
+
+	var file = './public/samples/graphite/' + req.params.fileName + '.' + req.params.extension;
+	file_name = req.params.fileName + '.' + req.params.extension;
+	console.log(file);
+
+	res.download(file, function (err) {
+		if (err) {
+			// Check if headers have been sent
+			res.sendStatus(404);
+		}
+		else {
+			return res.status(304).end();
+			// return res.redirect('/alloy_report'); // 404, maybe 500 depending on err
+		}
+
+		// Don't need res.end() here since already sent
+
+	})
+
+}); 
 
 
 router.get('/alloy_standard', function(req, res, next) {
@@ -452,7 +494,7 @@ router.get('/data_corrode/:alloy_name', function (req, res, next) {
 		//  res.jsonp(result.rows);
 		 ////console.log(result.rows);
 		//  console.log(result.rows); 
-		 var sql = 'select ' +result.rows[0].param_scope+' from alloy_param_data,alloy_param, alloy_standard_info,alloy_report_info,alloy_batch where alloy_param_data.param_id=alloy_param.id and  alloy_param_data.standard_id =alloy_standard_info.id and alloy_param_data.report_id =alloy_report_info.id and alloy_param_data.alloy_batch_id =alloy_batch.id and param_id=\'' + req.params.param_id + '\'';
+		 var sql = 'select ' + result.rows[0].param_scope +' from alloy_param_data,alloy_shape,alloy_name,test_direction,alloy_param, alloy_standard_info,alloy_report_info,alloy_batch,alloy_test_org where alloy_param_data.param_id=alloy_param.id and  alloy_param_data.standard_id =alloy_standard_info.id and alloy_param_data.report_id =alloy_report_info.id and alloy_param_data.alloy_batch_id =alloy_batch.id and alloy_param_data.alloy_shape_id =alloy_shape.id and alloy_param_data.test_direction_id =test_direction.id and alloy_param_data.test_org_id =alloy_test_org.id and alloy_param_data.material_name_id =alloy_name.id and param_id=\'' + req.params.param_id + '\'';
 		 console.log(sql);
 		 my_conn.query(sql, function (result) {
 			 res.jsonp(result.rows);
