@@ -156,7 +156,7 @@ router.post('/salt', multer({ storage: storage3 }).single('file'), function (req
                     console.log(sql);
                     my_conn.query(sql, function (result) {
                     });
-                    Wurl = '/data_salt/1';
+                    Wurl = '/data_salt/2';
                     res.redirect(Wurl);
                 });
             });

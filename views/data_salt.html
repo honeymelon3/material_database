@@ -181,7 +181,7 @@
                             参数列表
                         </li>-->
                         <li ng-repeat="x in salt_left" class="list-group-item">
-                            <a    href="/data_salt/{{x.id}}" data-placement="top" title="单位：{{x.param_unit}}；英文名称：{{x.param_name}}">{{ x.param_intro}}</a>
+                            <a    href="/data_salt/{{x.param_id}}" data-placement="top" title="单位：{{x.param_unit}}；英文名称：{{x.param_name}}">{{ x.param_intro}}</a>
                         </li>                       
                     </div>
                     <!--<div style="background-color: white;">
@@ -356,8 +356,14 @@
                     <form class="form-vertical " style="display:inline" action="/upload/salt" enctype="multipart/form-data" method="post">
     
     
-                <p>目前只接受CSV文件格式上传，编码格式为GB2312.文件名不能包含空格、括号、横杠</p>
-                <p>上传成功后会跳转到数据页面，不成功则在上传页面等待响应，可关闭重新修改数据后操作</p>                        <br>
+                        <li>目前只接受CSV文件格式上传，编码格式为GB2312.文件名不能包含空格、括号、横杠</li>
+                        <li>上传成功后会跳转到数据页面，不成功则在上传页面等待响应，可关闭重新修改数据后操作</li>
+                        <li>表格数据中的索引包括:
+                            <p style=" text-indent:2em"><a>param_id</a>(参数名称的序号);</p>
+                            <p style=" text-indent:2em"><a>salt_id</a>(熔盐类型序号);</p>
+                            
+                        
+                        </li>                         <br>
     
                         <div class="form-group">
     
