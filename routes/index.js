@@ -621,7 +621,7 @@ router.get('/salt_list50/:param_id', function(req, res,next) {
    	//var sql = 'select * from db_user where username = \'jyq\'' ;
 	//var sql = 'SELECT column_name from information_schema.columns where table_name = \'alloy_param_data\'' ;
 	//  ['合金名称', '合金批次', '方法依据', '测试温度', '保温时间', '环境气氛', '坩埚材料', '测试装置', '微观腐蚀深度', 'Cr扩散层深度', '失重换算的腐蚀深度', '数据来源', '数据负责人']; 
-	 var sql = 'select "alloy_name","alloy_batch","methods","salt_batch","salt_batch_add","test_temp","duration","environment","crucible","setup","corrdepth_morphology(um)","corrodepth_Cr(um)","corrdepth_weight(um)","references","param_maintainer"  from alloy_salt_corrod left join salt_element on alloy_salt_corrod.salt_batch=salt_element.salt_batch' + ' where alloy_name =\'' + req.params.alloy_name + '\';';
+	 var sql = 'select "alloy_name","alloy_batch","salt_batch_add","methods","salt_batch","test_temp","duration","environment","crucible","setup","corrdepth_morphology(um)","corrodepth_Cr(um)","corrdepth_weight(um)","references","param_maintainer"  from alloy_salt_corrod' + ' where alloy_name =\'' + req.params.alloy_name + '\';';
 	console.log(sql);
 	 my_conn.query(sql,function(result){		
 		res.jsonp(result.rows);
