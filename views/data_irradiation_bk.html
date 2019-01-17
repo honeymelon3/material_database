@@ -59,13 +59,13 @@
                     
                     if(p != '$$hashKey' ) value1.push($v.datas[i][p]);//拿地其中一组数据的所有value值
                     }
-                    value2.push(value1.join(";"));//把所有value值放进value2数组
+                    value2.push(value1.join(","));//把所有value值放进value2数组
                 }
                 var str2=value2.join("\n");//把各行value值添加换行符
     
                 var str = str1+"\n"+str2;  //最终数据的字符串
                 str =  encodeURIComponent(str);  
-                aLink.href = "data:text/csv;charset=utf-8,\uFEFF,"+str;  
+                aLink.href = "data:text/csv;charset=utf-8,\uFEFF"+str;  
                 //aLink.click();  
             }  
         </script>
