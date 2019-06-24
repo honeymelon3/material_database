@@ -734,7 +734,7 @@ router.get('/role', function(req, res, next) {
 	   }
    }
 		   ////console.log(user); 
-   var sql = 'UPDATE db_user SET alloy='+ user.alloy+',graphite='+user.graphite+',salt='+user.salt+',irradiation='+user.irradiation+',corrode='+user.corrode+',auth='+user.auth +' WHERE username = \''+user.username+'\'';
+   var sql = 'UPDATE db_user SET alloy='+ user.alloy+',graphite='+user.graphite+',salt='+user.salt+',irradiation='+user.irradiation+',corrode='+user.corrode+',update='+user.update+',auth='+user.auth +' WHERE username = \''+user.username+'\'';
   
 	  my_conn.query(sql,function(result){		
 		  res.send(result.rows);
