@@ -733,7 +733,7 @@ router.get('/role', function(req, res, next) {
 		   user[item] = 0;
 	   }
    }
-		   ////console.log(user); 
+		   console.log(user); 
    var sql = 'UPDATE db_user SET alloy='+ user.alloy+',graphite='+user.graphite+',salt='+user.salt+',irradiation='+user.irradiation+',corrode='+user.corrode+',update='+user.update+',auth='+user.auth +' WHERE username = \''+user.username+'\'';
   
 	  my_conn.query(sql,function(result){		
