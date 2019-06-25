@@ -455,7 +455,7 @@ router.get('/data_irradiation/:param_id', function (req, res, next) {
 router.get('/data_corrode', function(req, res, next) {
 	
 	if(req.session.user.corrode == 1){ 
-		console.log('debug corrode');					//到达/home路径首先判断是否已经登录
+		//console.log('debug corrode');					//到达/home路径首先判断是否已经登录
 		res.render("data_corrode", { title: '熔盐数据库', alloy_name: 'GH3535' });   			//未登录则重定向到 /login 路径
 	} ;	
 	if(req.session.user.corrode == 0){ 					//到达/home路径首先判断是否已经登录
@@ -489,13 +489,13 @@ router.get('/data_corrode/:alloy_name', function (req, res, next) {
    	//var sql = 'select * from db_user where username = \'jyq\'' ;
 	//var sql = 'SELECT column_name from information_schema.columns where table_name = \'alloy_param_data\'' ;
 	var sql1='select param_scope from alloy_param where id=\''+req.params.param_id+'\';';
-	 console.log(sql1);
+	 //console.log(sql1);
 	 my_conn.query(sql1, function (result) {
 		//  res.jsonp(result.rows);
 		 ////console.log(result.rows);
 		//  console.log(result.rows); 
 		 var sql = 'select ' + result.rows[0].param_scope +' from alloy_param_data,alloy_shape,alloy_name,test_direction,alloy_param, alloy_standard_info,alloy_report_info,alloy_batch,alloy_test_org where alloy_param_data.param_id=alloy_param.id and  alloy_param_data.standard_id =alloy_standard_info.id and alloy_param_data.report_id =alloy_report_info.id and alloy_param_data.alloy_batch_id =alloy_batch.id and alloy_param_data.alloy_shape_id =alloy_shape.id and alloy_param_data.test_direction_id =test_direction.id and alloy_param_data.test_org_id =alloy_test_org.id and alloy_param_data.material_name_id =alloy_name.id and param_id=\'' + req.params.param_id + '\'';
-		 console.log(sql);
+		// console.log(sql);
 		 my_conn.query(sql, function (result) {
 			 res.jsonp(result.rows);
 			 ////console.log(result.rows);
@@ -512,7 +512,7 @@ router.get('/data_corrode/:alloy_name', function (req, res, next) {
 	// select * from alloy_param where id in (select distinct param_id from alloy_param_data) order by id
 	my_conn.query(sql,function(result){		
 		res.jsonp(result.rows);
-		console.log('goodg1');
+		//console.log('goodg1');
 	}); 
 });
 
@@ -568,7 +568,7 @@ router.get('/salt_list50/:param_id', function(req, res,next) {
 		////console.log(result.rows);
 		//  console.log(result.rows); 
 		var sql = 'select ' + result.rows[0].param_scope + ' from salt_param_data,salt_param,salt_name where salt_param_data.salt_id=salt_name.salt_id and salt_param_data.param_id=salt_param.param_id and salt_param_data.param_id=\'' + req.params.param_id + '\'';
-		console.log(sql);
+		//console.log(sql);
 		my_conn.query(sql, function (result) {
 			res.jsonp(result.rows);
 			////console.log(result.rows);
@@ -622,7 +622,7 @@ router.get('/salt_list50/:param_id', function(req, res,next) {
 	//var sql = 'SELECT column_name from information_schema.columns where table_name = \'alloy_param_data\'' ;
 	//  ['合金名称', '合金批次', '方法依据', '测试温度', '保温时间', '环境气氛', '坩埚材料', '测试装置', '微观腐蚀深度', 'Cr扩散层深度', '失重换算的腐蚀深度', '数据来源', '数据负责人']; 
 	 var sql = 'select "alloy_name","alloy_batch","methods","salt_batch","salt_batch_add","test_temp","duration","environment","crucible","setup","corrdepth_morphology(um)","corrodepth_Cr(um)","corrdepth_weight(um)","references","param_maintainer","upload_time","data_category"  from alloy_salt_corrod' + ' where alloy_name =\'' + req.params.alloy_name + '\';';
-	console.log(sql);
+	//console.log(sql);
 	 my_conn.query(sql,function(result){		
 		res.jsonp(result.rows);
 		//console.log(result.rows);
@@ -735,7 +735,7 @@ router.get('/role', function(req, res, next) {
    }
 		   //console.log(user); 
    var sql = 'UPDATE db_user SET alloy='+ user.alloy+',graphite='+user.graphite+',salt='+user.salt+',irradiation='+user.irradiation+',corrode='+user.corrode+',upload='+user.upload+',auth='+user.auth +' WHERE username = \''+user.username+'\'';
-   console.log(sql);
+  // console.log(sql);
 	  my_conn.query(sql,function(result){		
 		  res.send(result.rows);
 	  }); 

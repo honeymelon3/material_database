@@ -92,8 +92,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a data-toggle="modal" data-target="#upload"><span class="glyphicon glyphicon-glyphicon glyphicon-upload">上传数据</a>
+                    <li ng-show = "{{upload == 1 && auth ==1}}">
+                        <a ng-show = "{{upload == 1 && auth ==1}}" data-toggle="modal" data-target="#upload"><span class="glyphicon glyphicon-glyphicon glyphicon-upload">上传数据</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-user">文档<span class="caret"></span></a>
@@ -131,23 +131,23 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe">网站地图<span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-menu-left">
-                            <li ng-show = "{{alloy == 1}}">
+                            <li ng-show = "{{alloy == 1 && auth ==1}}">
                                 <a href="/data_alloy">合金数据库</a>
                             </li>
-                            <li ng-show = "{{graphite == 1}}" role="separator" class="divider"></li>
-                            <li ng-show = "{{graphite == 1}}">
+                            <li ng-show = "{{graphite == 1 && auth ==1}}" role="separator" class="divider"></li>
+                            <li ng-show = "{{graphite == 1 && auth ==1}}">
                                 <a href="/data_graphite">石墨数据库</a>
                             </li>
-                            <li ng-show = "{{salt == 1}}" role="separator" class="divider"></li>
-                            <li ng-show = "{{salt == 1}}">
+                            <li ng-show = "{{salt == 1 && auth ==1}}" role="separator" class="divider"></li>
+                            <li ng-show = "{{salt == 1 && auth ==1}}">
                                 <a href="/data_salt">熔盐数据库</a>
                             </li>
-                            <li ng-show = "{{irradiation == 1}}" role="separator" class="divider"></li>
-                            <li ng-show = "{{irradiation == 1}}">
+                            <li ng-show = "{{irradiation == 1 && auth ==1}}" role="separator" class="divider"></li>
+                            <li ng-show = "{{irradiation == 1 && auth ==1}}">
                                 <a href="/data_irradiation">材料辐照数据库</a>
                             </li>
-                             <li ng-show = "{{corrode == 1}}" role="separator" class="divider"></li>
-                            <li ng-show = "{{corrode == 1}}">
+                             <li ng-show = "{{corrode == 1 && auth ==1}}" role="separator" class="divider"></li>
+                            <li ng-show = "{{corrode == 1 && auth ==1}}">
                                 <a href="/data_corrode">材料腐蚀数据库</a>
                             </li>
                         </ul>
@@ -478,6 +478,7 @@
                     $scope.irradiation = <%=session.user.irradiation%>;
                     $scope.corrode = <%=session.user.corrode%>;
                     $scope.auth = <%=session.user.auth%>;
+                    $scope.upload = <%=session.user.upload%>;
                     //console.log($scope.auth);
                     var i = 0;
                     $scope.isSelectedAll = true;
