@@ -88,6 +88,10 @@
                             <li ng-show = "{{corrode == 1 && auth == 1}}">
                                 <a href="">熔盐腐蚀数据库</a>
                             </li>
+                            <li ng-show = "{{salt_env == 1}}" role="separator" class="divider"></li>
+                            <li ng-show = "{{salt_env == 1}}">
+                                <a href="data_salt_env">熔盐环境力学数据库</a>
+                            </li>
                         </ul>
                     </li>
 
@@ -187,6 +191,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="row">
         <div class="col-md-4">
@@ -200,7 +205,8 @@
                         <a href="data_irradiation" class="btn btn-success" ng-show="{{irradiation == 1 &&  auth == 1}}">即刻访问</a>
                     </div>
                 </div>
-            </div><div class="col-md-4">
+            </div>
+            <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4><span class="glyphicon glyphicon-home"></span>熔盐腐蚀数据库</h4>
@@ -212,7 +218,21 @@
 
                     </div>
                 </div>
-            </div></div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4><span class="glyphicon glyphicon-home"></span>熔盐环境力学数据库</h4>
+                    </div>
+                    <div class="panel-body">
+                        <p>在TMSR-SEED的熔盐环境材料力学数据库中包含了UNS N10003合金等在材料在高温熔盐环境中的原位慢拉伸、蠕变等力学性能数据，数据主要来源于核创院测试的数据以及公开发表的论文、技术报告中的数据。</p>
+                        <br><br><br>
+                        <a href="data_salt_env" class="btn btn-success" ng-show="{{salt_env == 1 &&  auth == 1}}">即刻访问</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- /.row -->
 
         <!-- Portfolio Section -->
@@ -266,6 +286,7 @@
                   <li>熔盐数据库</li>
                   <li>材料辐照数据库</li>
                   <li>材料腐蚀数据库</li>
+                  <li>熔盐环境力学数据库</li>
                 </ul>
                 <p>TMSR-SEED数据库全称“TMSR科学与工程扩展数据库”（ TMSR Scientific & Engineering Extended Database），简称TMSR-SEED，拟建设成为涵盖第四代堆-钍基熔盐核反应堆候选材料和成熟核电站材料的元素组成、组织结构、物理性能、力学性能、化学性能等各类参数信息。为用户带来快捷的查询体验和材料使用的基本指南，并为反应堆的工程设计提供科学指导、必要数据和标准。该库还开发了各种分析拓展功能，可对材料进行寿命预测，智能设计，模拟建模等，为核材料研究、核技术应用以及核能系统的设计、分析和建设提供支持。</p>
             </div>
@@ -302,131 +323,9 @@
 
     </div>
     <!--用户登录  -->
-    <div class="modal fade" id="myLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-      <!-- <div class="modal-content"> -->
-        <!-- <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-            &times;
-          </button>
-          <h4 class="modal-title" id="myModalLabel">
-            用户登录
-          </h4>
-        </div> -->
-        <div class="modal-body">
-          <div class="col-md-6 column login " style="margin-top:75px">
-  					<form class=" form-horizontal" role="form" id="form1" onsubmit="return false">
-  						<div class="form-group ">
-  							<p id="myhint" style="display:none;font-size:16px;color:red;margin-left:150px">hint</p>
-  							 <label for="name" ><font color="white">用户名</label><input type="text" class="form-control  " id="name" check-type="required" required-message="请填写你的大名。">
-  						</div>
-  						<div class="form-group">
-  							 <label for="password">密码</label></font> <input type="password" class="form-control" id="pw1" check-type="required" minlength="6">
-  						</div>
-      			  <div class="form-group"style="margin-top:25px">
-      				<div class="col-sm-offset-3">
-      				  <button type="submit" id="login0" class="btn btn-success col-sm-3">登陆</button>
-      				  <button class="btn btn-success col-sm-3 col-sm-offset-3" data-toggle="modal" data-target="#myModal">注册</button>
-      				</div>
-      			  </div>
-  					</form>
-  				</div>
-        </div>
-      <!-- </div><!-- /.modal-content -->
-      </div><!-- /.modal -->
-    </div>
-
-    <!--注册用户  -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-            &times;
-          </button>
-          <h4 class="modal-title" id="myModalLabel">
-            用户注册
-          </h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal"  id="form2" action="/register" method="post"   role="form">
-            <div class="form-group">
-            <label for="name" class="col-sm-2 control-label">用户名</label>
-            <div class="col-sm-6">
-              <input type="text" class="form-control" name= "username" id="username" check-type="required" required-message="请输入姓名">
-            </div>
-            </div>
-             <div class="form-group">
-            <label for="name" class="col-sm-2 control-label">部门</label>
-            <div class="col-sm-6">
-              <input type="text" class="form-control" name= "department" id="dep" check-type="required" required-message="请输入部门名称">
-            </div>
-            </div>
-             <div class="form-group">
-            <label for="name" class="col-sm-2 control-label">公司</label>
-            <div class="col-sm-6">
-              <input type="text" class="form-control" name= "company" id="com" check-type="required" required-message="请输入公司名称">
-            </div>
-            </div>
-
-             <div class="form-group">
-            <label for="name" class="col-sm-2 control-label">手机</label>
-            <div class="col-sm-6">
-              <input type="text" class="form-control" name= "phone" id="email" check-type="mobile" >
-            </div>
-            </div>
 
 
 
-            <div class="form-group">
-            <label for="pw1" class="col-sm-2 control-label">密码</label>
-            <div class="col-sm-6">
-              <input type="password" class="form-control" name= "password" id="password1" check-type="required" minlength="6">
-            </div>
-            </div>
-
-            <div class="form-group">
-            <label for="pw2" class="col-sm-2 control-label">确认密码</label>
-            <div class="col-sm-6">
-              <input type="password" class="form-control"  check-type="required" minlength="6">
-            </div>
-            </div>
-
-            <div class="form-group ">
-            <div class="col-sm-6 col-sm-offset-2">
-            <label for="name">请选择您要申请的数据库权限</label>
-            <div class="checkbox">
-              <label><input type="checkbox" name= "metal" value="1">合金数据库</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" name= "graphene" value="1">石墨数据库</label>
-            </div>
-                      <div class="checkbox">
-              <label><input type="checkbox" name= "lava" value="1">熔盐数据库</label>
-            </div>
-                      <div class="checkbox">
-              <label><input type="checkbox" name= "irradiation" value="1">辐照数据库</label>
-            </div>
-                      <div class="checkbox">
-              <label><input type="checkbox" name= "invasion" value="1">熔盐腐蚀数据库</label>
-            </div>
-          </div>
-          </div>
-
-            <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button type="button" id="register0" class="btn btn-primary col-sm-2 col-sm-offset-1">提交</button>
-              <button type="reset"  class="btn btn-primary col-sm-2 col-sm-offset-1">重置</button>
-            </div>
-            </div>
-        </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-            </button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal -->
     </div>
 
 
@@ -512,6 +411,7 @@ var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope) {
 $scope.alloy = <%=session.user.alloy%>;
 $scope.salt = <%=session.user.salt%>;
+$scope.salt_env = <%=session.user.salt_env%>;
 $scope.graphite = <%=session.user.graphite%>;
 $scope.irradiation = <%=session.user.irradiation%>;
 $scope.corrode = <%=session.user.corrode%>;
