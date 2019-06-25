@@ -336,65 +336,7 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-    $(function(){
-     $("#form1").validation({icon:true});
-     // $("#form2").validation({icon:true});
-      $("#form2").validation(function(obj,params){
-      if (obj.id=='username'){
-        $.get("/user_exist",{username:$(obj).val()},function(data){
-        //alert(data[0]);
-        if(data.rowCount!=0){
-        params.err = true;
-        params.msg = "用户已存在";
-        };
-        });
-        }}
-        ,{reqmark:true} //这个参数是设必填不要显示有星号，默认是有星号的
-      );
-      //$("#register0").click(function(){
-        //location.href = 'register';
-      //});
-      $("#login0").click(function(){
-      if ($("#form1").valid(this,'输入信息有误')==false){
-          return false;
-        }
-        var username = $("#name").val();
-        var password = $("#pw1").val();
-        var data = {"username":username,"password":password};
-        $.ajax({
-          url:'/login',
-          type:'post',
-          data: data,
-          success: function(data,status){
-          if(status == 'success'){
-            location.href = '/home';
-            }
-          },
-          error: function(data,status){
-            if(status == 'error'){
-              if (data.status == 404){
-              $("#myhint").text("用户名或密码不正确");
-              $("#myhint").css("display","block");;
-              }
-            //location.href = '/login';
-            }
-          }
-        });
-      });
 
-    $("#register0").click(function(){
-        if ($("#form2").valid('填写信息不正确')==false){
-          //alert('填写信息不完整。');
-          return false;
-        };
-      $("#form2").submit();
-
-      });
-
-
-    });
-    </script>
 
 
     <!-- Script to Activate the Carousel -->
