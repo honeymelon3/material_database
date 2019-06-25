@@ -93,7 +93,7 @@
             <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
                 <ul class="nav navbar-nav navbar-right">
                     <li  ng-show = "{{upload == 1 && auth ==1}}">
-                        <a data-toggle="modal" data-target="#upload"><span class="glyphicon glyphicon-glyphicon glyphicon-upload">上传数据</a>
+                        <a ng-show = "{{upload == 1 && auth ==1 }}" data-toggle="modal" data-target="#upload"><span class="glyphicon glyphicon-glyphicon glyphicon-upload">上传数据</a>
                     </li>
 
                     <li>
