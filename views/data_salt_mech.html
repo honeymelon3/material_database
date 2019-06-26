@@ -185,7 +185,7 @@
                             参数列表
                         </li>-->
                         <li ng-repeat="x in salt_mech_left" class="list-group-item">
-                            <a    href="/data_salt_mech/{{x.param_id}}" data-placement="top" title="单位：{{x.param_unit}}；英文名称：{{x.param_name}}">{{ x.param_intro}}</a>
+                            <a    href="/data_salt_mech/{{x.id}}" data-placement="top" title="单位：{{x.param_unit}}；英文名称：{{x.param_name}}">{{ x.param_intro}}</a>
                         </li>                       
                     </div>
                     <!--<div style="background-color: white;">
@@ -493,7 +493,7 @@
                             $scope.salt_mech_left = response.data;
                             response.data.forEach(function(e){
                                 var par_id= <%= param_id %>;
-                                if(e.param_id == par_id)
+                                if(e.id == par_id)
                            { $scope.param_intro= e.param_intro;
                             $scope.param_sc = e.param_scope_sc;
                             
