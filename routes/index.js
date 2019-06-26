@@ -33,6 +33,16 @@ var rd = require("./util/rdfiles.js");
 		res.jsonp(result.rows);
 	}); 
 });
+
+router.get('/get_salt_mech_name', function(req, res,next) { //熔盐数据库
+	var sql = 'select param_name from salt_mech_param';
+ ////console.log(req.query.query_field);
+ 
+ my_conn.query(sql,function(result){
+ ////console.log(result.rows);
+	 res.jsonp(result.rows);
+ }); 
+});
 router.get('/get_irradiant_name', function(req, res,next) { //辐照数据库
    	var sql = 'select distinct alloy_name from alloy_irradiant_data UNION select param_name from alloy_irradiant_param UNION select distinct enviroment from alloy_irradiant_data';
 	////console.log(req.query.query_field);
@@ -431,6 +441,26 @@ router.get('/data_salt/:param_id', function (req, res, next) {
 
 });
 
+router.get('/data_salt_mech', function(req, res, next) {
+	if(req.session.user.salt_mech == 1){ 					//到达/home路径首先判断是否已经登录
+		res.render("data_salt_mech", { title: '熔盐数据库', param_id: '3'});  			//未登录则重定向到 /login 路径
+	} ;	
+	if(req.session.user.salt_mech == 0){ 					//到达/home路径首先判断是否已经登录
+		res.render("/home"); 			//未登录则重定向到 /login 路径
+	} ;	
+   
+});
+router.get('/data_salt_mech/:param_id', function (req, res, next) {
+	////console.log(req.session.user.alloy);
+	if (req.session.user.salt_mech == 1) { 					//到达/home路径首先判断是否已经登录
+		res.render("data_salt_mech", { title: '熔盐数据库', param_id: req.params.param_id }); 			//未登录则重定向到 /login 路径
+	};
+	if (req.session.user.salt_mech == 0) { 					//到达/home路径首先判断是否已经登录
+		res.render("/home"); 			//未登录则重定向到 /login 路径
+	};
+
+});
+
 router.get('/data_irradiation', function(req, res, next) {
 	if(req.session.user.irradiation == 1){ 					//到达/home路径首先判断是否已经登录
 		res.render("data_irradiation", { title: '材料辐照数据库', param_id: 1});  			//未登录则重定向到 /login 路径
@@ -617,6 +647,7 @@ router.get('/salt_list50/:param_id', function(req, res,next) {
 	}); 
 });
 
+
  router.get('/corrode_list50/:alloy_name', function(req, res,next) { 
    	//var sql = 'select * from db_user where username = \'jyq\'' ;
 	//var sql = 'SELECT column_name from information_schema.columns where table_name = \'alloy_param_data\'' ;
@@ -631,15 +662,39 @@ router.get('/salt_list50/:param_id', function(req, res,next) {
 	
 });
 
+router.get('/salt_mech', function(req, res,next) { //负面清单页面入口
+	var sql = 'select * from  salt_mech_param where id in (select distinct param_id from salt_mech_data) order by id';
+ //console.log(sql);
+ my_conn.query(sql,function(result){		
+	 res.jsonp(result.rows);
+ }); 
+});
 
 
-
+router.get('/salt_mech_list50/:param_id', function(req, res,next) { 
+	//var sql = 'select * from db_user where username = \'jyq\'' ;
+ //var sql = 'SELECT column_name from information_schema.columns where table_name = \'alloy_param_data\'' ;
+ var sql1 = 'select param_scope from salt_mech_param where param_id=\'' + req.params.param_id + '\';';
+ console.log(sql1);
+ my_conn.query(sql1, function (result) {
+	 //  res.jsonp(result.rows);
+	 ////console.log(result.rows);
+	 //  console.log(result.rows); 
+	 var sql = 'select ' + result.rows[0].param_scope + ' from salt_mech_data,salt_mech_param where  salt_mech_data.param_id=salt_mech_param.param_id and salt_mech_data.param_id=\'' + req.params.param_id + '\'';
+	 //console.log(sql);
+	 my_conn.query(sql, function (result) {
+		 res.jsonp(result.rows);
+		 ////console.log(result.rows);
+		 // console.log('gooda2');
+	 });
+ });
+});
 
 
 //下面是登陆验证代码
 router.route("/login").get(function(req,res){    // 到达此路径则渲染login文件，并传出title值供 login.html使用
 	res.render("login",{title:'MTSR用户登陆'});
-}).post(function(req,res){ 	
+		}).post(function(req,res){ 	
 
 	var user =req.body;
 	var myDate = new Date();
@@ -665,7 +720,7 @@ router.route("/login").get(function(req,res){    // 到达此路径则渲染logi
 		}		
 	});				   
 
-});
+		});
 
 
 router.get("/loginout",function(req,res){    // 到达 /logout 路径则登出， session中user,error对象置空，并重定向到根路径
@@ -734,7 +789,7 @@ router.get('/role', function(req, res, next) {
 	   }
    }
 		   //console.log(user); 
-   var sql = 'UPDATE db_user SET alloy='+ user.alloy+',graphite='+user.graphite+',salt='+user.salt+',irradiation='+user.irradiation+',corrode='+user.corrode+',salt_env='+user.salt_env+',upload='+user.upload+',auth='+user.auth +' WHERE username = \''+user.username+'\'';
+   var sql = 'UPDATE db_user SET alloy='+ user.alloy+',graphite='+user.graphite+',salt='+user.salt+',irradiation='+user.irradiation+',corrode='+user.corrode+',salt_mech='+user.salt_mech+',upload='+user.upload+',auth='+user.auth +' WHERE username = \''+user.username+'\'';
   // console.log(sql);
 	  my_conn.query(sql,function(result){		
 		  res.send(result.rows);

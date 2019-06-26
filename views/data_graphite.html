@@ -148,6 +148,10 @@
                             <li ng-show = "{{corrode == 1 && auth ==1}}">
                                 <a href="/data_corrode">材料腐蚀数据库</a>
                             </li>
+                            <li ng-show = "{{salt_mech == 1}}" role="separator" class="divider"></li>
+                            <li ng-show = "{{salt_mech == 1}}">
+                                <a href="data_salt_mech">熔盐环境力学数据库</a>
+                            </li>
                         </ul>
                     </li>
 
@@ -483,6 +487,7 @@
                     $scope.corrode = <%=session.user.corrode%>;
                     $scope.auth = <%=session.user.auth%>;
                     $scope.upload = <%=session.user.upload%>;
+                    $scope.salt_mech = <%=session.user.salt_mech%>;
                     //console.log($scope.auth);
                     var i = 0;
                     $scope.isSelectedAll = true;

@@ -150,6 +150,10 @@
                             <li ng-show = "{{corrode == 1 && auth ==1 }}">
                                 <a href="/data_corrode">材料腐蚀数据库</a>
                             </li>
+                            <li ng-show = "{{salt_mech == 1}}" role="separator" class="divider"></li>
+                            <li ng-show = "{{salt_mech == 1}}">
+                                <a href="data_salt_mech">熔盐环境力学数据库</a>
+                            </li>
                         </ul>
                     </li>
 
@@ -484,6 +488,7 @@
                     $scope.queryComplete = [];  //控制input筛选标签是否完成查询，完成后就隐藏下面多余的input框
                     $scope.alloy = <%=session.user.alloy%>;
                     $scope.salt = <%=session.user.salt%>;
+                    $scope.salt_mech = <%=session.user.salt_mech%>;
                     $scope.graphite = <%=session.user.graphite%>;
                     $scope.irradiation = <%=session.user.irradiation%>;
                     $scope.corrode = <%=session.user.corrode%>;

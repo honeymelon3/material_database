@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -92,20 +92,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
                 <ul class="nav navbar-nav navbar-right">
-                    <li ng-show = "{{upload == 1 && auth ==1}}">
-                        <a ng-show = "{{upload == 1 && auth ==1}}" data-toggle="modal" data-target="#upload"><span class="glyphicon glyphicon-glyphicon glyphicon-upload">上传数据</a>
+                    <li  ng-show = "{{upload == 1 && auth ==1}}">
+                        <a ng-show = "{{upload == 1 && auth ==1 }}" data-toggle="modal" data-target="#upload"><span class="glyphicon glyphicon-glyphicon glyphicon-upload">上传数据</a>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-user">文档<span class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-menu-left">
-                            <li>
-                                <a href="/alloy_report"><span class="glyphicon glyphicon-file">报告</a>
-                            </li>
-                            <li>
-                                <a href="/alloy_standard"><span class="glyphicon glyphicon-book">标准</a>
-                            </li>
-                        </ul>
-                    </li>
+
                     <li>
                         <a href="/contact"><span class="glyphicon glyphicon-earphone">联系</a>
                     </li>
@@ -136,7 +126,7 @@
                             </li>
                             <li ng-show = "{{graphite == 1 && auth ==1}}" role="separator" class="divider"></li>
                             <li ng-show = "{{graphite == 1 && auth ==1}}">
-                                <a href="/data_graphite">石墨数据库</a>
+                                <a href="/data_graphite && auth ==1}}">石墨数据库</a>
                             </li>
                             <li ng-show = "{{salt == 1 && auth ==1}}" role="separator" class="divider"></li>
                             <li ng-show = "{{salt == 1 && auth ==1}}">
@@ -166,12 +156,12 @@
     <div class="row" >
         <div class="col-lg-12" >
             <h1 class=""  >TMSR
-                <small>熔盐腐蚀数据库 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a><%= alloy_name  %></a></small>
+                <small>熔盐环境力学数据库 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a>{{param_intro}}</a></small>
             </h1>
             <ol class="breadcrumb" >
                 <li><a href="/home">Home</a>
                 </li>
-                <li><a href="/data_corrode">Refresh</a>
+                <li><a href="/data_salt_mech/3">Refresh</a>
                 </li> 
             </ol>
         </div>
@@ -185,7 +175,7 @@
                     <div class="leftMenu">
                         <div class="panel-heading" style="background:#F5F5F5"  >
                             <h4 class="panel-title"  >
-                                <font style="color:grey">材料列表</font>
+                                <font style="color:grey">参数列表</font>
                                 <!--<span class="glyphicon glyphicon-chevron-up right"></span>-->
                             </h4>
                         </div>
@@ -194,8 +184,8 @@
                         <!--<li  class="list-group-item">
                             参数列表
                         </li>-->
-                        <li ng-repeat="x in corrode_left" class="list-group-item">
-                            <a    href="/data_corrode/{{x.alloy_name}}" >{{ x.alloy_name }}</a>
+                        <li ng-repeat="x in salt_mech_left" class="list-group-item">
+                            <a    href="/data_salt_mech/{{x.param_id}}" data-placement="top" title="单位：{{x.param_unit}}；英文名称：{{x.param_name}}">{{ x.param_intro}}</a>
                         </li>                       
                     </div>
                     <!--<div style="background-color: white;">
@@ -360,51 +350,56 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-        <!-- BEGIN REGISTRATION FORM -->
+                    <!-- BEGIN REGISTRATION FORM -->
                     <div>
                         <h3>样表下载</h3>
-                        <a href="/public/samples/alloy_salt_corrod.csv">熔盐腐蚀数据样表</a>
-                     </div>
-                 <br>
-                 
-                 <form class="form-vertical " style="display:inline" action="/upload/corrode" enctype="multipart/form-data" method="post">
+                        <a href="/public/samples/salt_mech_data.csv">熔盐环境力学数据样表</a>
+                    </div>
+                    <br>
     
-                
-                <p>目前只接受CSV文件格式上传，编码格式为GB2312.文件名不能包含空格、括号、横杠</p>
-                <p>上传成功后会跳转到数据页面，不成功则在上传页面等待响应，可关闭重新修改数据后操作</p>
-                  <br>
+                    <form class="form-vertical " style="display:inline" action="/upload/salt_mech" enctype="multipart/form-data" method="post">
     
-                    <div class="form-group">
-            
-            
-                        <div class="controls">
-            
-                            <div>
-            
-                                <input class="m-wrap placeholder-no-fix" type="file" id="data_csv" placeholder="选择文件" name="file" />
-            
+    
+                        <li>目前只接受CSV文件格式上传，编码格式为GB2312.文件名不能包含空格、括号、横杠</li>
+                        <li>上传成功后会跳转到数据页面，不成功则在上传页面等待响应，可关闭重新修改数据后操作</li>
+                        <li>表格数据中的索引包括:
+                            <p style=" text-indent:2em"><a href="/public/samples/salt_mech_param.csv">param_id</a>(参数名称的序号);</p>
+
+                            
+                        
+                        </li>                         <br>
+    
+                        <div class="form-group">
+    
+    
+                            <div class="controls">
+    
+                                <div>
+    
+                                    <input class="m-wrap placeholder-no-fix" type="file" id="data_csv" placeholder="选择文件" name="file" />
+    
+                                </div>
+    
                             </div>
-            
+    
                         </div>
-            
-                    </div>
     
     
     
     
-                     <div class="form-group">
-
-                    
-                                <button type="submit" id="" class="btn btn-green pull-right">
-                    
-                                    上传数据
-                    
-                                </button>
-                    
-                    </div>
-
+                        <div class="form-group">
     
-                </form>
+    
+                            <button type="submit" id="" class="btn btn-green pull-right">
+    
+                                上传数据
+    
+                            </button>
+    
+                        </div>
+    
+    
+                    </form>
                 </div>
             </div>
         </div>
@@ -477,12 +472,12 @@
                     $scope.queryComplete = [];  //控制input筛选标签是否完成查询，完成后就隐藏下面多余的input框
                     $scope.alloy = <%=session.user.alloy%>;
                     $scope.salt = <%=session.user.salt%>;
+                    $scope.salt_mech = <%=session.user.salt_mech%>;
                     $scope.graphite = <%=session.user.graphite%>;
                     $scope.irradiation = <%=session.user.irradiation%>;
                     $scope.corrode = <%=session.user.corrode%>;
                     $scope.auth = <%=session.user.auth%>;
                     $scope.upload = <%=session.user.upload%>;
-                    $scope.salt_mech = <%=session.user.salt_mech%>;
                     //console.log($scope.auth);
                     var i = 0;
                     $scope.isSelectedAll = true;
@@ -493,17 +488,29 @@
                     $scope.fields = [];//把字段统一放到这里，供后续处理
                     $scope.selected = []; 
                     $scope.selectedTags = [];
-                    var myUrl = "http://10.10.12.251:8081/corrode";
+                    var myUrl = "http://10.10.12.251:8081/salt_mech";
                 $http.jsonp($sce.trustAsResourceUrl(myUrl)).then(function(response) {
-                            $scope.corrode_left = response.data;
-                         
+                            $scope.salt_left = response.data;
+                            response.data.forEach(function(e){
+                                var par_id= <%= param_id %>;
+                                if(e.param_id == par_id)
+                           { $scope.param_intro= e.param_intro;
+                            $scope.param_sc = e.param_scope_sc;
+                            
+                            $scope.param_title = e.param_intro;
+                            $scope.param_name = e.param_name;
+                            $scope.param_unit = e.param_unit;
+                            }
+                           })
+                            // $scope.param_intro= e.param_intro;
+                            // $scope.param_sc = e.param_scope_sc;
                     });		
                     
                                                     
                     
                     var flag = false;
                     
-                $http.jsonp($sce.trustAsResourceUrl("http://10.10.12.251:8081/corrode_list50/<%= alloy_name %>"))
+                $http.jsonp($sce.trustAsResourceUrl("http://10.10.12.251:8081/salt_mech_list50/<%= param_id %>"))
                     .then(function(response) {
                     
                     $scope.data = response.data;
@@ -513,14 +520,16 @@
                         $scope.fields.push(p1);
                         $scope.selected.push(p1);
                     }
-                    $scope.param_sc=['合金名称','合金批次','方法依据', '熔盐批次', '熔盐添加成分', '测试温度(°C)','保温时间(h)','环境气氛','坩埚材料','测试装置','微观腐蚀深度(μm)','Cr扩散层深度(μm)','失重换算的腐蚀深度(μm)','数据来源','数据负责人','上传时间','数据级别'];
-                    $scope.alloy_name='<%= alloy_name %>';
                    // console.log('good1');
 
                     
                 });
         
-
+                $http.jsonp($sce.trustAsResourceUrl("http://10.10.12.251:8081/get_salt_mech_name")).then(function(response) {
+                            //$scope.lastName = response[0].param_name;
+                            $scope.query_res = response.data;
+                            //console.log(response);
+                    });
 
                 $scope.add = function () {
                         $scope.params.push(i++);//动态增加标签
@@ -780,15 +789,16 @@
                         myRegression.points.sort(function(a, b) {
                             return a[0] - b[0];
                         });
-               
-                        var alloy_name = angular.copy($scope.alloy_name)
+                        var param_title=angular.copy($scope.param_title)
+                        var param_unit = angular.copy($scope.param_unit)
+                        var param_name = angular.copy($scope.param_name)
 
                         var chart_x= angular.copy($scope.x_value);
                         var chart_y=angular.copy($scope.y_value);
                         // console.log(param_name);
                         var option = {
                             title: {
-                                text: alloy_name,
+                                text: param_title+'   单位:'+param_unit,
                             //  subtext: 'By ecStat.regression',
                             //  sublink: 'https://github.com/ecomfe/echarts-stat',
                                 left: 'center'

@@ -8,7 +8,7 @@ var exec = require('child_process').exec
 var storage3 = multer.diskStorage({
     destination: function (req, file, cb) {
 
-        cb(null,process.cwd() + "/public/csvs");    // 保存的路径，备注：需要自己创�?
+        cb(null,process.cwd() + "/public/csvs");    // 保存的路径，备注：需要自己创�?
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname + '-' + Date.now());
@@ -271,5 +271,55 @@ router.post('/corrode', multer({ storage: storage3 }).single('file'), function (
 
 
     
+})
+
+router.post('/salt_mech', multer({ storage: storage3 }).single('file'), function (req, res, next) {
+    console.log(req.file);
+    // console.log(req.file);
+    // console.log(process.cwd());
+    // var upfdate = Date.now();
+    // var newDate = new Date();
+    // var filename = '';
+    // var localOffset = newDate.getTimezoneOffset() * 60000;
+
+    // var upftime = newDate.toISOString();
+    // console.log(upftime);
+    if (req.file != null) {
+        console.log(req.file.path);
+        var commands_string = 'scp ' + req.file.path + ' root@cu01:' + req.file.path;
+        console.log(commands_string);
+        exec(commands_string, function (error, stdout, stderr) {
+            if (error) {
+                console.error('error: ' + error);
+                return;
+            }
+            console.log('stdout: ' + stdout);
+            console.log('stderr: ' + typeof stderr);
+            var sql = 'set client_encoding = \'GBK\'';
+            console.log(sql);
+            my_conn.query(sql, function (result) {
+                console.log(result.rows);
+                var sql = 'copy salt_mech_data(data_category,data_source_type,data_source_name,param_id,param_value,material_name,material_batch,material_source,material_pre_treatment,salt_type,salt_nominal_composition,salt_batch,salt_source,salt_pre_treatment,salt_containing_material,test_type,test_standard,test_starting_date,test_duration,test_temp,test_atmosphere,test_stress,test_strain_rate,strain_measurement_method,specimen_type,gauge_area,gauge_length,note,param_maintainer) from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
+                console.log(sql);
+                my_conn.query(sql, function (result) {
+                    console.log(result.rows);
+                    var sql = 'set client_encoding = \'UTF8\'';
+                    console.log(sql);
+                    my_conn.query(sql, function (result) {
+                    });
+                    Wurl = '/data_salt_mech/3';
+                    res.redirect(Wurl);
+                });
+            });
+         
+
+        });
+
+
+    }
+
+
+
+
 })
 module.exports = router;

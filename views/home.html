@@ -88,9 +88,9 @@
                             <li ng-show = "{{corrode == 1 && auth == 1}}">
                                 <a href="">熔盐腐蚀数据库</a>
                             </li>
-                            <li ng-show = "{{salt_env == 1}}" role="separator" class="divider"></li>
-                            <li ng-show = "{{salt_env == 1}}">
-                                <a href="data_salt_env">熔盐环境力学数据库</a>
+                            <li ng-show = "{{salt_mech == 1}}" role="separator" class="divider"></li>
+                            <li ng-show = "{{salt_mech == 1}}">
+                                <a href="data_salt_mech">熔盐环境力学数据库</a>
                             </li>
                         </ul>
                     </li>
@@ -227,7 +227,7 @@
                     <div class="panel-body">
                         <p>在TMSR-SEED的熔盐环境材料力学数据库中包含了UNS N10003合金等在材料在高温熔盐环境中的原位慢拉伸、蠕变等力学性能数据，数据主要来源于核创院测试数据以及公开发表的论文、技术报告。</p>
             
-                        <a href="data_salt_env" class="btn btn-success" ng-show="{{salt_env == 1 &&  auth == 1}}">即刻访问</a>
+                        <a href="data_salt_mech" class="btn btn-success" ng-show="{{salt_mech == 1 &&  auth == 1}}">即刻访问</a>
 
                     </div>
                 </div>
@@ -353,7 +353,7 @@ var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope) {
 $scope.alloy = <%=session.user.alloy%>;
 $scope.salt = <%=session.user.salt%>;
-$scope.salt_env = <%=session.user.salt_env%>;
+$scope.salt_mech = <%=session.user.salt_mech%>;
 $scope.graphite = <%=session.user.graphite%>;
 $scope.irradiation = <%=session.user.irradiation%>;
 $scope.corrode = <%=session.user.corrode%>;
