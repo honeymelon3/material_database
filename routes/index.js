@@ -680,7 +680,7 @@ router.get('/salt_mech_list50/:param_id', function(req, res,next) {
 	 //  res.jsonp(result.rows);
 	 ////console.log(result.rows);
 	 //  console.log(result.rows); 
-	 var sql = 'select ' + result.rows[0].param_scope + ' from salt_mech_data,salt_mech_param where  salt_mech_data.param_id=salt_mech_param.param_id and salt_mech_data.param_id=\'' + req.params.param_id + '\'';
+	 var sql = 'select ' + result.rows[0].param_scope + ' from salt_mech_data,salt_mech_param where  salt_mech_data.param_id=salt_mech_param.id and salt_mech_data.param_id=\'' + req.params.param_id + '\'';
 	 //console.log(sql);
 	 my_conn.query(sql, function (result) {
 		 res.jsonp(result.rows);
