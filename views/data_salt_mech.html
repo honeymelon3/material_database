@@ -785,7 +785,7 @@
                     if($scope.logicMethod == "对数回归") logic_Method = "logarithmic";
                     if($scope.logicMethod == "指数回归") logic_Method = "exponential";
                         var myRegression = ecStat.regression(logic_Method, data,parseInt($scope.z_value));
-                            console.log($scope.z_value);
+                            console.log(myRegression.expression);
                         myRegression.points.sort(function(a, b) {
                             return a[0] - b[0];
                         });
