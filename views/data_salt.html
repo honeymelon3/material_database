@@ -134,7 +134,7 @@
                             </li>
                             <li ng-show = "{{irradiation == 1 && auth ==1}}" role="separator" class="divider"></li>
                             <li ng-show = "{{irradiation == 1 && auth ==1}}">
-                                <a href="/data_irradiation">材料辐照数据库</a>
+                                <a href="/data_irradiation">辐照数据库</a>
                             </li>
                              <li ng-show = "{{corrode == 1 && auth ==1}}" role="separator" class="divider"></li>
                             <li ng-show = "{{corrode == 1 && auth ==1}}">
@@ -142,7 +142,7 @@
                             </li>
                             <li ng-show = "{{salt_mech == 1}}" role="separator" class="divider"></li>
                             <li ng-show = "{{salt_mech == 1}}">
-                                <a href="data_salt_mech">熔盐环境力学数据库</a>
+                                <a href="data_salt_mech">力化交互数据库</a>
                             </li>
                         </ul>
                     </li>
@@ -363,8 +363,8 @@
                         <li>目前只接受CSV文件格式上传，编码格式为GB2312.文件名不能包含空格、括号、横杠</li>
                         <li>上传成功后会跳转到数据页面，不成功则在上传页面等待响应，可关闭重新修改数据后操作</li>
                         <li>表格数据中的索引包括:
-                            <p style=" text-indent:2em"><a>param_id</a>(参数名称的序号);</p>
-                            <p style=" text-indent:2em"><a>salt_id</a>(熔盐类型序号);</p>
+                            <p style=" text-indent:2em"><a  href="/public/samples/salt_param.csv">param_id</a>(参数名称的序号);</p>
+                            <p style=" text-indent:2em"><a href="/public/samples/salt_name.csv">salt_id</a>(熔盐类型序号);</p>
                             
                         
                         </li>                         <br>

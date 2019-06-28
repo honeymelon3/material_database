@@ -463,7 +463,7 @@ router.get('/data_salt_mech/:param_id', function (req, res, next) {
 
 router.get('/data_irradiation', function(req, res, next) {
 	if(req.session.user.irradiation == 1){ 					//到达/home路径首先判断是否已经登录
-		res.render("data_irradiation", { title: '材料辐照数据库', param_id: 1});  			//未登录则重定向到 /login 路径
+		res.render("data_irradiation", { title: '辐照数据库', param_id: 1});  			//未登录则重定向到 /login 路径
 	} ;	
 	if(req.session.user.irradiation == 0){ 					//到达/home路径首先判断是否已经登录
 		res.render("/home"); 			//未登录则重定向到 /login 路径
