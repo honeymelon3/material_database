@@ -53,7 +53,7 @@ router.get('/get_irradiant_name', function(req, res,next) { //辐照数据库
 	}); 
 });
 
- router.get('/get_corrode_name', function(req, res,next) { //熔盐腐蚀数据库
+ router.get('/get_corrode_name', function(req, res,next) { //腐蚀数据库
    	var sql = 'select distinct alloy_name from alloy_salt_corrod UNION select distinct morphology from alloy_salt_corrod';
 	////console.log(req.query.query_field);
 	
@@ -63,7 +63,7 @@ router.get('/get_irradiant_name', function(req, res,next) { //辐照数据库
 	}); 
 });
 
-router.get('/get_login_record', function(req, res,next) { //熔盐腐蚀数据库
+router.get('/get_login_record', function(req, res,next) { //腐蚀数据库
 	var sql = 'select max(index) as login,max(user_index) as user from login_record ,db_user';
  	my_conn.query(sql,function(result){
  	////console.log(result.rows);
