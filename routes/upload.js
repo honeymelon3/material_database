@@ -222,6 +222,58 @@ router.post('/irradiation', multer({ storage: storage3 }).single('file'), functi
 
 
 })
+
+router.post('/irradiation_graphite', multer({ storage: storage3 }).single('file'), function (req, res, next) {
+    console.log(req.file);
+    // console.log(req.file);
+    // console.log(process.cwd());
+    // var upfdate = Date.now();
+    // var newDate = new Date();
+    // var filename = '';
+    // var localOffset = newDate.getTimezoneOffset() * 60000;
+
+    // var upftime = newDate.toISOString();
+    // console.log(upftime);
+    if (req.file != null) {
+        console.log(req.file.path);
+        var commands_string = 'scp ' + req.file.path + ' root@cu01:' + req.file.path;
+        console.log(commands_string);
+        exec(commands_string, function (error, stdout, stderr) {
+            if (error) {
+                console.error('error: ' + error);
+                return;
+            }
+            console.log('stdout: ' + stdout);
+            console.log('stderr: ' + typeof stderr);
+            var sql = 'set client_encoding = \'GBK\'';
+            console.log(sql);
+            my_conn.query(sql, function (result) {
+                console.log(result.rows);
+                var sql = 'copy graphite_irradiant_data("sample_id","graphite_grade","sample_direction_id","manufacture","filler_id","filler_size_id","forming_process_id","irradiation_reactor","enviroment","temperature_lower_limit","temperature_upper_limit","ave_temperature","stress_during_irradiation","fast_neutron_dose","dpa","test_time","test_temp","param_id","param_before_irradiation","param_after_irradiation","param_change","source","test_standard","report_name","param_mantainer_id","data_category","note") from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
+                console.log(sql);
+                my_conn.query(sql, function (result) {
+                    console.log(result.rows);
+
+                    var sql = 'set client_encoding = \'UTF8\'';
+                    console.log(sql);
+                    my_conn.query(sql, function (result) {
+                    });
+
+                    Wurl = '/data_irradiation/1';
+                    res.redirect(Wurl);
+                });
+
+            });
+
+
+        });
+
+
+    }
+
+
+
+})
 router.post('/corrode', multer({ storage: storage3 }).single('file'), function (req, res, next) {
     console.log(req.file);
     // console.log(req.file);
