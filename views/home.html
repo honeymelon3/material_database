@@ -362,7 +362,7 @@ $scope.auth = <%=session.user.auth%>;
 $scope.upload = <%=session.user.upload%>;
 var myUrl = "http://10.10.12.251:8081/statistics";
 $http.jsonp($sce.trustAsResourceUrl(myUrl)).then(function(response) {
-                            
+                            cosole.log(data);
     $scope.statistics = response.data;
 
                     });
