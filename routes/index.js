@@ -54,7 +54,7 @@ router.get('/get_irradiant_name', function(req, res,next) { //辐照数据库
 });
 
 router.get('/get_irradiant_graphite_name', function(req, res,next) { //石墨辐照数据库
-	var sql = ' select param_name from graphite_irradiant_param UNION select distinct enviroment from graphite_irradiant_data';
+	var sql = ' select param_name from graphite_irradiant_param ';
  ////console.log(req.query.query_field);
  
  my_conn.query(sql,function(result){
