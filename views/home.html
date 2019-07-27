@@ -361,7 +361,7 @@ $scope.corrode = <%=session.user.corrode%>;
 $scope.auth = <%=session.user.auth%>;
 $scope.upload = <%=session.user.upload%>;
 var myUrl = 'http://10.10.12.251:8081/statistics';
-$http({method:'GET',url:myUrl,cache:ture}).then(function(response) {
+$http({method:'GET',url:myUrl,cache:true}).then(function(response) {
                            
     $scope.statistics = response.data;
 
