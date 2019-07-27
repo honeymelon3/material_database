@@ -664,6 +664,28 @@ router.get('/salt_list50/:param_id', function(req, res,next) {
 	}); 
 });
 
+
+
+router.get('/irrad_list50/:param_id', function(req, res,next) { 
+	//var sql = 'select * from db_user where username = \'jyq\'' ;
+ //var sql = 'SELECT column_name from information_schema.columns where table_name = \'alloy_param_data\'' ;
+  var sql1 = 'select param_scope from alloy_irradiant_param where id=\'' + req.params.param_id + '\';';
+  // console.log(sql1);
+  my_conn.query(sql1, function (result) {
+	  //  res.jsonp(result.rows);
+	  ////console.log(result.rows);
+	  //  console.log(result.rows); 
+	  var sql = 'select ' + result.rows[0].param_scope + ' from  alloy_irradiant_data,alloy_irradiant_param where alloy_irradiant_data.param_id=alloy_irradiant_param.id  and param_id=\'' + req.params.param_id + '\'';
+	  console.log(sql);
+	  my_conn.query(sql, function (result) {
+		  res.jsonp(result.rows);
+		  ////console.log(result.rows);
+		  // console.log('gooda2');
+	  });
+  });
+
+});
+
 router.get('/irradiation_graphite', function(req, res,next) { //负面清单页面入口
 	var sql = 'select * from graphite_irradiant_param where param_id in (select distinct param_id from graphite_irradiant_data) order by param_id';
    //console.log(sql);
