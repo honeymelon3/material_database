@@ -160,7 +160,7 @@
                     </div>
                     <div class="panel-body">
                         <p>在TMSR-SEED 的合金材料库中包含了熔盐堆用的UNS N10003、316、800H、2.25Cr-Mo等合金的40种性能数据，特别是其中收录了UNS N10003合金（包括Hastelloy N合金和GH3535合金）的性能数据是目前全球最全面的，合金数据主要来源于核创院测试的数据、ASME手册数据以及ORNL的数据。</p>
-                        <a href="data_alloy" class="btn btn-success" ng-show="{{alloy == 1 &&  auth == 1}}">即刻访问</a>
+                        <a href="data_alloy" class="btn btn-success" ng-show="{{alloy == 1 &&  auth == 1}}">即刻访问:{{statistcs(0)}}</a>
 
                     </div>
                 </div>
@@ -173,7 +173,7 @@
                     <div class="panel-body">
                         <p>在TMSR-SEED 的石墨材料库中包含了NG-CT-10、NG-CT-50、T220、IG110等熔盐堆专用核石墨的43种性能数据，数据主要来源于核创院测试的数据、企业数据、ASME手册以及ORNL报告。</p>
                         <br><br>
-                        <a href="data_graphite" class="btn btn-success" ng-show="{{graphite == 1 &&  auth == 1}}">即刻访问</a>
+                        <a href="data_graphite" class="btn btn-success" ng-show="{{graphite == 1 &&  auth == 1}}">即刻访问:{{statistcs(1)}}</a>
                     </div>
 
                 </div>
@@ -186,7 +186,7 @@
                     <div class="panel-body">
                         <p>在TMSR-SEED的熔盐数据库中包含了FLiNaK、FliBe、FliBe+ThU等熔盐的11种物性数据，数据主要来源于核创院测试的数据。</p>
                         <br><br><br>
-                        <a href="data_salt" class="btn btn-success" ng-show="{{salt == 1 &&  auth == 1}}">即刻访问</a>
+                        <a href="data_salt" class="btn btn-success" ng-show="{{salt == 1 &&  auth == 1}}">即刻访问:{{statistcs(2)}}</a>
 
                     </div>
                 </div>
@@ -202,7 +202,7 @@
                     <div class="panel-body">
                         <p>在TMSR-SEED的辐照数据库中包含了UNS N10003合金等在辐照环境下的10种性能数据，数据主要来源于核创院测试的数据以及ORNL报告。</p>
                         <br>
-                        <a href="data_irradiation" class="btn btn-success" ng-show="{{irradiation == 1 &&  auth == 1}}">合金材料</a>
+                        <a href="data_irradiation" class="btn btn-success" ng-show="{{irradiation == 1 &&  auth == 1}}">合金材料{{statistcs(4)}}</a>
                         <a href="data_irradiation_graphite" class="btn btn-success" ng-show="{{irradiation == 1 &&  auth == 1}}">石墨材料</a>
                     </div>
                 </div>
@@ -215,7 +215,7 @@
                     <div class="panel-body">
                         <p>在TMSR-SEED的腐蚀数据库中包含了UNS N10003、316等合金在不同熔盐环境下的耐熔盐腐蚀性能数据，数据主要来源于核创院测试的数据。</p>
                         <br>
-                        <a href="data_corrode" class="btn btn-success" ng-show="{{corrode == 1 &&  auth == 1}}">即刻访问</a>
+                        <a href="data_corrode" class="btn btn-success" ng-show="{{corrode == 1 &&  auth == 1}}">即刻访问{{statistcs(3)}}</a>
 
                     </div>
                 </div>
@@ -226,9 +226,9 @@
                         <h4><span class="glyphicon glyphicon-home"></span>力化交互数据库</h4>
                     </div>
                     <div class="panel-body">
-                        <p>在TMSR-SEED的熔盐环境材料力学数据库中包含了UNS N10003合金等在材料在高温熔盐环境中的原位慢拉伸、蠕变等力学性能数据，数据主要来源于核创院测试数据以及公开发表的论文、技术报告。</p>
+                        <p>在TMSR-SEED的力化交互数据库中包含了UNS N10003合金等在材料在高温熔盐环境中的原位慢拉伸、蠕变等力学性能数据，用于评估材料在高温应力和熔盐物理化学作用的协同影响下的损伤行为。数据主要来源于核创院测试的数据以及公开发表的论文、技术报告中的数据。</p>
             
-                        <a href="data_salt_mech" class="btn btn-success" ng-show="{{salt_mech == 1 &&  auth == 1}}">即刻访问</a>
+                        <a href="data_salt_mech" class="btn btn-success" ng-show="{{salt_mech == 1 &&  auth == 1}}">即刻访问{{statistcs(5)}}</a>
 
                     </div>
                 </div>
@@ -360,6 +360,13 @@ $scope.irradiation = <%=session.user.irradiation%>;
 $scope.corrode = <%=session.user.corrode%>;
 $scope.auth = <%=session.user.auth%>;
 $scope.upload = <%=session.user.upload%>;
+var myUrl = "http://10.10.12.251:8081/statistcs";
+$http.jsonp($sce.trustAsResourceUrl(myUrl)).then(function(response) {
+                            
+    $scope.statistics = response.data;
+
+                    });
+
 });
 </script>
 </body></html>
