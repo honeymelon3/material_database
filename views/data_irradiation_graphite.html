@@ -505,15 +505,15 @@
                             response.data.forEach(function(e){
 
                                 var par_id= <%= param_id %>;
-                                console.log(e.param_scope_sc);
-                                if(e.id == par_id)
+
+                                if(e.param_id == par_id)
                            { $scope.param_intro= e.param_intro;
                             $scope.param_sc = e.param_scope_sc;
                             $scope.param_title = e.param_intro;
                             $scope.param_name = e.param_name;
                             $scope.param_unit = e.param_unit;
                             }
-                            console.log($scope.param_scope_sc);
+                          // console.log($scope.param_scope_sc);
                            })
                             // $scope.param_intro= e.param_intro;
                             // $scope.param_sc = e.param_scope_sc;
