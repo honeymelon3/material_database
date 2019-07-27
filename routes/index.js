@@ -565,7 +565,7 @@ router.get('/graphite_irradiant', function(req, res,next) { //负面清单页面
 });
 
 router.get('/statistics', function(req, res,next) { //负面清单页面入口
-	var sql = 'select n_live_tup from pg_stat_user_tables where relname in (\'alloy_param_data\',\'graphite_param_data\',\'salt_param_data\',\'alloy_irradiant_data\',\'alloy_salt_corrod\',\'salt_mech_data\',\'graphite_irradiant_data\')';
+	var sql = 'select n_live_tup from pg_stat_user_tables where relname in (\'alloy_param_data\',\'graphite_param_data\',\'salt_param_data\',\'alloy_irradiant_data\',\'alloy_salt_corrod\',\'salt_mech_data\',\'graphite_irradiant_data\') order by relid';
    // select * from alloy_param where id in (select distinct param_id from alloy_param_data) order by id
    my_conn.query(sql,function(result){		
 	   res.jsonp(result.rows);
