@@ -92,16 +92,18 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
                 <ul class="nav navbar-nav navbar-right">
-                    <li  ng-show = "{{upload == 1 && auth ==1}}">
-                        <a ng-show = "{{upload == 1 && auth ==1 }}"  data-toggle="modal" data-target="#upload"><span class="glyphicon glyphicon-glyphicon glyphicon-upload">上传数据</a>
+                    <li ng-show = "{{upload == 1 && auth ==1}}">
+                        <a ng-show = "{{upload == 1 && auth ==1}}" data-toggle="modal" data-target="#upload"><span class="glyphicon glyphicon-glyphicon glyphicon-upload">上传数据</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-user">文档<span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-menu-left">
                             <li>
-                                <a href="/graphite_report"><span class="glyphicon glyphicon-file">报告</a>
+                                <a href="/alloy_report"><span class="glyphicon glyphicon-file">报告</a>
                             </li>
-
+                            <li>
+                                <a href="/alloy_standard"><span class="glyphicon glyphicon-book">标准</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -129,10 +131,10 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-globe">网站地图<span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-menu-left">
-                            <li ng-show = "{{alloy == 1 && auth ==1 }}">
-                                <a href="/data_alloy"合金数据库</a>
+                            <li ng-show = "{{alloy == 1 && auth ==1}}">
+                                <a href="/data_alloy">合金数据库</a>
                             </li>
-                            <li ng-show = "{{graphite == 1 && auth ==1 }}" role="separator" class="divider"></li>
+                            <li ng-show = "{{graphite == 1 && auth ==1}}" role="separator" class="divider"></li>
                             <li ng-show = "{{graphite == 1 && auth ==1}}">
                                 <a href="/data_graphite">石墨数据库</a>
                             </li>
@@ -142,7 +144,11 @@
                             </li>
                             <li ng-show = "{{irradiation == 1 && auth ==1}}" role="separator" class="divider"></li>
                             <li ng-show = "{{irradiation == 1 && auth ==1}}">
-                                <a href="/data_irradiation">辐照数据库</a>
+                                <a href="/data_irradiation">合金辐照数据库</a>
+                            </li>
+                            <li ng-show = "{{irradiation == 1 && auth ==1}}" role="separator" class="divider"></li>
+                            <li ng-show = "{{irradiation == 1 && auth ==1}}">
+                                <a href="/data_irradiation_graphite">石墨辐照数据库</a>
                             </li>
                              <li ng-show = "{{corrode == 1 && auth ==1}}" role="separator" class="divider"></li>
                             <li ng-show = "{{corrode == 1 && auth ==1}}">
@@ -164,12 +170,12 @@
     <div class="row" >
         <div class="col-lg-12" >
             <h1 class=""  >TMSR
-                <small>石墨数据库 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a>{{param_intro}}</a></small>
+                <small>石墨辐照数据库 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a>{{param_intro}}</a></small>
             </h1>
             <ol class="breadcrumb" >
                 <li><a href="/home">Home</a>
                 </li>
-                <li><a href="/data_graphite/1">Refresh</a>
+                <li><a href="/data_irradiation_graphite/2">Refresh</a>
                 </li> 
             </ol>
         </div>
@@ -192,8 +198,8 @@
                         <!--<li  class="list-group-item">
                             参数列表
                         </li>-->
-                        <li ng-repeat="x in graphite_left" class="list-group-item">
-                            <a    href="/data_graphite/{{x.id}}" data-placement="top" title="单位：{{x.param_unit}}；英文名称：{{x.param_name}}">{{ x.param_intro}}</a>
+                        <li ng-repeat="x in irradiant_left" class="list-group-item">
+                            <a    href="/data_irradiation_graphite/{{x.id}}" data-placement="top" title="单位：{{x.param_unit}}；英文名称：{{x.param_name}}">{{ x.param_intro}}</a>
                         </li>                       
                     </div>
                     <!--<div style="background-color: white;">
@@ -346,7 +352,6 @@
         </div>
       </div>
     </div>
-  
     <div class="modal fade" id="upload" tabindex="-1" role="upload" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:10%">
     
         <div class="modal-dialog">
@@ -362,23 +367,17 @@
                     <!-- BEGIN REGISTRATION FORM -->
                     <div>
                         <h3>样表下载</h3>
-                        <a href="/public/samples/graphite_param_data.csv">石墨数据库数据样表</a>
+                        <a href="/public/samples/graphite_irradiation_data_sample.csv">石墨辐照数据样表</a>
+                        <a href="/public/samples/graphite_irradiation_data.pdf">石墨辐照样表说明</a>
                     </div>
                     <br>
     
-                    <form class="form-vertical " style="display:inline" action="/upload/graphite" enctype="multipart/form-data" method="post">
+                    <form class="form-vertical " style="display:inline" action="/upload/irradiation_graphite" enctype="multipart/form-data"
+                        method="post">
     
     
-                <li>目前只接受CSV文件格式上传，编码格式为GB2312.文件名不能包含空格、括号、横杠</li>
-                <li>上传成功后会跳转到数据页面，不成功则在上传页面等待响应，可关闭重新修改数据后操作</li>
-                <li>表格数据中的索引包括:
-                    <p style=" text-indent:2em"><a href="/public/samples/graphite/graphite_param.csv">param_id</a>(参数名称的序号);</p>
-                    <p style=" text-indent:2em"><a href="/public/samples/graphite/graphite_report_info.csv">report_id</a>(实验报告序号);</p>
-                    <p style=" text-indent:2em"><a href="/public/samples/graphite/graphite_standard_info.csv">standard_id</a>(参考规范序号);</p>
-                    <p style=" text-indent:2em"><a href="/public/samples/graphite/graphite_maintainer.csv">maintainer_id</a>(数据维护者序号)</p>
-                
-                </li>
-            <br>
+                <p>目前只接受CSV文件格式上传，编码格式为GB2312.文件名不能包含空格、括号、横杠</p>
+                <p>上传成功后会跳转到数据页面，不成功则在上传页面等待响应，可关闭重新修改数据后操作</p>                        <br>
     
                         <div class="form-group">
     
@@ -387,7 +386,8 @@
     
                                 <div>
     
-                                    <input class="m-wrap placeholder-no-fix" type="file" id="data_csv" placeholder="选择文件" name="file" />
+                                    <input class="m-wrap placeholder-no-fix" type="file" id="data_csv" placeholder="选择文件"
+                                        name="file" />
     
                                 </div>
     
@@ -417,6 +417,7 @@
         <!-- END REGISTRATION FORM -->
     
     </div>
+
 
 
     <script>
@@ -498,10 +499,9 @@
                     $scope.fields = [];//把字段统一放到这里，供后续处理
                     $scope.selected = []; 
                     $scope.selectedTags = [];
-                    var myUrl = "http://10.10.12.251:8081/graphite";
+                    var myUrl = "http://10.10.12.251:8081/irradiation_graphite";
                 $http.jsonp($sce.trustAsResourceUrl(myUrl)).then(function(response) {
-                            $scope.graphite_left = response.data;
-                            
+                            $scope.irradiant_left = response.data;
                             response.data.forEach(function(e){
                                 var par_id= <%= param_id %>;
                                 if(e.id == par_id)
@@ -521,7 +521,7 @@
                     
                     var flag = false;
                     
-                $http.jsonp($sce.trustAsResourceUrl("http://10.10.12.251:8081/gp_list50/<%= param_id %>"))
+                $http.jsonp($sce.trustAsResourceUrl("http://10.10.12.251:8081/irrad_graphite_list50/<%= param_id %>"))
                     .then(function(response) {
                     
                     $scope.data = response.data;
@@ -536,7 +536,7 @@
                     
                 });
         
-                $http.jsonp($sce.trustAsResourceUrl("http://10.10.12.251:8081/get_graphite_name")).then(function(response) {
+                $http.jsonp($sce.trustAsResourceUrl("http://10.10.12.251:8081/get_irradiant_graphite_name")).then(function(response) {
                             //$scope.lastName = response[0].param_name;
                             $scope.query_res = response.data;
                             //console.log(response);
@@ -823,12 +823,12 @@
                             xAxis: {
                                 name:chart_x,
                                 type: 'value',
-                                scale:true,
                                 splitLine: {
                                     lineStyle: {
                                         type: 'dashed'
                                     }
                                 },
+                                scale:true,
                                 splitNumber: 20
                             },
                             yAxis: {

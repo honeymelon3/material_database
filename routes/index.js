@@ -16,7 +16,7 @@ var rd = require("./util/rdfiles.js");
 	}); 
 });
  router.get('/get_graphite_name', function(req, res,next) { //石墨数据库
-   	var sql = 'select material_name from material_name UNION select param_name from alloy_param';
+   	var sql = 'select material_name from material_name UNION select param_name from graphite_param';
 	////console.log(req.query.query_field);
 	
 	my_conn.query(sql,function(result){
@@ -51,6 +51,16 @@ router.get('/get_irradiant_name', function(req, res,next) { //辐照数据库
 	////console.log(result.rows);
 		res.jsonp(result.rows);
 	}); 
+});
+
+router.get('/get_irradiant_graphite_name', function(req, res,next) { //石墨辐照数据库
+	var sql = ' select param_name from graphite_irradiant_param UNION select distinct enviroment from graphite_irradiant_data';
+ ////console.log(req.query.query_field);
+ 
+ my_conn.query(sql,function(result){
+ ////console.log(result.rows);
+	 res.jsonp(result.rows);
+ }); 
 });
 
  router.get('/get_corrode_name', function(req, res,next) { //腐蚀数据库
@@ -402,16 +412,6 @@ router.get('/data_graphite', function(req, res, next) {
 	} ;	
   
 });
-
-router.get('/data_graphite_irradiant', function(req, res, next) {
-	if(req.session.user.graphite_irradiant == 1){ 					//到达/home路径首先判断是否已经登录
-		res.render("data_graphite_irradiant", { title: '石墨数据库', param_id: '2'});  			//未登录则重定向到 /login 路径
-	} ;	
-	if(req.session.user.graphite_irradiant == 0){ 					//到达/home路径首先判断是否已经登录
-		res.render("/home"); 			//未登录则重定向到 /login 路径
-	} ;	
-  
-});
 router.get('/data_graphite/:param_id', function (req, res, next) {
 	if (req.session.user.graphite == 1) { 					//到达/home路径首先判断是否已经登录
 		res.render("data_graphite", { title: '石墨数据库', param_id: req.params.param_id });  			//未登录则重定向到 /login 路径
@@ -421,6 +421,7 @@ router.get('/data_graphite/:param_id', function (req, res, next) {
 	};
 
 });
+
 
 router.get('/get_graphite_report', function(req, res,next) { //负面清单页面入口
 	var path = './public/documents/graphite';
@@ -483,6 +484,26 @@ router.get('/data_irradiation/:param_id', function (req, res, next) {
 	////console.log(req.session.user.alloy);
 	if (req.session.user.irradiation == 1) { 					//到达/home路径首先判断是否已经登录
 		res.render("data_irradiation", { title: '熔盐数据库', param_id: req.params.param_id }); 			//未登录则重定向到 /login 路径
+	};
+	if (req.session.user.irradiation == 0) { 					//到达/home路径首先判断是否已经登录
+		res.render("/home"); 			//未登录则重定向到 /login 路径
+	};
+
+});
+
+router.get('/data_irradiation_graphite', function(req, res, next) {
+	if(req.session.user.irradiation == 1){ 					//到达/home路径首先判断是否已经登录
+		res.render("data_irradiation_graphite", { title: '石墨辐照数据库', param_id: 2});  			//未登录则重定向到 /login 路径
+	} ;	
+	if(req.session.user.irradiation == 0){ 					//到达/home路径首先判断是否已经登录
+		res.render("/home"); 			//未登录则重定向到 /login 路径
+	} ;		
+   
+});
+router.get('/data_irradiation_graphite/:param_id', function (req, res, next) {
+	////console.log(req.session.user.alloy);
+	if (req.session.user.irradiation == 1) { 					//到达/home路径首先判断是否已经登录
+		res.render("data_irradiation_graphite", { title: '石墨熔盐数据库', param_id: req.params.param_id }); 			//未登录则重定向到 /login 路径
 	};
 	if (req.session.user.irradiation == 0) { 					//到达/home路径首先判断是否已经登录
 		res.render("/home"); 			//未登录则重定向到 /login 路径
@@ -643,16 +664,25 @@ router.get('/salt_list50/:param_id', function(req, res,next) {
 	}); 
 });
 
- router.get('/irrad_list50/:param_id', function(req, res,next) { 
+router.get('/irradiation_graphite', function(req, res,next) { //负面清单页面入口
+	var sql = 'select * from graphite_irradiant_param where param_id in (select distinct param_id from graphite_irradiant_data) order by param_id';
+   //console.log(sql);
+   my_conn.query(sql,function(result){		
+	   res.jsonp(result.rows);
+   }); 
+});
+
+
+ router.get('/irrad_graphite_list50/:param_id', function(req, res,next) { 
    	//var sql = 'select * from db_user where username = \'jyq\'' ;
 	//var sql = 'SELECT column_name from information_schema.columns where table_name = \'alloy_param_data\'' ;
-	 var sql1 = 'select param_scope from alloy_irradiant_param where id=\'' + req.params.param_id + '\';';
+	 var sql1 = 'select param_scope from graphite_irradiant_param where id=\'' + req.params.param_id + '\';';
 	 // console.log(sql1);
 	 my_conn.query(sql1, function (result) {
 		 //  res.jsonp(result.rows);
 		 ////console.log(result.rows);
 		 //  console.log(result.rows); 
-		 var sql = 'select ' + result.rows[0].param_scope + ' from  alloy_irradiant_data,alloy_irradiant_param where alloy_irradiant_data.param_id=alloy_irradiant_param.id  and param_id=\'' + req.params.param_id + '\'';
+		 var sql = 'select ' + result.rows[0].param_scope + ' from  graphite_irradiant_data,graphite_irradiant_param,filler_id,filler_size_id,forming_process_id,sample_direction_id where graphite_irradiant_data.param_id=graphite_irradiant_param.id and graphite_irradiant_data.filler_id=filler_id.filler_id and graphite_irradiant_data.filler_size_id=filler_size_id.filler_size_id  and graphite_irradiant_data.froming_direction_id=froming_direction_id.froming_direction_id  and graphite_irradiant_data.sample_direction_id=and graphite_irradiant_data.filler_id=filler_id.filler_id.and graphite_irradiant_data.filler_id=filler_id.filler_id and param_id=\'' + req.params.param_id + '\'';
 		 console.log(sql);
 		 my_conn.query(sql, function (result) {
 			 res.jsonp(result.rows);
