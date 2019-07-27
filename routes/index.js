@@ -682,7 +682,7 @@ router.get('/irradiation_graphite', function(req, res,next) { //负面清单页�
 		 //  res.jsonp(result.rows);
 		 ////console.log(result.rows);
 		 //  console.log(result.rows); 
-		 var sql = 'select ' + result.rows[0].param_scope + ' from  graphite_irradiant_data,graphite_irradiant_param,filler_id,filler_size_id,forming_process_id,sample_direction_id where graphite_irradiant_data.param_id=graphite_irradiant_param.param_id and graphite_irradiant_data.filler_id=filler_id.filler_id and graphite_irradiant_data.filler_size_id=filler_size_id.filler_size_id  and graphite_irradiant_data.forming_direction_id=forming_direction_id.forming_direction_id  and graphite_irradiant_data.sample_direction_id=sample_direction_id.sample_direction_id  and param_id=\'' + req.params.param_id + '\'';
+		 var sql = 'select ' + result.rows[0].param_scope + ' from  graphite_irradiant_data,graphite_irradiant_param,filler_id,filler_size_id,forming_process_id,sample_direction_id where graphite_irradiant_data.param_id=graphite_irradiant_param.param_id and graphite_irradiant_data.filler_id=filler_id.filler_id and graphite_irradiant_data.filler_size_id=filler_size_id.filler_size_id  and graphite_irradiant_data.forming_process_id=forming_process_id.forming_process_id  and graphite_irradiant_data.sample_direction_id=sample_direction_id.sample_direction_id  and param_id=\'' + req.params.param_id + '\'';
 		 console.log(sql);
 		 my_conn.query(sql, function (result) {
 			 res.jsonp(result.rows);
