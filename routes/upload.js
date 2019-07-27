@@ -249,7 +249,7 @@ router.post('/irradiation_graphite', multer({ storage: storage3 }).single('file'
             console.log(sql);
             my_conn.query(sql, function (result) {
                 console.log(result.rows);
-                var sql = 'copy graphite_irradiant_data("sample_id","graphite_grade","sample_direction_id","manufacture","filler_id","filler_size_id","forming_process_id","irradiation_reactor","enviroment","temperature_lower_limit","temperature_upper_limit","ave_temperature","stress_during_irradiation","fast_neutron_dose","dpa","test_time","test_temp","param_id","param_before_irradiation","param_after_irradiation","param_change","source","test_standard","report_name","param_mantainer_id","data_category","note") from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
+                var sql = 'copy graphite_irradiant_data("sample_id","graphite_grade","sample_direction_id","manufacture","filler_id","filler_size_id","forming_process_id","irradiation_reactor","environment","temperature_lower_limit","temperature_upper_limit","ave_temperature","stress_during_irradiation","fast_neutron_dose","dpa","test_time","test_temp","param_id","param_before_irradiation","param_after_irradiation","param_change","source","test_standard","report_name","param_mantainer_id","data_category","note") from \'' + req.file.path + '\' with delimiter as \',\' csv header;';
                 console.log(sql);
                 my_conn.query(sql, function (result) {
                     console.log(result.rows);
