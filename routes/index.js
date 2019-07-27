@@ -403,6 +403,15 @@ router.get('/data_graphite', function(req, res, next) {
   
 });
 
+router.get('/data_graphite_irradiant', function(req, res, next) {
+	if(req.session.user.graphite_irradiant == 1){ 					//到达/home路径首先判断是否已经登录
+		res.render("data_graphite_irradiant", { title: '石墨数据库', param_id: '2'});  			//未登录则重定向到 /login 路径
+	} ;	
+	if(req.session.user.graphite_irradiant == 0){ 					//到达/home路径首先判断是否已经登录
+		res.render("/home"); 			//未登录则重定向到 /login 路径
+	} ;	
+  
+});
 router.get('/data_graphite/:param_id', function (req, res, next) {
 	if (req.session.user.graphite == 1) { 					//到达/home路径首先判断是否已经登录
 		res.render("data_graphite", { title: '石墨数据库', param_id: req.params.param_id });  			//未登录则重定向到 /login 路径
@@ -546,8 +555,17 @@ router.get('/data_corrode/:alloy_name', function (req, res, next) {
 	}); 
 });
 
+router.get('/graphite_irradiant', function(req, res,next) { //负面清单页面入口
+	var sql = 'select * from  graphite_irradiant_param where id in (select distinct param_id from graphite_irradiant_data) order by id';
+   // select * from alloy_param where id in (select distinct param_id from alloy_param_data) order by id
+   my_conn.query(sql,function(result){		
+	   res.jsonp(result.rows);
+	   //console.log('goodg1');
+   }); 
+});
+
 router.get('/statistics', function(req, res,next) { //负面清单页面入口
-	var sql = 'select n_live_tup from pg_stat_user_tables where relname in (\'alloy_param_data\',\'graphite_param_data\',\'salt_param_data\',\'alloy_irradiant_data\',\'alloy_salt_corrod\',\'salt_mech_data\')';
+	var sql = 'select n_live_tup from pg_stat_user_tables where relname in (\'alloy_param_data\',\'graphite_param_data\',\'salt_param_data\',\'alloy_irradiant_data\',\'alloy_salt_corrod\',\'salt_mech_data\',\'graphite_irradiant_data\')';
    // select * from alloy_param where id in (select distinct param_id from alloy_param_data) order by id
    my_conn.query(sql,function(result){		
 	   res.jsonp(result.rows);
@@ -796,7 +814,7 @@ router.get('/role', function(req, res, next) {
 	   }
    }
 		   //console.log(user); 
-   var sql = 'UPDATE db_user SET alloy='+ user.alloy+',graphite='+user.graphite+',salt='+user.salt+',irradiation='+user.irradiation+',corrode='+user.corrode+',salt_mech='+user.salt_mech+',upload='+user.upload+',auth='+user.auth +' WHERE username = \''+user.username+'\'';
+   var sql = 'UPDATE db_user SET alloy='+ user.alloy+',graphite='+user.graphite+',salt='+user.salt+',irradiation='+user.irradiation+',irradiation_graphite='+user.irradiation_graphite+',corrode='+user.corrode+',salt_mech='+user.salt_mech+',upload='+user.upload+',auth='+user.auth +' WHERE username = \''+user.username+'\'';
   // console.log(sql);
 	  my_conn.query(sql,function(result){		
 		  res.send(result.rows);
