@@ -160,7 +160,7 @@
                     </div>
                     <div class="panel-body">
                         <p>在TMSR-SEED 的合金材料库中包含了熔盐堆用的UNS N10003、316、800H、2.25Cr-Mo等合金的40种性能数据，特别是其中收录了UNS N10003合金（包括Hastelloy N合金和GH3535合金）的性能数据是目前全球最全面的，合金数据主要来源于核创院测试的数据、ASME手册数据以及ORNL的数据。</p>
-                        <a href="data_alloy" class="btn btn-success" ng-show="{{alloy == 1 &&  auth == 1}}">即刻访问:{{statistics(0)}}</a>
+                        <a href="data_alloy" class="btn btn-success" ng-show="{{alloy == 1 &&  auth == 1}}">即刻访问:{{statistics[0]}}</a>
 
                     </div>
                 </div>
@@ -362,7 +362,7 @@ $scope.auth = <%=session.user.auth%>;
 $scope.upload = <%=session.user.upload%>;
 var myUrl = "http://10.10.12.251:8081/statistics";
 $http.jsonp($sce.trustAsResourceUrl(myUrl)).then(function(response) {
-                            cosole.log(data);
+                            cosole.log(response.data);
     $scope.statistics = response.data;
 
                     });
